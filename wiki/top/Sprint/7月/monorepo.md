@@ -7,12 +7,14 @@
 - 集中型と分散型の大きな2方針がある
 - Googleはmonorepo,Netflixはmulti-repoでそれぞれ効率的。唯一の魔法の回答はない
 
+
+
 モデル|説明
 --|--
-single repository|単一リポジトリ
-multi-repo|複数リポジトリ
-repo-hybrid|リポジトリハイブリッド
-split-repo|分割リポジトリ
+single repository|単一リポジトリ。変更のたびにプロジェクト全体をコンパイルする必要があるということではない。
+multi-repo|複数リポジトリ。ローカルに最適化される傾向がある。
+repo-hybrid|リポジトリハイブリッド。混合使用
+split-repo|分割リポジトリ。モノレポ モデルを好みながらも、テクノロジーによってデプロイメントを分離することを強く要求する組織によってよく選択される
 
 ## 読んだ記事
 [Azure 関数 API を Node.js v3 から v4 プログラミング モデルに移行する](https://learn.microsoft.com/ja-jp/azure/developer/javascript/end-to-end/contoso-real-estate-serverless-api-migration)  
