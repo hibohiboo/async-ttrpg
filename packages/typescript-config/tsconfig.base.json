@@ -4,5 +4,6 @@
     "lib": ["ES2022"],
     /* Linting */
     "strict": true,
+    "esModuleInterop": true
   }
 }

@@ -4,6 +4,6 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "module": "commonjs",
-    "strict": true,
+    "skipLibCheck": true, // false だと Honoが  Cannot find name 'WebSocket'. などの型エラーを出すため
   }
 }

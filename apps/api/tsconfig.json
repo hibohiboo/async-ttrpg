@@ -1,11 +1,9 @@
 {
-  "extends": "@async-ttrpg/tsconfig/backend",
+  "extends": "@async-ttrpg/tsconfig/tsconfig.backend",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "paths": { "@/*": ["./src/*"] },
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

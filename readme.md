@@ -40,6 +40,9 @@ Reactのベストプラクティスである[bulletproof-react](https://github.c
 - apps/api                ... フロントエンド共通のバックエンド
 - packages/tsconfig       ... TypeScript設定
 - packages/eslint-config  ... Lint設定
+- .vscode/tasks.json      ... VSCode拡張のFunctionsのデプロイ設定
+- .vscode/extensions.json ... 本プロジェクトで利用しているVSCode拡張
+- .vscode/settings.json   ... LintなどEditor設定
 + wiki                    ... 作業中のメモなど
 + document                ... 本プロジェクトに関する資料
 + .husky                  ... huskyによるGit Hooks
