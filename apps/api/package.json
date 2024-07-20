@@ -10,7 +10,7 @@
     "predev": "npm run build",
     "dev": "func start --port 7071",
     "lint": "eslint",
-    "deploy": "dotenv -e .env -- bash -c 'func azure functionapp publish $APP_NAME'"
+    "deploy": "dotenv -e .env -- bash -c 'bash deploy.sh'"
   },
   "dependencies": {
     "@azure/functions": "^4.5.0",
