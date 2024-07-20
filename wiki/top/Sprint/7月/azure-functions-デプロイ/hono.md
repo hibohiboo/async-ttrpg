@@ -11,3 +11,5 @@
 
 [Nxモノレポ上でAzure Functionsをビルド・デプロイできるようにするメモ](https://zenn.dev/naas/scraps/60f944146eacd9)
 
+[Issue](https://github.com/microsoft/vscode-azurefunctions/issues/2521)をみるとみんな困っているみたい。
+
