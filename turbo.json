@@ -5,7 +5,6 @@
     "ncu": {},
     "dev": {},
     "build": {
-      "dependsOn": ["^build"],
       "outputs": ["dist"]
    }
   }
