@@ -25,7 +25,7 @@
 		{
 			"type": "shell",
 			"label": "npm install (functions)",
-			"command": "npm install",
+			"command": "npm install  --ignore-scripts",
 			"options": {
 				"cwd": "${workspaceFolder}/apps/api"
 			}
