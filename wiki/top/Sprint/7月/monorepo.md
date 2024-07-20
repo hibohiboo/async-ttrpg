@@ -72,5 +72,6 @@ npmに限定するには、ルートパッケージのNPMスクリプトにonly-
 [npm workspacesとモノレポ探検記](https://zenn.dev/suin/scraps/20896e54419069)  
 [npm workspace の使い方](https://qiita.com/frozenbonito/items/8230d4a3cb5ea1b32802)  
 [今モノレポを使うなら](https://qiita.com/john-Q/items/ef7c433a5f441ff89ffb)  
+[Turborepoのチュートリアル](https://zenn.dev/hayato94087/articles/d2956e662202a7)
 
 
