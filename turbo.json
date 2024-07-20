@@ -3,6 +3,7 @@
   "globalDependencies": [".env"],
   "tasks": {
     "ncu": {},
-    "dev": {}
+    "dev": {},
+    "build":{}
   }
 }

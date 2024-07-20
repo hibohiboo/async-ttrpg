@@ -4,7 +4,8 @@
   "description": "sakutto trpg",
   "scripts": {
     "prepare": "husky",
-    "ncu": "turbo ncu"
+    "ncu": "turbo ncu",
+    "build": "turbo build"
   },
   "author": "hibohiboo",
   "license": "MIT",
