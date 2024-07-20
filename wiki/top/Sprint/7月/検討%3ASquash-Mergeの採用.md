@@ -11,6 +11,8 @@
 でも、ごみコミット残っていてもそこまで大きく困らないのでNO-FFでもいいかもしれない。
 NO-FFのCherry-pickがうまくできれば、か。一工夫すればいけそう。[git cherry-pickでマージコミットを適用する](https://te2u.hatenablog.jp/entry/2013/11/02/130740)
 
+no-ffの運用で困らなさそう。
+
 
 ## 読んだ記事
 [Git の Squash マージをやめた話](https://tech.mobilefactory.jp/entry/2023/11/29/160000)
