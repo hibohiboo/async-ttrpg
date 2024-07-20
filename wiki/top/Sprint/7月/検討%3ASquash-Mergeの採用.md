@@ -4,8 +4,11 @@
 
 ![image.png](/.attachments/image-9b0012fe-502b-4d10-a0d2-5cfadb8bb0a8.png)
 
+![image.png](/.attachments/image-cedbb200-7378-4b57-b286-bc54fc62b2cf.png)
+
+
 ## 読んだ記事
 [Git の Squash マージをやめた話](https://tech.mobilefactory.jp/entry/2023/11/29/160000)
 [squash and mergeしか使ってないけど全く困ってない](https://wp.jmuk.org/2023/11/30/squash-and-merge%E3%81%97%E3%81%8B%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%84%E3%81%91%E3%81%A9%E5%85%A8%E3%81%8F%E5%9B%B0%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%84/)
 
- 
+ [トランクベース開発を活用して爆速に開発した話](https://www.slideshare.net/slideshow/ss-245435257/245435257)
