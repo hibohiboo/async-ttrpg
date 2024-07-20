@@ -42,6 +42,7 @@ Reactのベストプラクティスである[bulletproof-react](https://github.c
 - packages/eslint-config  ... Lint設定
 + wiki                    ... 作業中のメモなど
 + document                ... 本プロジェクトに関する資料
++ .husky                  ... huskyによるGit Hooks
 ```
 
 ## npmスクリプト
