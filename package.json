@@ -1,0 +1,11 @@
+{
+  "name": "async-ttrpg",
+  "version": "0.0.0",
+  "description": "sakutto trpg",
+  "scripts": {},
+  "author": "hibohiboo",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^9.1.1"
+  }
+}
