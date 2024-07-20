@@ -9,7 +9,7 @@
 ![image.png](/.attachments/image-9b0012fe-502b-4d10-a0d2-5cfadb8bb0a8.png)
 
 でも、ごみコミット残っていてもそこまで大きく困らないのでNO-FFでもいいかもしれない。
-NO-FFのCherry-pickがうまくできれば、か。
+NO-FFのCherry-pickがうまくできれば、か。一工夫すればいけそう。[git cherry-pickでマージコミットを適用する](https://te2u.hatenablog.jp/entry/2013/11/02/130740)
 
 
 ## 読んだ記事
