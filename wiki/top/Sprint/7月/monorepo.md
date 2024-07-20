@@ -41,5 +41,6 @@ Google は、トランクベースの開発モデルを大規模に使用して�
 [モノレポのAzure Functions (Node Typescript) のtsconfigにpathsのエイリアス設定を行ったメモ](https://qiita.com/hibohiboo/items/9fa5257ba706e71512a4)  
 [Google のモノレポの仕組み](https://qeunit.com/blog/how-google-does-monorepo/)  
 [知っておくべき実践的な主流レポモデル](https://qeunit.com/blog/the-hands-on-mainstream-repo-models-you-need-to-know/)  
+[squash and mergeしか使ってないけど全く困ってない](https://wp.jmuk.org/2023/11/30/squash-and-merge%E3%81%97%E3%81%8B%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%84%E3%81%91%E3%81%A9%E5%85%A8%E3%81%8F%E5%9B%B0%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%84/)
 
  
