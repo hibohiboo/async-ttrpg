@@ -43,6 +43,7 @@ Reactのベストプラクティスである[bulletproof-react](https://github.c
 + wiki                    ... 作業中のメモなど
 + document                ... 本プロジェクトに関する資料
 + .husky                  ... huskyによるGit Hooks
++ infra                   ... IaC
 ```
 
 ## npmスクリプト
@@ -76,3 +77,17 @@ refactor|仕様に影響がないコード改善(リファクタ)
 perf|パフォーマンス向上関連
 test|テスト関連
 chore| ビルド、補助ツール、ライブラリ関連
+
+## インフラ
+
+ツール|バージョン
+--|--
+az bicep|0.29.45
+
+スクリプト|説明
+--|--
+createResourceGropu.bash|リソースグループの作成
+createFunctions.bash|Azure Functionsの作成
+createWebApps.bash|Azure Static Web Apps
+
+の作成
