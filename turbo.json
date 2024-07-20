@@ -4,6 +4,9 @@
   "tasks": {
     "ncu": {},
     "dev": {},
-    "build":{}
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist"]
+   }
   }
 }

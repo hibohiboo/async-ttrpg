@@ -2,7 +2,7 @@
   "extends": "@async-ttrpg/tsconfig/backend",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
