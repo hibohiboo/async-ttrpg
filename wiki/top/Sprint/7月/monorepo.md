@@ -69,4 +69,8 @@ npmに限定するには、ルートパッケージのNPMスクリプトにonly-
 [モノレポのAzure Functions (Node Typescript) のtsconfigにpathsのエイリアス設定を行ったメモ](https://qiita.com/hibohiboo/items/9fa5257ba706e71512a4)  
 [Google のモノレポの仕組み](https://qeunit.com/blog/how-google-does-monorepo/)  
 [知っておくべき実践的な主流レポモデル](https://qeunit.com/blog/the-hands-on-mainstream-repo-models-you-need-to-know/)  
-[npm workspacesとモノレポ探検記](https://zenn.dev/suin/scraps/20896e54419069)
+[npm workspacesとモノレポ探検記](https://zenn.dev/suin/scraps/20896e54419069)  
+[npm workspace の使い方](https://qiita.com/frozenbonito/items/8230d4a3cb5ea1b32802)  
+[今モノレポを使うなら](https://qiita.com/john-Q/items/ef7c433a5f441ff89ffb)  
+
+
