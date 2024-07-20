@@ -1,0 +1,28 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc && tsc-alias",
+    "watch": "tsc -w",
+    "clean": "rimraf dist",
+    "predev": "npm run clean && npm run build",
+    "dev": "func start --port 7071",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.5.0",
+    "date-fns": "^3.6.0",
+    "mssql": "^11.0.1"
+  },
+  "devDependencies": {
+    "@async-ttrpg/eslint-config-custom": "*",
+    "@async-ttrpg/tsconfig": "*",
+    "@types/mssql": "^9.1.5",
+    "@types/node": "^20.x",
+    "rimraf": "^6.0.1",
+    "tsc-alias": "^1.8.10",
+    "typescript": "^5.5.3"
+  },
+  "main": "dist/functions/*.js"
+}

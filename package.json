@@ -3,11 +3,20 @@
   "version": "0.0.0",
   "description": "sakutto trpg",
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "ncu": "turbo ncu"
   },
   "author": "hibohiboo",
   "license": "MIT",
   "devDependencies": {
-    "husky": "^9.1.1"
-  }
+    "husky": "^9.1.1",
+    "npm-check-updates": "^16.14.20",
+    "prettier": "^3.3.3",
+    "turbo": "^2.0.9"
+  },
+  "packageManager": "npm@10.8.2",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
 }

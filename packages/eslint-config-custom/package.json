@@ -1,0 +1,21 @@
+{
+  "name": "@async-ttrpg/eslint-config-custom",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "version": "0.0.0",
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.7.0",
+    "eslint": "^9.7.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-turbo": "^2.0.9",
+    "eslint-plugin-unused-imports": "^4.0.0",
+    "typescript-eslint": "^8.0.0-alpha.38"
+  },
+  "scripts": {
+    "inspect": "npx -y @eslint/config-inspector",
+    "build": "npx -y @eslint/config-inspector build --base async-ttrpg/public/eslint-config-inspector --outDir ../../dist/public/eslint-config-inspector",
+    "ncu": "ncu -u"
+  }
+}
