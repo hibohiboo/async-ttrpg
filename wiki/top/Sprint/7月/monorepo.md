@@ -8,7 +8,6 @@
 - Googleはmonorepo,Netflixはmulti-repoでそれぞれ効率的。唯一の魔法の回答はない
 
 
-
 モデル|説明
 --|--
 single repository|単一リポジトリ。変更のたびにプロジェクト全体をコンパイルする必要があるということではない。
@@ -17,6 +16,7 @@ repo-hybrid|リポジトリハイブリッド。混合使用
 split-repo|分割リポジトリ。モノレポ モデルを好みながらも、テクノロジーによってデプロイメントを分離することを強く要求する組織によってよく選択される
 
 ## Google のモノレポの仕組みより
+
 [Google のモノレポの仕組み](https://qeunit.com/blog/how-google-does-monorepo/)  
 
 
@@ -29,10 +29,38 @@ split-repo|分割リポジトリ。モノレポ モデルを好みながらも�
 - ビルドプロセスを調整することの難しさ 
 - これらの他の要因によってテストサイクルはより複雑になる
 
-### Google リポジトリはどのブランチモデルをサポートしていますか?
+### Googleリポジトリのブランチモデル
 Google は、トランクベースの開発モデルを大規模に使用して成功を収めていることでも知られています。
 
 ![image.png](/.attachments/image-abf42b50-0659-4006-82fb-a306c2387164.png)
+
+## npm workspacesとモノレポ探検記 より
+[npm workspacesとモノレポ探検記](https://zenn.dev/suin/scraps/20896e54419069)
+
+### ワークスペース (workspaces)
+
+モノレポにおけるNPMで配布するパッケージ。通常、/packagesディレクトリにワークスペースごとのディレクトリを作る。
+
+モノレポには複数のワークスペースが存在しうる。
+
+### 巻き上げ
+Nodeのモジュール解決で、自分のnode_modulesにモジュールが無いとき、親のnode_modules、その親のnode_modulesへとディレクトリをさかのぼってモジュールを探す仕組みがある。
+
+たとえば、/a/b/c/index.jsでrequire("x")したとき、次の順でモジュールが見つかるまで探す。
+
+/a/b/c/node_modules/x
+/a/b/node_modules/x
+/a/node_modules/x
+/node_modules/x
+この仕組みをモノレポでは活用することがある。
+
+たとえば、packages/aとpackages/bどちらもjestを使いたいとき、それぞれにjestをインストールするのではなく、ルートパッケージにjestをひとつだけ入れておけばいい。
+
+### パッケージマネージャをnpmに限定する
+
+npmに限定するには、ルートパッケージのNPMスクリプトにonly-allowを追加します。
+
+ "preinstall": "npx only-allow npm
 
 
 
@@ -41,6 +69,9 @@ Google は、トランクベースの開発モデルを大規模に使用して�
 [モノレポのAzure Functions (Node Typescript) のtsconfigにpathsのエイリアス設定を行ったメモ](https://qiita.com/hibohiboo/items/9fa5257ba706e71512a4)  
 [Google のモノレポの仕組み](https://qeunit.com/blog/how-google-does-monorepo/)  
 [知っておくべき実践的な主流レポモデル](https://qeunit.com/blog/the-hands-on-mainstream-repo-models-you-need-to-know/)  
-[squash and mergeしか使ってないけど全く困ってない](https://wp.jmuk.org/2023/11/30/squash-and-merge%E3%81%97%E3%81%8B%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%84%E3%81%91%E3%81%A9%E5%85%A8%E3%81%8F%E5%9B%B0%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%84/)
+[npm workspacesとモノレポ探検記](https://zenn.dev/suin/scraps/20896e54419069)  
+[npm workspace の使い方](https://qiita.com/frozenbonito/items/8230d4a3cb5ea1b32802)  
+[今モノレポを使うなら](https://qiita.com/john-Q/items/ef7c433a5f441ff89ffb)  
+[Turborepoのチュートリアル](https://zenn.dev/hayato94087/articles/d2956e662202a7)
 
- 
+
