@@ -13,3 +13,5 @@
 
 [Issue](https://github.com/microsoft/vscode-azurefunctions/issues/2521)をみるとみんな困っているみたい。
 
+別フォルダにコピーする力技で解決
+https://github.com/hibohiboo/async-ttrpg/commit/8e62dc1fe7ff78fe29cb7df7401171b35153cf15
