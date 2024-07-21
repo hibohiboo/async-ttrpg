@@ -12,6 +12,25 @@ export function azureHonoHandler(fetch: FetchCallback) {
 }
 ```
 
+[Functionsのドキュメント - ログの記録](https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-reference-node?tabs=javascript%2Cwindows%2Cazure-cli&pivots=nodejs-model-v4#logging)によると、`context.log`を使うと関数に紐づけられるので強くお勧めするとある。
+
+Honoを使おうとすると、関数は１つに固定される。context.logで関連付ける必要はないのかもしれない。
+
+```
+app.http('httpTrigger', {
+  methods: [
+    //Add all your supported HTTP methods here
+    'GET',
+    'POST',
+    'DELETE',
+    'PUT',
+  ],
+  authLevel: 'anonymous',
+  route: '{*proxy}',
+  handler: azureHonoHandler(honoApp.fetch),
+})
+```
+
 
 
 
