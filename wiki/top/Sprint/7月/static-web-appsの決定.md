@@ -11,4 +11,5 @@ cd apps && npm create vite@latest
 [Reactベースのフルスタックフレームワーク「Remix」の公式ドキュメントを再度、しっかり読んでみた](https://qiita.com/FAL-coffee/items/ec5733904b8485b6d94d)  
 https://vitejs.dev/guide/
 
+[TypeScriptのProject Referencesを使ってソースコードを分割し、レイヤー間の依存関係を強制する](https://zenn.dev/katsumanarisawa/articles/58103deb4f12b4)
 
