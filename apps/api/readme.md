@@ -5,7 +5,7 @@
 --|--|--|--
 型スキーマ|[zod](https://github.com/colinhacks/zod)|MIT|☆32k
 SQLクライアント|[mssql](https://github.com/tediousjs/node-mssql)|MIT|公式サンプル
-Webアプリフレームワーク|[Hono](https://github.com/honojs/hono)|MIT|速い, 軽い, Web標準
+Webアプリフレームワーク|[Hono](https://github.com/honojs/hono)|MIT|速い, 軽い, Web標準.RPCのために導入
 日付ライブラリ|[date-fns](https://github.com/date-fns/date-fns)|MIT|dayjsに比べてDate型をそのまま利用できる
 エイリアスの設定|[tsc-alias](https://github.com/justkey007/tsc-alias)|MIT|相対パスによる分かりにくさを解消するため
 ディレクトリ削除|[rimraf](https://github.com/isaacs/rimraf)|ISC|Windows Linuxの環境差異をなくすため

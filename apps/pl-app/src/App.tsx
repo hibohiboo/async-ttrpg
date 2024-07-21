@@ -1,11 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { client } from './client';
+
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
+
 import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
-
+  useEffect(() => {
+    (async () => {
+      const res = await client.api.httpTrigger1.$get();
+      console.log('rpc response', res);
+      if (res.ok) {
+        const responseJson = await res.json();
+        console.log('response data', responseJson);
+      }
+    })();
+  }, []);
   return (
     <>
       <div>

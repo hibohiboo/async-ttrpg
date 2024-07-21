@@ -6,6 +6,7 @@
 --|--|--|--
 UIライブラリ|[react](https://github.com/facebook/react)|MIT
 UIライブラリ|[react-dom](https://github.com/facebook/react)|MIT
+Webアプリフレームワーク|[Hono](https://github.com/honojs/hono)|MIT|速い, 軽い, Web標準.RPCのために導入
 ビルドツール|[vite](https://github.com/vitejs/vite)|MIT
 Refetch用プラグイン|[@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)|MIT|uses [SWC](https://swc.rs/) for Fast Refresh
 環境変数|[dotenv-cli](https://github.com/entropitor/dotenv-cli)|MIT|npm script内で環境変数を読み込むため

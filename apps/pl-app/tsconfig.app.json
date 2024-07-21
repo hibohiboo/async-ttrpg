@@ -1,9 +1,10 @@
 {
   "extends": "@async-ttrpg/tsconfig/tsconfig.frontend",
   "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": ".",
-    "paths": { "@/*": ["./src/*"] },
+    "paths": { 
+      "@/*": ["./src/*"],
+      "@api/*": ["../api/src/*"],
+     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
   },
   "include": ["src"],
