@@ -7,7 +7,7 @@ npm install
 ## このリポジトリは？
 最近気になった技術をまとめて試したい
 - [x] monorepo
-- [ ] bulletproof-react
+- [z] bulletproof-react
 - [ ] zustand
 - [ ] hono
 - [ ] react-form
