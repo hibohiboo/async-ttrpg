@@ -12,5 +12,6 @@ cd apps && npm create vite@latest
 https://vitejs.dev/guide/
 
 [TypeScriptのProject Referencesを使ってソースコードを分割し、レイヤー間の依存関係を強制する](https://zenn.dev/katsumanarisawa/articles/58103deb4f12b4)  
+[tsconfigのincremental](https://qiita.com/ryokkkke/items/390647a7c26933940470) ... 遅いなら有効にしてもいいかも。初回コンパイルが遅くなるようなのでいったん有効にはしない  
 
 
