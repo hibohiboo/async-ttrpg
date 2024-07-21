@@ -16,7 +16,7 @@ export function azureHonoHandler(fetch: FetchCallback) {
 
 Honoを使おうとすると、関数は１つに固定される。context.logで関連付ける必要はないのかもしれない。
 
-```
+```ts
 app.http('httpTrigger', {
   methods: [
     //Add all your supported HTTP methods here
