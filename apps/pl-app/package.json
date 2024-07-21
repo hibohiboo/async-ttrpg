@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "dotenv -e .env.local -- bash -c 'swa deploy ./dist --env production'"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -15,9 +17,11 @@
   },
   "devDependencies": {
     "@async-ttrpg/eslint-config-custom": "*",
+    "@azure/static-web-apps-cli": "^1.1.10",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
+    "dotenv-cli": "^7.4.2",
     "typescript": "^5.5.3",
     "vite": "^5.3.4"
   }
