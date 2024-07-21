@@ -36,7 +36,7 @@ app.http('httpTrigger', {
 
 [公式](https://hono.dev/docs/guides/rpc)
 
-
+[見よ、これがHonoのRPCだ](https://zenn.dev/yusukebe/articles/a00721f8b3b92e)を見ると、サーバーのrouteから型をexportして、clientで使う仕組みの模様。
 
 
 
