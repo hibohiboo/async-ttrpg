@@ -9,16 +9,12 @@ npm install
 - [x] monorepo
 - [z] bulletproof-react
 - [ ] zustand
-- [ ] hono
+- [x] hono
 - [ ] react-form
 
 題材として、非同期TRPGを作りたい。
 非同期TRPGについては[Wiki](./wiki/top/非同期TRPGとは.md)に記載。
 
-
-項目|ライブラリ|バージョン|ライセンス
---|--|--|--
-Webアプリフレームワーク|[Hono](https://github.com/honojs/hono)|4.5.0|MIT
 
 ## フロントエンドアーキテクチャ
 Reactのベストプラクティスである[bulletproof-react](https://github.com/alan2207/bulletproof-react)をベースに開発する。
