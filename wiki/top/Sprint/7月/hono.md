@@ -31,6 +31,11 @@ app.http('httpTrigger', {
 })
 ```
 
+## RPC
+[Current Status of Hono](https://yusukebe.com/posts/2023/current-status-of-hono/)を読むと、tRPCに似たクライアントとバックエンドで同じ型を使える機能がtRPCより手軽に使えるとある。
+
+[公式](https://hono.dev/docs/guides/rpc)
+
 
 
 
@@ -40,3 +45,5 @@ app.http('httpTrigger', {
 [今ホットなHonoを使ってNext.jsのRoute Handlersをハイジャックする](https://zenn.dev/chot/articles/e109287414eb8c)  
 [Hono - Getting Started](https://hono.dev/docs/getting-started/basic)  
 [Hono + Cloudflare Workers で REST API を作ってみよう](https://zenn.dev/azukiazusa/articles/hono-cloudflare-workers-rest-api#hello-world)  
+[Current Status of Hono](https://yusukebe.com/posts/2023/current-status-of-hono/)
+[見よ、これがHonoのRPCだ](https://zenn.dev/yusukebe/articles/a00721f8b3b92e)
