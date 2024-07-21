@@ -27,6 +27,7 @@
   "typescript.format.enable": false,
   "javascript.format.enable": false,
   "azureFunctions.deploySubpath": "apps\\api",
+  "azureFunctions.projectSubpath": "apps\\api",
   "azureFunctions.postDeployTask": "npm install (functions)",
   "azureFunctions.projectLanguage": "TypeScript",
   "azureFunctions.projectRuntime": "~4",
