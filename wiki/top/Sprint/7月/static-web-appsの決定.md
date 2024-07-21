@@ -14,4 +14,5 @@ https://vitejs.dev/guide/
 [TypeScriptのProject Referencesを使ってソースコードを分割し、レイヤー間の依存関係を強制する](https://zenn.dev/katsumanarisawa/articles/58103deb4f12b4)  
 [tsconfigのincremental](https://qiita.com/ryokkkke/items/390647a7c26933940470) ... 遅いなら有効にしてもいいかも。初回コンパイルが遅くなるようなのでいったん有効にはしない  
 
+[Azure Static Web Apps をパイプラインを使わずSWA CLIでデプロイしたメモ](https://qiita.com/hibohiboo/items/6b88b12f032e9d9f5307)
 
