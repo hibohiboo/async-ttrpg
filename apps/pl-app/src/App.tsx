@@ -16,6 +16,9 @@ function App() {
         const responseJson = await res.json();
         console.log('response data', responseJson);
       }
+      const b = await client.index.$get();
+      const x = await b.text();
+      console.log('rpc text response', x);
     })();
   }, []);
   return (
