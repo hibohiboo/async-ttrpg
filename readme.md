@@ -8,9 +8,10 @@ npm install
 最近気になった技術をまとめて試したい
 - [x] monorepo
 - [z] bulletproof-react
+- [ ] [feature-sliced.design](https://feature-sliced.design/)
 - [ ] zustand
 - [x] hono
-- [ ] react-form
+- [ ] react-hooks-form
 
 題材として、非同期TRPGを作りたい。
 非同期TRPGについては[Wiki](./wiki/top/非同期TRPGとは.md)に記載。
