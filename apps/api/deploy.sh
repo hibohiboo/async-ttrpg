@@ -9,4 +9,5 @@ cp local.settings.json $BUILD_DIR
 jq 'del(.devDependencies)' package.json > temp.json && mv temp.json $BUILD_DIR/package.json
 
 cd $BUILD_DIR && npm install --omit=dev \
-   && func azure functionapp publish $APP_NAME
+   && func azure functionapp publish $APP_NAME --subscription $AZURE_SUBSCRIPTION_ID
+

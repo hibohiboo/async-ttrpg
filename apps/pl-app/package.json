@@ -9,8 +9,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "dotenv -e .env.local -- bash -c 'swa deploy ./dist --env production'"
+    "predeploy": "rm -rf ./node_modules/.tmp && tsc -b && vite build --mode staging",
+    "deploy": "dotenv -e .env.deploy -- bash -c 'swa deploy ./dist --env production --subscription-id $AZURE_SUBSCRIPTION_ID'"
   },
   "dependencies": {
     "hono": "^4.5.1",
