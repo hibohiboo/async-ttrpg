@@ -47,3 +47,7 @@ app.http('httpTrigger', {
 [Hono + Cloudflare Workers で REST API を作ってみよう](https://zenn.dev/azukiazusa/articles/hono-cloudflare-workers-rest-api#hello-world)  
 [Current Status of Hono](https://yusukebe.com/posts/2023/current-status-of-hono/)
 [見よ、これがHonoのRPCだ](https://zenn.dev/yusukebe/articles/a00721f8b3b92e)
+
+## 書いた
+
+[Hono RPC + Azure Functionsを試したら型エラーでハマったメモ](https://qiita.com/hibohiboo/items/cdc189fe93cf63ef353d)
