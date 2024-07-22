@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "rm -rf ./node_modules/.tmp",
     "build": "tsc -b && vite build",
     "lint": "eslint",
     "preview": "vite preview",

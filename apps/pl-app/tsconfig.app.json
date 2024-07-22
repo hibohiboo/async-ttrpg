@@ -4,7 +4,8 @@
     "paths": { 
       "@pl-app/*": ["./src/*"],
       "@api/*": ["../api/src/*"],
-     }
+     },
+     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo"
   },
   "include": ["src", "../api/src"],
   "exclude": ["node_modules", "dist"]
