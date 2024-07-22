@@ -1,7 +1,12 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "extends": "@async-ttrpg/tsconfig/tsconfig.frontend",
+  "compilerOptions": {
+    "paths": { 
+      "@pl-app/*": ["./src/*"],
+      "@api/*": ["../api/src/*"],
+     },
+     "rootDir": ".."
+  },
+  "include": ["src", "../api/src"],
+  "exclude": ["node_modules", "dist"]
 }

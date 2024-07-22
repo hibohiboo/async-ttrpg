@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// 型解決の方法がわからないのでいったんanyで対応
-
 export const streamToAsyncIterator = (
-  readable: any /* ReadableStream<Uint8Array> */,
+  readable: any, // ReadableStream<Uint8Array> | null,
 ) => {
+  if (readable == null) return null;
   const reader = readable.getReader();
   return {
     next() {

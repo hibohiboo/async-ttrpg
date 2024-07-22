@@ -1,6 +1,6 @@
 import { app } from '@azure/functions';
-import honoApp from '@/app';
-import { azureHonoHandler } from '@/utils/honoAzureFuncAdapter/azureHonoHandler';
+import honoApp from '@api/app';
+import { azureHonoHandler } from '@api/utils/honoAzureFuncAdapter/azureHonoHandler';
 
 app.http('httpTrigger', {
   methods: ['GET', 'POST'],

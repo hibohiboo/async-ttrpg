@@ -2,9 +2,18 @@
   "extends": "@async-ttrpg/tsconfig/tsconfig.backend",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": ".",
-    "paths": { "@/*": ["./src/*"] },
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+    "target": "es2022",
+    "module": "commonjs",
+    "declaration": true,
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "types": [
+      "node",
+    ],
+    "paths": { "@api/*": ["./src/*"] },
+  }
 }
