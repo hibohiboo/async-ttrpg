@@ -1,6 +1,6 @@
 import { createRoute, z, OpenAPIHono } from '@hono/zod-openapi';
 import { format } from 'date-fns';
-
+import { swaggerUI } from '@hono/swagger-ui';
 const app = new OpenAPIHono()
   .openapi(
     createRoute({
@@ -29,7 +29,14 @@ const app = new OpenAPIHono()
       path: '/api/httpTrigger1',
       method: 'get',
       description: '日時出力テスト',
-      request: {},
+      request: {
+        query: z.object({
+          name: z.string().optional().openapi({
+            example: 'world',
+            description: '名前',
+          }),
+        }),
+      },
       responses: {
         200: {
           description: 'OK',
@@ -58,32 +65,20 @@ const app = new OpenAPIHono()
     },
   );
 
-app.doc('/doc', {
-  openapi: '3.0.0',
-  info: {
-    title: 'API',
-    version: '1.0.0',
-  },
-});
+app
+  .doc('/specification', {
+    openapi: '3.0.0',
+    info: {
+      title: 'API',
+      version: '1.0.0',
+    },
+  })
+  .get(
+    '/doc',
+    swaggerUI({
+      url: '/specification',
+    }),
+  );
 export default app;
-
-// const app = new OpenAPIHono()
-//   .use(
-//     '/api/*',
-//     cors({
-//       origin: ['*'],
-//       allowHeaders: ['X-Custom-Header', 'Content-Type'],
-//       allowMethods: ['POST', 'GET', 'OPTIONS'],
-//     }),
-//   )
-//   .get('/', (c) => c.text('Hello Azure Functions!'))
-//   .get('/api/httpTrigger1', async (c) => {
-//     const name = c.req.query('name') || (await c.req.text()) || 'world';
-//     console.log(name);
-//     const time = format(new Date(), 'yyyy-MM-dd: HH:mm:ss');
-//     return c.json({ msg: `Hello, ${name}!`, time });
-//   });
-// // https://hono.dev/docs/middleware/builtin/cors
-// app.use('/api/*', cors());
 
 export type AppType = typeof app;
