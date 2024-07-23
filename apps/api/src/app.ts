@@ -1,8 +1,8 @@
 import { createRoute, z, OpenAPIHono } from '@hono/zod-openapi';
 import { format } from 'date-fns';
 import { swaggerUI } from '@hono/swagger-ui';
-import { CharacterSchema } from '@db/zod/index';
-import { prisma } from '@db/client';
+import { CharacterSchema } from '@db/generated/zod/index';
+import { prisma } from './shared/prisma';
 
 const app = new OpenAPIHono()
   .openapi(
