@@ -1,6 +1,9 @@
 import { createRoute, z, OpenAPIHono } from '@hono/zod-openapi';
 import { format } from 'date-fns';
 import { swaggerUI } from '@hono/swagger-ui';
+import { CharacterSchema } from '@db/zod/index';
+import { prisma } from '@db/client';
+
 const app = new OpenAPIHono()
   .openapi(
     createRoute({
@@ -62,6 +65,27 @@ const app = new OpenAPIHono()
       console.log(name);
       const time = format(new Date(), 'yyyy-MM-dd: HH:mm:ss');
       return c.json({ msg: `Hello, ${name}!`, time });
+    },
+  )
+  .openapi(
+    createRoute({
+      path: '/api/characters',
+      method: 'get',
+      description: 'キャラクター一覧取得',
+      responses: {
+        200: {
+          description: 'OK',
+          content: {
+            'application/json': {
+              schema: CharacterSchema.array(),
+            },
+          },
+        },
+      },
+    }),
+    async (c) => {
+      const characters = await prisma.character.findMany();
+      return c.json(characters);
     },
   );
 

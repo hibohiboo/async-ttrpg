@@ -24,6 +24,7 @@
   "devDependencies": {
     "@async-ttrpg/eslint-config-custom": "*",
     "@async-ttrpg/tsconfig": "*",
+    "@async-ttrpg/prisma": "*",
     "@types/mssql": "^9.1.5",
     "@types/node": "^20.14.11",
     "dotenv-cli": "^7.4.2",
@@ -31,5 +32,5 @@
     "tsc-alias": "^1.8.10",
     "typescript": "^5.5.3"
   },
-  "main": "dist/src/{app.js,functions/*.js}"
+  "main": "dist/apps/api/src/{app.js,functions/*.js}"
 }
