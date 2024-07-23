@@ -1,0 +1,13 @@
+generator zod {
+  provider = "zod-prisma-types"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+

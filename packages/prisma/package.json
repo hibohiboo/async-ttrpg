@@ -1,0 +1,19 @@
+{
+  "name": "@async-ttrpg/prisma",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "pull": "prisma db pull"
+  },
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^5.17.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "prisma": "^5.17.0",
+    "zod-prisma-types": "^3.1.8"
+  }
+}
