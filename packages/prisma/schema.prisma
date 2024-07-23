@@ -11,3 +11,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Character {
+  CharacterID   String @id(map: "PK__Characte__757BCA40D91FB5C1") @db.NVarChar(128)
+  CharacterName String @db.NVarChar(128)
+}
+
+model PlayerCharacters {
+  PlayerID    String @db.NVarChar(128)
+  CharacterID String @db.NVarChar(128)
+
+  @@id([PlayerID, CharacterID], map: "PK__PlayerCh__5D19C80C52AC6F06")
+}
+
+model Players {
+  PlayerID          String @id(map: "PK__Players__4A4E74A8F711213E") @db.NVarChar(128)
+  PlayerName        String @db.NVarChar(128)
+  CharacterMaxCount Int
+}
