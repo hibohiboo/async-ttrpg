@@ -6,3 +6,5 @@ https://zenn.dev/maronn/articles/ovverite-env-in-exec-jest
 
 https://learn.microsoft.com/ja-jp/shows/beginners-series-to-learn-a-full-stack-application-with-azure-sql-prisma/course-overview-1-of-37-full-stack-application-with-azure-sql-prisma-beginners-series
 
+https://learn.microsoft.com/ja-jp/shows/beginners-series-to-learn-a-full-stack-application-with-azure-sql-prisma/
+
