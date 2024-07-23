@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "pull": "prisma db pull"
+    "pull": "prisma db pull",
+    "generate": "prisma generate"
   },
   "author": "",
   "license": "MIT",
