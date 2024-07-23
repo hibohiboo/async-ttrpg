@@ -4,9 +4,9 @@
     "outDir": "dist",
     "paths": { 
       "@api/*": ["./src/*"],
-      "@db/*": ["../../packages/prisma/*"],
+      "@db/*": ["../../packages/prisma/generated/*"],
      },
   },
-  "include": ["src","../../packages/prisma/*"],
+  "include": ["src","../../packages/prisma/generated/*"],
   "exclude": ["node_modules", "dist"]
 }
