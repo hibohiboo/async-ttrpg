@@ -1,8 +1,7 @@
 import { createRoute, z, OpenAPIHono } from '@hono/zod-openapi';
 import { format } from 'date-fns';
-import { swaggerUI } from '@hono/swagger-ui';
+// import { swaggerUI } from '@hono/swagger-ui';
 import { CharacterSchema } from '@db/zod';
-import { prisma } from './shared/prisma';
 
 const app = new OpenAPIHono()
   .openapi(
@@ -84,25 +83,27 @@ const app = new OpenAPIHono()
       },
     }),
     async (c) => {
-      const characters = await prisma.character.findMany();
+      // prismaをいれるとAzure Functionsで動かない
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const characters = [] as any; // await prisma.character.findMany();
       return c.json(characters);
     },
   );
 
-app
-  .doc('/specification', {
-    openapi: '3.0.0',
-    info: {
-      title: 'API',
-      version: '1.0.0',
-    },
-  })
-  .get(
-    '/doc',
-    swaggerUI({
-      url: '/specification',
-    }),
-  );
+app.doc('/specification', {
+  openapi: '3.0.0',
+  info: {
+    title: 'API',
+    version: '1.0.0',
+  },
+});
+// SwaggerUIを入れるとAzure Functionsで動かない
+// .get(
+//   '/doc',
+//   swaggerUI({
+//     url: '/specification',
+//   }),
+// )
 export default app;
 
 export type AppType = typeof app;
