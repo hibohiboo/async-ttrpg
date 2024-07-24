@@ -1,0 +1,1 @@
+[tRPC より良いかもしれない "ts-rest" の紹介(ユースケースによる)](https://zenn.dev/chiba/articles/ts-rest-quickstart)
