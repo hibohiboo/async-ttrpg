@@ -10,3 +10,5 @@ https://learn.microsoft.com/ja-jp/shows/beginners-series-to-learn-a-full-stack-a
 
 【Prisma】npx prisma generate した時何が起きているのか【実験】
 https://qiita.com/sakurasan/items/02ca5ea47dd4f1725e0d
+
+https://www.prisma.io/docs/orm/prisma-client/setup-and-configuration/generating-prisma-client
