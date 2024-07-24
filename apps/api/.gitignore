@@ -98,4 +98,9 @@ __blobstorage__
 __queuestorage__
 __azurite_db*__.json
 
+# monorepo build tmp directory
 build
+
+# prisma client
+generated/client
+
