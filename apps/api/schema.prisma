@@ -5,6 +5,7 @@ generator zod {
 generator client {
   provider = "prisma-client-js"
   output   = "./generated/client"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
 datasource db {

@@ -3,10 +3,9 @@
   "Values": {
     "TZ": "UTC",
     "AzureWebJobsStorage":"",
-    "Azure_Storage_AccountName":"piyo",
-    "Azure_Storage_AccountKey": "HOGEHOGEA==",
     "FUNCTIONS_WORKER_RUNTIME": "node",
-    "AzureWebJobsFeatureFlags": "EnableWorkerIndexing"
+    "AzureWebJobsFeatureFlags": "EnableWorkerIndexing",
+    "DATABASE_URL":"sqlserver://hoge.database.windows.net:1433;database=hogehoge;user=piyo;password=piyopiyo;encrypt=true;schema=pdo"
   },
   "Host": {
     "CORS": "*"

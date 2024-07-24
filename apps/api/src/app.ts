@@ -84,8 +84,6 @@ const app = new OpenAPIHono()
       },
     }),
     async (c) => {
-      // prismaをいれるとAzure Functionsで動かない
-
       const characters = await prisma.character.findMany();
       return c.json(characters);
     },
