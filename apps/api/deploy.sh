@@ -11,14 +11,8 @@ cp local.settings.json $BUILD_DIR
 jq 'del(.devDependencies)' package.json > temp.json && mv temp.json $BUILD_DIR/package.json
 
 # Prismaを使うための準備
-PRISMA_DIR=$BIN_DIR/../../packages/prisma
-cp $PRISMA_DIR/schema.prisma $BUILD_DIR
-cd $BUILD_DIR && npm i -D prisma zod-prisma-types
+cp schema.prisma $BUILD_DIR
 
-# Prisma client の init を行う
-cd $BUILD_DIR && npx prisma generate
-cd $BUILD_DIR && npm uninstall prisma zod-prisma-types # initが終わったら不要になるので
 
-cd $BUILD_DIR && npm install --omit=dev \
-   && func azure functionapp publish $APP_NAME --subscription $AZURE_SUBSCRIPTION_ID
-
+cd $BUILD_DIR && npm install \
+   && npm i -D prisma && npm run prisma-generate

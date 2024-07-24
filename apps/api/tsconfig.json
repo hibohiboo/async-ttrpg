@@ -2,11 +2,12 @@
   "extends": "@async-ttrpg/tsconfig/tsconfig.backend",
   "compilerOptions": {
     "outDir": "dist",
+    "rootDir": ".",
     "paths": { 
       "@api/*": ["./src/*"],
-      "@db/*": ["../../packages/prisma/generated/*"],
+      "@db/*": ["./generated/*"],
      },
   },
-  "include": ["src","../../packages/prisma/generated/*"],
+  "include": ["src","generated"],
   "exclude": ["node_modules", "dist"]
 }

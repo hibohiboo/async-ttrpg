@@ -10,6 +10,8 @@
     "predev": "npm run build",
     "dev": "func start --port 7071",
     "lint": "eslint",
+    "prisma-pull": "prisma db pull",
+    "prisma-generate": "prisma generate",
     "predeploy": "npm run build",
     "deploy": "dotenv -e .env -- bash -c 'bash deploy.sh'"
   },
@@ -30,9 +32,11 @@
     "@types/mssql": "^9.1.5",
     "@types/node": "^20.14.11",
     "dotenv-cli": "^7.4.2",
+    "prisma": "^5.17.0",
     "rimraf": "^6.0.1",
     "tsc-alias": "^1.8.10",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "zod-prisma-types": "^3.1.8"
   },
-  "main": "dist/apps/api/src/{app.js,functions/*.js}"
+  "main": "dist/src/{app.js,functions/*.js}"
 }
