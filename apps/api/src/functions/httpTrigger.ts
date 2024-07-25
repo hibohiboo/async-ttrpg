@@ -7,7 +7,7 @@ app.setup({
 app.http('httpTrigger', {
   methods: ['GET', 'POST'],
   authLevel: 'anonymous',
-  route: 'api/{*proxy}',
+  route: '{*proxy}',
   // fetchの引数にはcontextを渡すことができないので第２引数のcontextは失われる。context.logによるログ出力はできないが、関数が１つだけのため関数とログの紐づけができなくなっても影響はない。
   handler: azureHonoHandler(honoApp.fetch),
 });
