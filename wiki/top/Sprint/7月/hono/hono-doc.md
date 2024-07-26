@@ -2,6 +2,7 @@
 [見よ、これがHonoのRPCだ](https://zenn.dev/yusukebe/articles/a00721f8b3b92e)
 https://github.com/honojs/middleware/tree/main/packages/zod-openapi
 
-
+Cloudflare Workers + Hono + Prismaでローカル環境構築
+https://zenn.dev/slowhand/articles/30c6bc9fd418ab
 https://zenn.dev/slowhand/articles/30c6bc9fd418ab
 
