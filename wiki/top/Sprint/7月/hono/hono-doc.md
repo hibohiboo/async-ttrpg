@@ -7,3 +7,4 @@ https://zenn.dev/slowhand/articles/30c6bc9fd418ab
 https://hono.dev/examples/prisma
 
 
+https://qpqmsnhr4ct5gazfunctionsapp.azurewebsites.net/doc
