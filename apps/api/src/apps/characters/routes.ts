@@ -58,7 +58,13 @@ export const deleteRoute = createRoute({
   responses: { ...defaultResponst },
   request: {
     params: z.object({
-      id: z.string().openapi({ description: 'キャラクターID' }),
+      id:
+        // どちらの書き方でもOK
+        //z.string().openapi({ description: 'キャラクターID', example: 'aaa' }),
+        CharacterSchema.shape.CharacterID.openapi({
+          description: 'キャラクターID',
+          example: 'bbb',
+        }),
     }),
   },
 });
