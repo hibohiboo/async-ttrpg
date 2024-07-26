@@ -5,7 +5,7 @@ app.setup({
   enableHttpStream: true,
 });
 app.http('httpTrigger', {
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   authLevel: 'anonymous',
   route: '{*proxy}',
   // fetchの引数にはcontextを渡すことができないので第２引数のcontextは失われる。context.logによるログ出力はできないが、関数が１つだけのため関数とログの紐づけができなくなっても影響はない。

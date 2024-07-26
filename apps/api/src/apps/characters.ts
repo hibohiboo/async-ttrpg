@@ -25,10 +25,17 @@ const app = new OpenAPIHono()
       return c.json(characters);
     },
   )
-  .post(zValidator('json', CharacterSchema), async (c) => {
+  // .post(zValidator('json', CharacterSchema), async (c) => {
+  //   const data = await c.req.valid('json');
+  //   const character = await prisma.character.create({ data });
+  //   return c.json(character);
+  // })
+  .put(zValidator('json', CharacterSchema), async (c) => {
     const data = await c.req.valid('json');
-    const character = await prisma.character.create({ data });
+    const character = await prisma.character.update({
+      where: { CharacterID: data.CharacterID },
+      data,
+    });
     return c.json(character);
   });
-
 export default app;
