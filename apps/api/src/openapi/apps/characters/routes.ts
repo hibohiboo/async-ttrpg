@@ -1,6 +1,8 @@
 import { CharacterSchema } from '@db/zod';
 import { createRoute } from '@hono/zod-openapi';
 import { z } from '@hono/zod-openapi';
+import { zValidator } from '@hono/zod-validator';
+
 export const getRoute = createRoute({
   path: '/',
   method: 'get',
@@ -68,3 +70,7 @@ export const deleteRoute = createRoute({
     }),
   },
 });
+export const putValidator = zValidator(
+  'json',
+  z.object({ CharacterID: z.string(), CharacterName: z.string() }),
+);

@@ -1,17 +1,6 @@
-import { OpenAPIHono } from '@hono/zod-openapi';
-import { swaggerUI } from '@hono/swagger-ui';
-import sample from './apps/samples';
-import characters from './apps/characters';
-const app = new OpenAPIHono()
-  .route('/', sample)
-  .route('/api/characters', characters);
+import characters from './routes/characters';
+import { Hono } from 'hono';
+const route = new Hono().route('/characters', characters);
+const app = new Hono().route('/api', route);
 export default app;
 export type AppType = typeof app;
-
-// openapi
-app
-  .doc('/specification', {
-    openapi: '3.1.0',
-    info: { title: 'API', version: '1.0.0' },
-  })
-  .get('/doc', swaggerUI({ url: '/specification' }));
