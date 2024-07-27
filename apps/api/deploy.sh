@@ -2,6 +2,8 @@
 BIN_DIR=$(cd $(dirname $0) && pwd)
 BUILD_DIR=$BIN_DIR/build
 rimraf ./build
+rimraf ./dist
+npm run build
 mkdir $BUILD_DIR
 cp -r dist $BUILD_DIR
 cp host.json $BUILD_DIR
