@@ -1,6 +1,16 @@
 import characters from './routes/characters';
 import { Hono } from 'hono';
+import { cors } from 'hono/cors';
 const route = new Hono().route('/characters', characters);
-const app = new Hono().route('/api', route);
+const app = new Hono()
+  .use(
+    '/api',
+    cors({
+      origin: '*',
+      allowHeaders: ['Content-Type'],
+      allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    }),
+  )
+  .route('/api', route);
 export default app;
 export type AppType = typeof app;

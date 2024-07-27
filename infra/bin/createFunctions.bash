@@ -8,6 +8,7 @@ cd $BICEP_DIR && az deployment group create \
   --template-file functions.bicep \
   --parameters \
     allowedOrigin=$WSA_ORIGIN \
+    databaseUrl=$DATABASE_URL \
   -g $RESOURCE_GROUP_NAME
 
 

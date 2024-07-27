@@ -1,6 +1,7 @@
 param storageAccountType string = 'Standard_LRS'
 param location string = resourceGroup().location
 param allowedOrigin string
+param databaseUrl string
 var storageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
@@ -43,6 +44,11 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
           name: 'FUNCTIONS_WORKER_RUNTIME'
           value: 'node'
         }
+        {
+          name: 'DATABASE_URL'
+          value: databaseUrl
+        }
+        
       ]
     }
   }
