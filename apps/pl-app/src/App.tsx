@@ -1,50 +1,37 @@
-import { useEffect, useState } from 'react';
-import { client } from '@pl-app/client';
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import { client } from './client';
+import type { InferRequestType } from 'hono';
 
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+type Character = InferRequestType<typeof client.api.characters.$post>['json'];
+export default function App() {
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Character>();
+  const onSubmit = handleSubmit((data) => {
+    client.api.characters.$post({ json: data });
+  });
+  // firstName and lastName will have correct type
 
-import './App.css';
-
-function App() {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    (async () => {
-      const res = await client.api.httpTrigger1.$get();
-      console.log('rpc response', res);
-      if (res.ok) {
-        const responseJson = await res.json();
-        console.log('response data', responseJson);
-      }
-      const b = await client.index.$get();
-      const x = await b.text();
-      console.log('rpc text response', x);
-    })();
-  }, []);
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <form onSubmit={onSubmit}>
+      <label>First Name</label>
+      <input {...register('')} />
+      <label>Last Name</label>
+      <input {...register('lastName')} />
+      <button
+        type="button"
+        onClick={() => {
+          setValue('lastName', 'luo'); // ✅
+          setValue('firstName', true); // ❌: true is not string
+          errors.bill; // ❌: property bill does not exist
+        }}
+      >
+        SetValue
+      </button>
+    </form>
   );
 }
-
-export default App;
