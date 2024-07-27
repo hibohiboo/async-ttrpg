@@ -17,13 +17,15 @@
     "hono": "^4.5.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-hook-form": "^7.52.1"
+    "react-hook-form": "^7.52.1",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@async-ttrpg/eslint-config-custom": "*",
     "@azure/static-web-apps-cli": "^2.0.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@types/uuid": "^10.0.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "dotenv-cli": "^7.4.2",
     "typescript": "^5.5.4",

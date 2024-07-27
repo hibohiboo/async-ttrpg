@@ -1,37 +1,31 @@
-import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { client } from './client';
 import type { InferRequestType } from 'hono';
+import { v4 } from 'uuid';
 
 type Character = InferRequestType<typeof client.api.characters.$post>['json'];
 export default function App() {
   const {
     register,
-    setValue,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<Character>();
   const onSubmit = handleSubmit((data) => {
-    client.api.characters.$post({ json: data });
+    if (errors.root) {
+      alert(errors.root.message);
+      return;
+    }
+    client.api.characters.$post({ json: { ...data, CharacterID: v4() } });
+    reset();
   });
   // firstName and lastName will have correct type
 
   return (
     <form onSubmit={onSubmit}>
-      <label>First Name</label>
-      <input {...register('')} />
-      <label>Last Name</label>
-      <input {...register('lastName')} />
-      <button
-        type="button"
-        onClick={() => {
-          setValue('lastName', 'luo'); // ✅
-          setValue('firstName', true); // ❌: true is not string
-          errors.bill; // ❌: property bill does not exist
-        }}
-      >
-        SetValue
-      </button>
+      <label>キャラクター名</label>
+      <input {...register('CharacterName')} />
+      <button type="submit">送信</button>
     </form>
   );
 }
