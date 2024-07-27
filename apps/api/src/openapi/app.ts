@@ -15,5 +15,3 @@ const route = new OpenAPIHono()
 const app = new OpenAPIHono().route(`/openapi`, route);
 
 export default app;
-
-// openapi
