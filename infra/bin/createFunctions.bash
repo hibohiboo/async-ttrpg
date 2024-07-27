@@ -6,6 +6,8 @@ source $BIN_DIR/common.bash
 cd $BICEP_DIR && az deployment group create \
   --name functionsDeployment \
   --template-file functions.bicep \
+  --parameters \
+    allowedOrigin=$WSA_ORIGIN \
   -g $RESOURCE_GROUP_NAME
 
 

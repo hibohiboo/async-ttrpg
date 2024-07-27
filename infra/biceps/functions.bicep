@@ -1,5 +1,6 @@
 param storageAccountType string = 'Standard_LRS'
 param location string = resourceGroup().location
+param allowedOrigin string
 var storageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
@@ -17,6 +18,9 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
   properties: {
     reserved: true
     siteConfig: {
+      cors: {
+        allowedOrigins: [allowedOrigin]
+      }
       linuxFxVersion: 'Node|20'
       appSettings: [
         {
