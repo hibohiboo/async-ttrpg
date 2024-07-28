@@ -12,3 +12,9 @@ https://npmtrends.com/playwright-vs-puppeteer
 伸びを見るとplaywrightのほうがよさそう。
 codeceptjs  と playwright の組み合わせでためそうと思う。
 
+そういえば、codeceptjs自体はどうなんだっけ。
+
+![image.png](/.attachments/image-f05fa984-a63b-4f9b-9f51-9495b0915542.png)
+
+気持ち下がり気味？
+
