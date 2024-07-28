@@ -11,7 +11,10 @@ npm install
 - [ ] [feature-sliced.design](https://feature-sliced.design/)
 - [ ] zustand
 - [x] hono
-- [ ] react-hooks-form
+- [x] react-hooks-form
+- [x] codeceptjs 
+- [ ] vitest
+- [ ] biome
 
 題材として、非同期TRPGを作りたい。
 非同期TRPGについては[Wiki](./wiki/top/非同期TRPGとは.md)に記載。
