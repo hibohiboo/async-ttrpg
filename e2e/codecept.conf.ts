@@ -7,7 +7,7 @@ setHeadlessWhen(process.env.HEADLESS);
 setCommonPlugins();
 
 export const config: CodeceptJS.MainConfig = {
-  tests: 'form_test.js',
+  tests: 'form_SR_test.js',
   output: './output',
   helpers: {
     Playwright: {
@@ -17,8 +17,7 @@ export const config: CodeceptJS.MainConfig = {
     },
   },
   // -----ここから追記-----
-  // translation: 'MyLang',
-  // vocabularies: ['ja-SR.js'],
+  translation: './ja-SR.js',
   // -----ここまで追記-----
   include: {
     I: './steps_file',
