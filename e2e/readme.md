@@ -48,12 +48,14 @@ Definitions were generated in steps.d.ts
 Creating a new test...
 ----------------------
 ? Feature which is being tested (ex: account, login, etc) etc
-? Filename of a test etc_test.js
+? Filename of a test form_test.js
 
-Test for etc_test.js was created in D:\projects\async-ttrpg\etc_test.js
+Test for form_test.js was created in D:\projects\async-ttrpg\form_test.js
 
 --
 CodeceptJS Installed! Enjoy supercharged testing! 🤩
 Find more information at https://codecept.io
 
 ```
+
+form_test.jsをe2eフォルダの下に移動。

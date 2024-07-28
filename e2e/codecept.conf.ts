@@ -13,11 +13,14 @@ export const config: CodeceptJS.MainConfig = {
     Playwright: {
       browser: 'chromium',
       url: 'http://localhost:5173',
-      show: false
-    }
+      show: false,
+    },
   },
+  // -----ここから追記-----
+  translation: './ja-SR.js',
+  // -----ここまで追記-----
   include: {
-    I: './steps_file'
+    I: './steps_file',
   },
-  name: 'e2e'
-}
+  name: 'e2e',
+};
