@@ -19,5 +19,5 @@ npx create-codeceptjs .
 ```
 
 ## 参考
-[QuickStart](https://codecept.io/quickstart/)
+[QuickStart](https://codecept.io/quickstart/)  
 [ja-JP.js](https://github.com/codeceptjs/CodeceptJS/blob/3.x/translations/ja-JP.js)
