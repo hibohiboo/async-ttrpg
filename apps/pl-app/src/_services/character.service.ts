@@ -1,4 +1,4 @@
-import { client } from '@pl-app/client';
+import { client } from '@pl-app/shared/client';
 import { InferRequestType } from 'hono/client';
 
 const characters = client.api.characters;
