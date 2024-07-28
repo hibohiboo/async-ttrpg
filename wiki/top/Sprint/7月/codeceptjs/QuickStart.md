@@ -72,3 +72,4 @@ export const config: CodeceptJS.MainConfig = {
 [我が名は神龍……どんなテストもひとつだけ自動化してやろう](https://qiita.com/tsuemura/items/56ba9942565963858d8f)  
 [QuickStart](https://codecept.io/quickstart/)  
 [ja-JP.js](https://github.com/codeceptjs/CodeceptJS/blob/3.x/translations/ja-JP.js)
+[translation](https://codecept.io/translation/#how-it-works)
