@@ -17,7 +17,8 @@ export const config: CodeceptJS.MainConfig = {
     },
   },
   // -----ここから追記-----
-  translation: './ja-SR.js',
+  translation: 'MyLang',
+  vocabularies: ['./ja-SR.js'],
   // -----ここまで追記-----
   // -----ここから追記-----
   plugins: {

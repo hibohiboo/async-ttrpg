@@ -1,6 +1,6 @@
-Feature('作成のテスト');
+Feature('キャラクターのCRUD');
 
-Scenario('test something', ({ I }) => {
+Scenario('キャラクターの追加', ({ I }) => {
   const 追加 = locate('a').withText('キャラクターを追加').as('追加');
   const Save = locate('button').withText('Save').as('Save');
 
