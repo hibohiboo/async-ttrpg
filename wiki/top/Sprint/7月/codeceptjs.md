@@ -18,3 +18,7 @@ codeceptjs  と playwright の組み合わせでためそうと思う。
 
 気持ち下がり気味？
 
+![image.png](/.attachments/image-41c79585-c13e-46ec-a473-f2c73a55d448.png)
+
+https://note.shiftinc.jp/n/n0c351743a299
+
