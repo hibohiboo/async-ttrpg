@@ -3,7 +3,7 @@ import { createRoute } from '@hono/zod-openapi';
 import { z } from '@hono/zod-openapi';
 import { zValidator } from '@hono/zod-validator';
 
-export const getRoute = createRoute({
+export const getListRoute = createRoute({
   path: '/',
   method: 'get',
   description: 'キャラクター一覧取得',
@@ -13,6 +13,22 @@ export const getRoute = createRoute({
       content: {
         'application/json': {
           schema: CharacterSchema.array(),
+        },
+      },
+    },
+  },
+});
+export const getRoute = createRoute({
+  path: '/:id',
+  method: 'get',
+  description: 'キャラクター取得',
+  request: { params: z.object({ id: CharacterSchema.shape.CharacterID }) },
+  responses: {
+    200: {
+      description: 'OK',
+      content: {
+        'application/json': {
+          schema: CharacterSchema,
         },
       },
     },

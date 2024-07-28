@@ -1,31 +1,28 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
-import { prisma } from '@api/shared/prisma';
-import { deleteRoute, getRoute, postRoute, putValidator } from './routes';
+import {
+  deleteRoute,
+  getListRoute,
+  getRoute,
+  postRoute,
+  putRoute,
+} from './routes';
 
 const app = new OpenAPIHono()
+  .openapi(getListRoute, async (c) => {
+    return c.json([{ CharacterID: '1', CharacterName: 'test' }]);
+  })
   .openapi(getRoute, async (c) => {
-    const characters = await prisma.character.findMany();
-    return c.json(characters);
+    return c.json({ CharacterID: '1', CharacterName: 'test' });
   })
   .openapi(postRoute, async (c) => {
     const data = await c.req.valid('json');
-    const character = await prisma.character.create({ data });
-    return c.json(character);
+    return c.json(data);
+  })
+  .openapi(putRoute, async (c) => {
+    const data = await c.req.valid('json');
+    return c.json(data);
   })
   .openapi(deleteRoute, async (c) => {
-    const character = await prisma.character.delete({
-      where: { CharacterID: c.req.valid('param').id },
-    });
-    return c.json(character);
-  })
-  .put(putValidator, async (c) => {
-    const data = await c.req.valid('json');
-    const { CharacterID, ...rest } = data;
-    const character = await prisma.character.upsert({
-      where: { CharacterID: CharacterID },
-      create: data,
-      update: rest,
-    });
-    return c.json(character);
+    return c.json({ CharacterID: '1', CharacterName: 'test' });
   });
 export default app;
