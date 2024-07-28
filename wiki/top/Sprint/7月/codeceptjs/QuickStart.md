@@ -18,6 +18,9 @@ cd e2e
 npx create-codeceptjs .
 ```
 
+## さあ　おまちかねのテストコードだ
+
+
 ## 参考
 [我が名は神龍……どんなテストもひとつだけ自動化してやろう](https://qiita.com/tsuemura/items/56ba9942565963858d8f)  
 [QuickStart](https://codecept.io/quickstart/)  
