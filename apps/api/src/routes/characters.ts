@@ -14,6 +14,16 @@ const app = new Hono()
     const character = await prisma.character.create({ data });
     return c.json(character);
   })
+  .get(
+    '/:id',
+    zValidator('param', z.object({ id: CharacterSchema.shape.CharacterID })),
+    async (c) => {
+      const characters = await prisma.character.findFirstOrThrow({
+        where: { CharacterID: c.req.valid('param').id },
+      });
+      return c.json(characters);
+    },
+  )
   .put(
     '/:id',
     zValidator('param', z.object({ id: CharacterSchema.shape.CharacterID })),

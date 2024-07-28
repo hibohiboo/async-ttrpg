@@ -19,7 +19,6 @@ export default function App() {
     client.api.characters.$post({ json: { ...data, CharacterID: v4() } });
     reset();
   });
-  // firstName and lastName will have correct type
 
   return (
     <form onSubmit={onSubmit}>
