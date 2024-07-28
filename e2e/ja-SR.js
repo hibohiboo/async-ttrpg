@@ -1,11 +1,21 @@
 module.exports = {
   I: '我が名は神龍',
+  contexts: {
+    Feature: 'テストの大枠を定義してやろう',
+    Scenario: 'テストケースを定義してやろう',
+    ScenarioOutline: '複数のデータセットを持つテストケースを定義してやろう',
+  },
   actions: {
+    amOutsideAngularApp: 'Angularの外に出てやろう',
+    amInsideAngularApp: 'Angularの中に入ってやろう',
     waitForElement: '要素が表示されるまで待ってやろう',
     waitForClickable: 'クリック可能になるまで待ってやろう',
     waitForVisible: '要素が見えるようになるまで待ってやろう',
     waitForText: 'テキストが表示されるまで待ってやろう',
+    moveTo: 'ページを移動してやろう',
     refresh: 'ページを更新してやろう',
+    haveModule: 'モジュールを持っているか確認してやろう',
+    resetModule: 'モジュールをリセットしてやろう',
     amOnPage: 'URLにアクセスしてやろう',
     click: 'クリックしてやろう',
     doubleClick: 'ダブルクリックしてやろう',
@@ -14,6 +24,7 @@ module.exports = {
     selectOption: 'オプションを選んでやろう',
     fillField: 'フィールドに入力してやろう',
     pressKey: 'キー入力してやろう',
+    triggerMouseEvent: 'マウスイベントを発火させてやろう',
     attachFile: 'ファイルを添付してやろう',
     seeInField: '入力フィールドに文字が入っているか確認してやろう',
     dontSeeInField: '入力フィールドに文字が入っていないか確認してやろう',
@@ -46,4 +57,4 @@ module.exports = {
     resizeWindow: 'ウィンドウをリサイズしてやろう',
     wait: '待ってやろう',
   },
-};
+}
