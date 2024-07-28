@@ -22,3 +22,5 @@ codeceptjs  と playwright の組み合わせでためそうと思う。
 
 https://note.shiftinc.jp/n/n0c351743a299
 
+https://zenn.dev/taiga533/articles/f6e1ef07a8676e
+
