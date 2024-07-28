@@ -26,6 +26,7 @@ npx create-codeceptjs .
 
 ## 『いいだろう　たやすい願いだ』
 ### PlayWright実行中にブラウザが開くようにしてやろう
+起動オプションを `show: true` にするだけで良い
 
 ## 参考
 [我が名は神龍……どんなテストもひとつだけ自動化してやろう](https://qiita.com/tsuemura/items/56ba9942565963858d8f)  
