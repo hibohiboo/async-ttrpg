@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -10,6 +10,7 @@ import {
 import { v4 } from 'uuid';
 
 function AddEdit() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const isAddMode = !id;
 
@@ -30,8 +31,9 @@ function AddEdit() {
     resolver: yupResolver(validationSchema),
   });
 
-  function onSubmit(data: Character) {
-    return isAddMode ? createUser(data) : updateUser(id, data);
+  async function onSubmit(data: Character) {
+    await (isAddMode ? createUser(data) : updateUser(id, data));
+    navigate('/');
   }
 
   async function createUser(data: Character) {
