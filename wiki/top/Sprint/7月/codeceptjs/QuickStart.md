@@ -33,6 +33,39 @@ npx create-codeceptjs .
 クライアントに提出するスクリーンショットが必要なんです！！お願いします！！！！！！！！！！！！！
 ## 『いいだろう　たやすい願いだ』
 ### スクリーンショットが自動で撮影されるようにしてやろう
+```diff
+import { setHeadlessWhen, setCommonPlugins } from '@codeceptjs/configure';
+// turn on headless mode when running with HEADLESS=true environment variable
+// export HEADLESS=true && npx codeceptjs run
+setHeadlessWhen(process.env.HEADLESS);
+
+// enable all common plugins https://github.com/codeceptjs/configure#setcommonplugins
+setCommonPlugins();
+
+export const config: CodeceptJS.MainConfig = {
+  tests: 'form_SR_test.js',
+  output: './output',
+  helpers: {
+    Playwright: {
+      browser: 'chromium',
+      url: 'http://localhost:5173',
+      show: true,
+    },
+  },
+  translation: './ja-SR.js',
++  plugins: {
++    stepByStepReport: {
++      enabled: true,
++      deleteSuccessful: false,
++    },
++  },
+  include: {
+    I: './steps_file',
+  },
+  name: 'e2e',
+};
+```
+
 ## 『願いはかなった　さらばだ』
 
 ## 参考
