@@ -1,4 +1,4 @@
-https://codecept.io/quickstart/
+
 
 ## 『我が名は神龍……どんなテストもひとつだけ自動化してやろう』
 じゃ、じゃあCRUDのブラウザテストの自動化をお願いします。
@@ -18,3 +18,6 @@ cd e2e
 npx create-codeceptjs .
 ```
 
+## 参考
+[QuickStart](https://codecept.io/quickstart/)
+[ja-JP.js](https://github.com/codeceptjs/CodeceptJS/blob/3.x/translations/ja-JP.js)
