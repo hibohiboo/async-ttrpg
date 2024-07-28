@@ -24,3 +24,4 @@ https://note.shiftinc.jp/n/n0c351743a299
 
 https://zenn.dev/taiga533/articles/f6e1ef07a8676e
 
+でも、シェンロンやってみたいので試してみる。
