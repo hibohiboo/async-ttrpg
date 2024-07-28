@@ -13,6 +13,8 @@ https://codecept.io/quickstart/
 ### まずはライブラリのインストールと初期設定をしてやろう……
 
 ```
+mkdir e2e
+cd e2e
 npx create-codeceptjs .
 ```
 
