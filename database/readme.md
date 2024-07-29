@@ -1,18 +1,5 @@
-## 初期DB作成手順
-
+## DB機動手順
+バックエンドのローカル実行前に起動すること
 ```
-./bin/bash.sh
-```
-
-上記コマンドでコンテナ内のバッシュに入る。
-
-下記コマンドでsqlcmd立ち上げ。
-```
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P MyPassword123
-```
-
-quickstartデータベースを作成する。
-```
-CREATE DATABASE quickstart
-GO
+./bin/up.sh
 ```
