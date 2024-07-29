@@ -2,7 +2,8 @@
   "recommendations": [
     "ms-azuretools.vscode-bicep",
     "ms-azuretools.vscode-azurefunctions",
-    "ms-vscode.vscode-typescript-next"
+    "ms-vscode.vscode-typescript-next",
+    "EditorConfig.EditorConfig"
   ],
   "unwantedRecommendations": []
 }

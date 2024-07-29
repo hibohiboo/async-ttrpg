@@ -1,0 +1,24 @@
+services:
+  mssql:
+    build: ./
+    user: root
+    container_name: mssql
+    hostname: mssql
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y # エンド ユーザー ライセンス契約を承諾
+      - MSSQL_SA_PASSWORD=MyPassword123
+      - MSSQL_PID=Developer # ライセンスタイプ. 無料でライセンスが付与される Developer Edition 
+      - MSSQL_TCP_PORT=1433
+      # - MSSQL_LCID=1041 # 言語ID
+      - MSSQL_COLLATION=Japanese_CI_AS
+      # ホスト名がloclhostだとDokcer Desktopでは動かない https://qiita.com/nozakita/items/c55e5fac3fc0364f42f5
+      - HOST_NAME=mssql
+      # サービスが起動するまでの時間待つ。待ち時間が短いと SA でのログインに失敗することがある。 https://github.com/Microsoft/mssql-docker/issues/203
+      - WAIT_TIME_FOR_LOGIN=10
+    volumes: # マッピングを指定
+      - ./initdb.d:/docker-initdb.d # 初期化用SQLとSQL Server起動スクリプト
+    # https://qiita.com/75ks/items/b156905968535e23278c
+    command: ["/bin/bash", "-c", "chmod +x /docker-initdb.d/entrypoint.sh && /docker-initdb.d/entrypoint.sh"] # SQL Server起動スクリプトを実行
+
