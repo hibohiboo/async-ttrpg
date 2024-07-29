@@ -14,7 +14,7 @@ echo "SQL Server started."
 echo "Initializing database..."
 /opt/mssql-tools18/bin/sqlcmd -S $HOST_NAME -U sa -P $MSSQL_SA_PASSWORD -C -d master -Q "CREATE DATABASE test;"
 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P $MSSQL_SA_PASSWORD -C -d test -Q "CREATE SCHEMA atrpg;"
-/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P $MSSQL_SA_PASSWORD -C -d test -i ddl.sq
+/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P $MSSQL_SA_PASSWORD -C -d test -i /docker-initdb.d/ddl.sql
 echo "Database initialized."
 
 # バックグラウンドで実行中のSQL Serverのプロセスを待機
