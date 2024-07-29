@@ -7,6 +7,7 @@ setHeadlessWhen(process.env.HEADLESS);
 setCommonPlugins();
 
 export const config: CodeceptJS.MainConfig = {
+  // tests: './cases/form_SR_test.js',
   tests: './cases/form_test.ts',
   output: './output',
   helpers: {
@@ -16,18 +17,15 @@ export const config: CodeceptJS.MainConfig = {
       show: true,
     },
   },
-  // -----ここから追記-----
+  // translation: './ja-SR.js',
   translation: 'MyLang',
   vocabularies: ['./ja-SR.js'],
-  // -----ここまで追記-----
-  // -----ここから追記-----
   plugins: {
     stepByStepReport: {
       enabled: true,
       deleteSuccessful: false,
     },
   },
-  // -----ここまで追記-----
   include: {
     I: './steps_file',
   },

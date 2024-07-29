@@ -1,5 +1,11 @@
 テストの大枠を定義してやろう('キャラクターのCRUD');
-
+テストの準備をしてやろう(() => {
+  const exec = require('child_process').exec;
+  // Character テーブルのデータをすべて消してやろう
+  exec(
+    'docker exec -d mssql /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P MyPassword@123 -C -d test -Q "TRUNCATE TABLE atrpg.Character;"',
+  );
+});
 テストケースを定義してやろう('キャラクターの追加',  ({I}) => {
   const 我が名は神龍 = I;
   const 追加 = locate('a').withText('キャラクターを追加').as('追加')

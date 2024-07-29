@@ -4,6 +4,7 @@ module.exports = {
     Feature: 'テストの大枠を定義してやろう',
     Scenario: 'テストケースを定義してやろう',
     ScenarioOutline: '複数のデータセットを持つテストケースを定義してやろう',
+    Before: 'テストの準備をしてやろう',
   },
   actions: {
     amOutsideAngularApp: 'Angularの外に出てやろう',
