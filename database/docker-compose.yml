@@ -18,5 +18,5 @@ services:
     volumes: # マッピングを指定
       - ./initdb.d:/docker-initdb.d # 初期化用SQLとSQL Server起動スクリプト
     # https://qiita.com/75ks/items/b156905968535e23278c
-    command: ["/bin/bash", "-c", "chmod +x /docker-initdb.d/entrypoint.sh && /docker-initdb.d/entrypoint.sh"] # SQL Server起動スクリプトを実行
+    command: ["/bin/bash", "-c", "/docker-initdb.d/entrypoint.sh"] # SQL Server起動スクリプトを実行
 
