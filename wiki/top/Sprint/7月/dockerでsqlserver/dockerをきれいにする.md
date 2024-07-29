@@ -16,3 +16,10 @@ lrwxrwxrwx 1 root root 79 Jul 29 09:35 docker-scout -> /mnt/wsl/docker-desktop/c
 シンボリックリンクも削除
 
 https://zenn.dev/23prime/articles/c78c42351a7439
+
+いれなおしてみたけどあまり変化なかった。
+
+けっきょく、dockerの書きかたがまずかった模様。下記の記法で解決
+
+Docker & Microsoft SQL Server(初期データ登録まで)
+https://qiita.com/75ks/items/b156905968535e23278c
