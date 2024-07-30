@@ -2,11 +2,10 @@ trigger:
   branches:
     include:
       - develop
-      - id/7/pipeline
-  # paths:
-  #   include:
-  #     - apps/pl-app/*
-  #     - .azure-devops/app-deploy-pipelines.yaml
+  paths:
+    include:
+      - apps/pl-app/*
+      - .azure-devops/app-deploy-pipelines.yaml
 pool:
   vmImage: ubuntu-latest
 steps:
