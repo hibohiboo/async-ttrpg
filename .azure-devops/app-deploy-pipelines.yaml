@@ -15,6 +15,5 @@ steps:
     inputs:
       app_location: /apps/pl-app
       output_location: /apps/pl-app/dist
-      api_build_command: 'npm run build'
     env:
       azure_static_web_apps_api_token: $(deployment_token)
