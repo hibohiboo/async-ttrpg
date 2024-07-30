@@ -47,6 +47,7 @@ Reactのベストプラクティスである[bulletproof-react](https://github.c
 + document                ... 本プロジェクトに関する資料
 + .husky                  ... huskyによるGit Hooks
 + infra                   ... IaC
++ database                ... ddl + docker
 ```
 
 ## npmスクリプト

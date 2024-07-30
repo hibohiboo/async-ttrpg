@@ -1,0 +1,20 @@
+trigger:
+  branches:
+    include:
+      - develop
+  paths:
+    include:
+      - apps/pl-app/*
+      - .azure-devops/app-deploy-pipelines.yaml
+pool:
+  vmImage: ubuntu-latest
+steps:
+  - task: AzureStaticWebApp@0
+    name: DeployStaticWebApp
+    displayName: Deploy Static Web App
+    inputs:
+      app_location: /apps/pl-app
+      output_location: dist
+      api_build_command: 'npm run build'
+    env:
+      azure_static_web_apps_api_token: $(deployment_token)
