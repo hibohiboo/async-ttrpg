@@ -16,7 +16,6 @@ steps:
     inputs:
       app_location: /apps/pl-app
       config_file_location: /apps/pl-app
-      app_build_command: npm run build --ignore-scripts
       output_location: /apps/pl-app/dist
     env:
       azure_static_web_apps_api_token: $(deployment_token)
