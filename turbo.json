@@ -4,8 +4,12 @@
   "tasks": {
     "ncu": {},
     "dev": {},
+    "prebuild": {},
     "build": {
       "outputs": ["dist"]
-   }
+     },
+     "@async-ttrpg/pl-app#build": {
+      "dependsOn": ["@async-ttrpg/api#build"]
+     }
   }
 }
