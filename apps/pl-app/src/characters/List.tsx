@@ -27,7 +27,7 @@ function List() {
 
   return (
     <div>
-      <h1>キャラクター</h1>
+      <h1>キャラクター一覧</h1>
       <Link to={`/add`} className="btn btn-sm btn-success mb-2">
         キャラクターを追加
       </Link>

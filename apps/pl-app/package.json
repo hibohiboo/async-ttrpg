@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "rm -rf ./node_modules/.tmp",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build --mode staging",
     "lint": "eslint",
     "preview": "vite preview",
     "predeploy": "rm -rf ./node_modules/.tmp && tsc -b && vite build --mode staging",
