@@ -14,7 +14,6 @@ steps:
     name: DeployStaticWebApp
     displayName: Deploy Static Web App
     inputs:
-      app_location: /apps/pl-app
       config_file_location: /apps/pl-app
       output_location: /apps/pl-app/dist
     env:
