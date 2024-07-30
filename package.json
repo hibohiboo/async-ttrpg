@@ -14,7 +14,7 @@
     "husky": "^9.1.4",
     "npm-check-updates": "^16.14.20",
     "prettier": "^3.3.3",
-    "turbo": "^2.0.9"
+    "turbo": "^2.0.10"
   },
   "packageManager": "npm@10.8.2",
   "private": true,
