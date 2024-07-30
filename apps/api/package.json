@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean && prisma-generate",
     "build": "tsc && tsc-alias && cp -r generated/client dist/generated/client",
     "watch": "tsc -w",
     "clean": "rimraf dist",
