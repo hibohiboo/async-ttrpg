@@ -13,8 +13,7 @@ steps:
     name: DeployStaticWebApp
     displayName: Deploy Static Web App
     inputs:
-      app_location: /apps/pl-app
-      app_build_command: npm run build --ignore-scripts
-      output_location: /apps/pl-app/dist
+      workingDirectory: /apps/pl-app
+      output_location: dist
     env:
       azure_static_web_apps_api_token: $(deployment_token)
