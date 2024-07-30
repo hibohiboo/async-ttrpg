@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "sakutto trpg",
   "scripts": {
-    "prepare": "husky",
+    "prepare": "husky || true",
     "ncu": "turbo ncu",
     "build": "turbo build",
     "dev": "turbo dev"
