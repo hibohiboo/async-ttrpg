@@ -19,4 +19,4 @@ steps:
       output_location: /apps/pl-app/dist
     env:
       azure_static_web_apps_api_token: $(deployment_token)
-      HUSKY: 0
+      CI: true
