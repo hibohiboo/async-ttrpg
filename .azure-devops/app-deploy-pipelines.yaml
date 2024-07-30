@@ -13,7 +13,7 @@ steps:
     name: DeployStaticWebApp
     displayName: Deploy Static Web App
     inputs:
-      workingDirectory: /apps/pl-app
+      workingDirectory: $(System.DefaultWorkingDirectory)/apps/pl-app
       output_location: dist
     env:
       azure_static_web_apps_api_token: $(deployment_token)
