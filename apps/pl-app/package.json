@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "rm -rf ./node_modules/.tmp && cd ../api && npm run build",
+    "prebuild": "rm -rf ./node_modules/.tmp",
     "build": "tsc -b && vite build",
     "lint": "eslint",
     "preview": "vite preview",
@@ -34,8 +34,5 @@
     "dotenv-cli": "^7.4.2",
     "typescript": "^5.5.4",
     "vite": "^5.3.5"
-  },
-  "engines": {
-    "node": ">=20.15.1"
   }
 }
