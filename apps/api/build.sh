@@ -14,3 +14,4 @@ jq 'del(.devDependencies)' package.json > temp.json && mv temp.json $BUILD_DIR/p
 
 npm run build --if-present
 
+cd $BUILD_DIR && npm install -omit=dev 
