@@ -6,7 +6,7 @@ trigger:
   paths:
     include:
       - apps/api/*
-      - .azure-devops/functions-build-pipeline.yml
+      - .azure-devops/functions-build-pipeline.yaml
 pool:
   vmImage: ubuntu-latest
 steps:
@@ -24,7 +24,7 @@ steps:
     then
         dotnet build extensions.csproj --output ./bin
     fi
-    npm install 
+    npm install --ignore-scripts
     npm run build --if-present
     npm prune --production
   workingDirectory: $(System.DefaultWorkingDirectory)/apps/api
