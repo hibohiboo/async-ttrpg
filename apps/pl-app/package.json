@@ -10,12 +10,13 @@
     "lint": "eslint",
     "preview": "vite preview",
     "predeploy": "rm -rf ./node_modules/.tmp && tsc -b && vite build --mode staging",
-    "deploy": "dotenv -e .env.deploy -- bash -c 'swa deploy ./dist --env production --subscription-id $AZURE_SUBSCRIPTION_ID'"
+    "deploy": "dotenv -e .env.deploy -- bash -c 'swa deploy ./dist --env production --subscription-id $AZURE_SUBSCRIPTION_ID'",
+    "ncu": "ncu -u"
   },
   "dependencies": {
     "@hono/swagger-ui": "^0.4.0",
     "@hookform/resolvers": "^3.9.0",
-    "hono": "^4.5.1",
+    "hono": "^4.5.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.1",
