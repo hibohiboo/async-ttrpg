@@ -10,6 +10,15 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 steps:
+- task: UseNode@1
+  inputs:
+    version: '20.15.1'
+  displayName: 'Install Node.js'
+- task: Npm@1
+  inputs:
+    command: custom
+    customCommand: 'install -g npm@10.8.2'
+  displayName: 'Upgrade npm to latest version'
 - bash: |
     if [ -f extensions.csproj ]
     then
