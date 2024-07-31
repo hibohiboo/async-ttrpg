@@ -6,7 +6,7 @@ trigger:
   paths:
     include:
       - apps/api/*
-      - .azure-devops/functions-build-pipelines.yaml
+      - .azure-devops/functions-build-pipeline.yml
 pool:
   vmImage: ubuntu-latest
 steps:
