@@ -12,9 +12,9 @@
   "license": "MIT",
   "devDependencies": {
     "husky": "^9.1.4",
-    "npm-check-updates": "^17.0.0",
+    "npm-check-updates": "^17.0.6",
     "prettier": "^3.3.3",
-    "turbo": "^2.0.10"
+    "turbo": "^2.0.13"
   },
   "packageManager": "npm@10.8.2",
   "private": true,
