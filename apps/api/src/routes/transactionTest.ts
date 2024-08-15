@@ -14,7 +14,7 @@ const app = new Hono()
     zValidator('json', TransactionTestSchema.array().min(1)),
     async (c) => {
       const data = await c.req.valid('json');
-      await db.beginTransaction();
+      const transaction = await db.beginTransaction();
       try {
         const [{ TestID }] = data;
         const deleteArgs = {
@@ -32,12 +32,12 @@ const app = new Hono()
           table.rows.add(row.TestID, row.CreatedAt);
         });
 
-        await db.executePreparedStatement(deleteArgs);
-        await db.bulk({ table, logger: console.log });
-        await db.commitTransaction();
+        await db.executePreparedStatement(deleteArgs, transaction);
+        await db.bulk({ table, logger: console.log }, transaction);
+        await transaction.commit();
         return c.json({});
       } catch (e) {
-        await db.rollbackTransaction();
+        await transaction.rollback();
         throw e;
       }
     },
@@ -47,7 +47,7 @@ const app = new Hono()
     zValidator('json', TransactionTestSchema.array().min(1)),
     async (c) => {
       const data = await c.req.valid('json');
-      await db.beginTransaction();
+      const transaction = await db.beginTransaction();
       try {
         const [{ TestID }] = data;
         const deleteArgs = {
@@ -65,13 +65,13 @@ const app = new Hono()
           table.rows.add(row.TestID, row.CreatedAt);
         });
 
-        await db.executePreparedStatement(deleteArgs);
+        await db.executePreparedStatement(deleteArgs, transaction);
         await new Promise((resolve) => setTimeout(resolve, 1000 * 5));
-        await db.bulk({ table, logger: console.log });
-        await db.commitTransaction();
+        await db.bulk({ table, logger: console.log }, transaction);
+        await transaction.commit();
         return c.json({});
       } catch (e) {
-        await db.rollbackTransaction();
+        await transaction.rollback();
         throw e;
       }
     },

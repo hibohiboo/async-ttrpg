@@ -16,7 +16,6 @@ export default class Database {
   private config: string;
   private poolconnection: ConnectionPool | null = null;
   private connected = false;
-  private transaction: sql.Transaction | null = null;
 
   constructor(connectionsString: string) {
     if (connectionsString === '') {
@@ -83,9 +82,9 @@ export default class Database {
     const result = await this.executeQuery(args);
     return result?.rowsAffected[0];
   }
-  private getPreparedStatement() {
-    if (this.transaction) {
-      return new sql.PreparedStatement(this.transaction);
+  private getPreparedStatement(transaction?: sql.Transaction) {
+    if (transaction) {
+      return new sql.PreparedStatement(transaction);
     }
     if (this.poolconnection == null) {
       throw new Error('Database connection failed');
@@ -93,9 +92,12 @@ export default class Database {
     return new sql.PreparedStatement(this.poolconnection);
   }
 
-  async executePreparedStatement<T>(args: ExecuteQueryArgs) {
+  async executePreparedStatement<T>(
+    args: ExecuteQueryArgs,
+    transaction?: sql.Transaction,
+  ) {
     await this.connect();
-    const ps = this.getPreparedStatement();
+    const ps = this.getPreparedStatement(transaction);
     const values = args.params.reduce((acc, { name, data, type }) => {
       ps.input(name, type);
       return { ...acc, [name]: data };
@@ -112,22 +114,25 @@ export default class Database {
       await ps.unprepare();
     }
   }
-  private getRequest() {
-    if (this.transaction) {
-      return new sql.Request(this.transaction);
+  private getRequest(transaction?: sql.Transaction) {
+    if (transaction) {
+      return new sql.Request(transaction);
     }
     if (this.poolconnection == null) {
       throw new Error('Database connection failed');
     }
     return new sql.Request(this.poolconnection);
   }
-  async bulk(args: {
-    table: sql.Table;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    logger: (...args: any[]) => void;
-  }) {
+  async bulk(
+    args: {
+      table: sql.Table;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      logger: (...args: any[]) => void;
+    },
+    transaction?: sql.Transaction,
+  ) {
     await this.connect();
-    const request = this.getRequest();
+    const request = this.getRequest(transaction);
     const result = await request.bulk(args.table);
     return result;
   }
@@ -136,22 +141,8 @@ export default class Database {
     if (this.poolconnection == null) {
       throw new Error('Database connection failed');
     }
-    this.transaction = new sql.Transaction(this.poolconnection);
-    await this.transaction.begin();
-  }
-  async commitTransaction() {
-    if (this.transaction == null) {
-      throw new Error('Transaction not started');
-    }
-    await this.transaction.commit();
-    this.transaction = null;
-  }
-  async rollbackTransaction() {
-    if (this.transaction == null) {
-      console.warn('Transaction not started');
-      return;
-    }
-    await this.transaction.rollback();
-    this.transaction = null;
+    const transaction = new sql.Transaction(this.poolconnection);
+    await transaction.begin();
+    return transaction;
   }
 }
