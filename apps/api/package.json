@@ -10,6 +10,7 @@
     "predev": "npm run build",
     "dev": "func start --port 7071",
     "lint": "eslint",
+    "prisma-pull-local": "dotenv -e .env.local -- bash -c 'npx prisma db pull'",
     "prisma-pull": "prisma db pull",
     "prisma-generate": "prisma generate",
     "deploy": "dotenv -e .env -- bash -c 'bash deploy.sh'",

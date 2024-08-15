@@ -1,7 +1,10 @@
 import characters from './routes/characters';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-const route = new Hono().route('/characters', characters);
+import transactionTest from './routes/transactionTest';
+const route = new Hono()
+  .route('/characters', characters)
+  .route('/test', transactionTest);
 const app = new Hono()
   .use(
     '/api',

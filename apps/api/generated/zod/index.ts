@@ -14,9 +14,7 @@ export const TransactionIsolationLevelSchema = z.enum(['ReadUncommitted','ReadCo
 
 export const CharacterScalarFieldEnumSchema = z.enum(['CharacterID','CharacterName']);
 
-export const PlayerCharactersScalarFieldEnumSchema = z.enum(['PlayerID','CharacterID']);
-
-export const PlayersScalarFieldEnumSchema = z.enum(['PlayerID','PlayerName','CharacterMaxCount']);
+export const TransactionTestScalarFieldEnumSchema = z.enum(['TestID','CreatedAt']);
 
 export const SortOrderSchema = z.enum(['asc','desc']);
 /////////////////////////////////////////
@@ -35,27 +33,15 @@ export const CharacterSchema = z.object({
 export type Character = z.infer<typeof CharacterSchema>
 
 /////////////////////////////////////////
-// PLAYER CHARACTERS SCHEMA
+// TRANSACTION TEST SCHEMA
 /////////////////////////////////////////
 
-export const PlayerCharactersSchema = z.object({
-  PlayerID: z.string(),
-  CharacterID: z.string(),
+export const TransactionTestSchema = z.object({
+  TestID: z.string(),
+  CreatedAt: z.coerce.date(),
 })
 
-export type PlayerCharacters = z.infer<typeof PlayerCharactersSchema>
-
-/////////////////////////////////////////
-// PLAYERS SCHEMA
-/////////////////////////////////////////
-
-export const PlayersSchema = z.object({
-  PlayerID: z.string(),
-  PlayerName: z.string(),
-  CharacterMaxCount: z.number().int(),
-})
-
-export type Players = z.infer<typeof PlayersSchema>
+export type TransactionTest = z.infer<typeof TransactionTestSchema>
 
 /////////////////////////////////////////
 // SELECT & INCLUDE
@@ -69,21 +55,12 @@ export const CharacterSelectSchema: z.ZodType<Prisma.CharacterSelect> = z.object
   CharacterName: z.boolean().optional(),
 }).strict()
 
-// PLAYER CHARACTERS
+// TRANSACTION TEST
 //------------------------------------------------------
 
-export const PlayerCharactersSelectSchema: z.ZodType<Prisma.PlayerCharactersSelect> = z.object({
-  PlayerID: z.boolean().optional(),
-  CharacterID: z.boolean().optional(),
-}).strict()
-
-// PLAYERS
-//------------------------------------------------------
-
-export const PlayersSelectSchema: z.ZodType<Prisma.PlayersSelect> = z.object({
-  PlayerID: z.boolean().optional(),
-  PlayerName: z.boolean().optional(),
-  CharacterMaxCount: z.boolean().optional(),
+export const TransactionTestSelectSchema: z.ZodType<Prisma.TransactionTestSelect> = z.object({
+  TestID: z.boolean().optional(),
+  CreatedAt: z.boolean().optional(),
 }).strict()
 
 
@@ -131,92 +108,45 @@ export const CharacterScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.Cha
   CharacterName: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
 }).strict();
 
-export const PlayerCharactersWhereInputSchema: z.ZodType<Prisma.PlayerCharactersWhereInput> = z.object({
-  AND: z.union([ z.lazy(() => PlayerCharactersWhereInputSchema),z.lazy(() => PlayerCharactersWhereInputSchema).array() ]).optional(),
-  OR: z.lazy(() => PlayerCharactersWhereInputSchema).array().optional(),
-  NOT: z.union([ z.lazy(() => PlayerCharactersWhereInputSchema),z.lazy(() => PlayerCharactersWhereInputSchema).array() ]).optional(),
-  PlayerID: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
-  CharacterID: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+export const TransactionTestWhereInputSchema: z.ZodType<Prisma.TransactionTestWhereInput> = z.object({
+  AND: z.union([ z.lazy(() => TransactionTestWhereInputSchema),z.lazy(() => TransactionTestWhereInputSchema).array() ]).optional(),
+  OR: z.lazy(() => TransactionTestWhereInputSchema).array().optional(),
+  NOT: z.union([ z.lazy(() => TransactionTestWhereInputSchema),z.lazy(() => TransactionTestWhereInputSchema).array() ]).optional(),
+  TestID: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  CreatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
 }).strict();
 
-export const PlayerCharactersOrderByWithRelationInputSchema: z.ZodType<Prisma.PlayerCharactersOrderByWithRelationInput> = z.object({
-  PlayerID: z.lazy(() => SortOrderSchema).optional(),
-  CharacterID: z.lazy(() => SortOrderSchema).optional()
+export const TransactionTestOrderByWithRelationInputSchema: z.ZodType<Prisma.TransactionTestOrderByWithRelationInput> = z.object({
+  TestID: z.lazy(() => SortOrderSchema).optional(),
+  CreatedAt: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
-export const PlayerCharactersWhereUniqueInputSchema: z.ZodType<Prisma.PlayerCharactersWhereUniqueInput> = z.object({
-  PlayerID_CharacterID: z.lazy(() => PlayerCharactersPlayerIDCharacterIDCompoundUniqueInputSchema)
+export const TransactionTestWhereUniqueInputSchema: z.ZodType<Prisma.TransactionTestWhereUniqueInput> = z.object({
+  TestID_CreatedAt: z.lazy(() => TransactionTestTestIDCreatedAtCompoundUniqueInputSchema)
 })
 .and(z.object({
-  PlayerID_CharacterID: z.lazy(() => PlayerCharactersPlayerIDCharacterIDCompoundUniqueInputSchema).optional(),
-  AND: z.union([ z.lazy(() => PlayerCharactersWhereInputSchema),z.lazy(() => PlayerCharactersWhereInputSchema).array() ]).optional(),
-  OR: z.lazy(() => PlayerCharactersWhereInputSchema).array().optional(),
-  NOT: z.union([ z.lazy(() => PlayerCharactersWhereInputSchema),z.lazy(() => PlayerCharactersWhereInputSchema).array() ]).optional(),
-  PlayerID: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
-  CharacterID: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  TestID_CreatedAt: z.lazy(() => TransactionTestTestIDCreatedAtCompoundUniqueInputSchema).optional(),
+  AND: z.union([ z.lazy(() => TransactionTestWhereInputSchema),z.lazy(() => TransactionTestWhereInputSchema).array() ]).optional(),
+  OR: z.lazy(() => TransactionTestWhereInputSchema).array().optional(),
+  NOT: z.union([ z.lazy(() => TransactionTestWhereInputSchema),z.lazy(() => TransactionTestWhereInputSchema).array() ]).optional(),
+  TestID: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  CreatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
 }).strict());
 
-export const PlayerCharactersOrderByWithAggregationInputSchema: z.ZodType<Prisma.PlayerCharactersOrderByWithAggregationInput> = z.object({
-  PlayerID: z.lazy(() => SortOrderSchema).optional(),
-  CharacterID: z.lazy(() => SortOrderSchema).optional(),
-  _count: z.lazy(() => PlayerCharactersCountOrderByAggregateInputSchema).optional(),
-  _max: z.lazy(() => PlayerCharactersMaxOrderByAggregateInputSchema).optional(),
-  _min: z.lazy(() => PlayerCharactersMinOrderByAggregateInputSchema).optional()
+export const TransactionTestOrderByWithAggregationInputSchema: z.ZodType<Prisma.TransactionTestOrderByWithAggregationInput> = z.object({
+  TestID: z.lazy(() => SortOrderSchema).optional(),
+  CreatedAt: z.lazy(() => SortOrderSchema).optional(),
+  _count: z.lazy(() => TransactionTestCountOrderByAggregateInputSchema).optional(),
+  _max: z.lazy(() => TransactionTestMaxOrderByAggregateInputSchema).optional(),
+  _min: z.lazy(() => TransactionTestMinOrderByAggregateInputSchema).optional()
 }).strict();
 
-export const PlayerCharactersScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.PlayerCharactersScalarWhereWithAggregatesInput> = z.object({
-  AND: z.union([ z.lazy(() => PlayerCharactersScalarWhereWithAggregatesInputSchema),z.lazy(() => PlayerCharactersScalarWhereWithAggregatesInputSchema).array() ]).optional(),
-  OR: z.lazy(() => PlayerCharactersScalarWhereWithAggregatesInputSchema).array().optional(),
-  NOT: z.union([ z.lazy(() => PlayerCharactersScalarWhereWithAggregatesInputSchema),z.lazy(() => PlayerCharactersScalarWhereWithAggregatesInputSchema).array() ]).optional(),
-  PlayerID: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
-  CharacterID: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
-}).strict();
-
-export const PlayersWhereInputSchema: z.ZodType<Prisma.PlayersWhereInput> = z.object({
-  AND: z.union([ z.lazy(() => PlayersWhereInputSchema),z.lazy(() => PlayersWhereInputSchema).array() ]).optional(),
-  OR: z.lazy(() => PlayersWhereInputSchema).array().optional(),
-  NOT: z.union([ z.lazy(() => PlayersWhereInputSchema),z.lazy(() => PlayersWhereInputSchema).array() ]).optional(),
-  PlayerID: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
-  PlayerName: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
-  CharacterMaxCount: z.union([ z.lazy(() => IntFilterSchema),z.number() ]).optional(),
-}).strict();
-
-export const PlayersOrderByWithRelationInputSchema: z.ZodType<Prisma.PlayersOrderByWithRelationInput> = z.object({
-  PlayerID: z.lazy(() => SortOrderSchema).optional(),
-  PlayerName: z.lazy(() => SortOrderSchema).optional(),
-  CharacterMaxCount: z.lazy(() => SortOrderSchema).optional()
-}).strict();
-
-export const PlayersWhereUniqueInputSchema: z.ZodType<Prisma.PlayersWhereUniqueInput> = z.object({
-  PlayerID: z.string()
-})
-.and(z.object({
-  PlayerID: z.string().optional(),
-  AND: z.union([ z.lazy(() => PlayersWhereInputSchema),z.lazy(() => PlayersWhereInputSchema).array() ]).optional(),
-  OR: z.lazy(() => PlayersWhereInputSchema).array().optional(),
-  NOT: z.union([ z.lazy(() => PlayersWhereInputSchema),z.lazy(() => PlayersWhereInputSchema).array() ]).optional(),
-  PlayerName: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
-  CharacterMaxCount: z.union([ z.lazy(() => IntFilterSchema),z.number().int() ]).optional(),
-}).strict());
-
-export const PlayersOrderByWithAggregationInputSchema: z.ZodType<Prisma.PlayersOrderByWithAggregationInput> = z.object({
-  PlayerID: z.lazy(() => SortOrderSchema).optional(),
-  PlayerName: z.lazy(() => SortOrderSchema).optional(),
-  CharacterMaxCount: z.lazy(() => SortOrderSchema).optional(),
-  _count: z.lazy(() => PlayersCountOrderByAggregateInputSchema).optional(),
-  _avg: z.lazy(() => PlayersAvgOrderByAggregateInputSchema).optional(),
-  _max: z.lazy(() => PlayersMaxOrderByAggregateInputSchema).optional(),
-  _min: z.lazy(() => PlayersMinOrderByAggregateInputSchema).optional(),
-  _sum: z.lazy(() => PlayersSumOrderByAggregateInputSchema).optional()
-}).strict();
-
-export const PlayersScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.PlayersScalarWhereWithAggregatesInput> = z.object({
-  AND: z.union([ z.lazy(() => PlayersScalarWhereWithAggregatesInputSchema),z.lazy(() => PlayersScalarWhereWithAggregatesInputSchema).array() ]).optional(),
-  OR: z.lazy(() => PlayersScalarWhereWithAggregatesInputSchema).array().optional(),
-  NOT: z.union([ z.lazy(() => PlayersScalarWhereWithAggregatesInputSchema),z.lazy(() => PlayersScalarWhereWithAggregatesInputSchema).array() ]).optional(),
-  PlayerID: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
-  PlayerName: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
-  CharacterMaxCount: z.union([ z.lazy(() => IntWithAggregatesFilterSchema),z.number() ]).optional(),
+export const TransactionTestScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.TransactionTestScalarWhereWithAggregatesInput> = z.object({
+  AND: z.union([ z.lazy(() => TransactionTestScalarWhereWithAggregatesInputSchema),z.lazy(() => TransactionTestScalarWhereWithAggregatesInputSchema).array() ]).optional(),
+  OR: z.lazy(() => TransactionTestScalarWhereWithAggregatesInputSchema).array().optional(),
+  NOT: z.union([ z.lazy(() => TransactionTestScalarWhereWithAggregatesInputSchema),z.lazy(() => TransactionTestScalarWhereWithAggregatesInputSchema).array() ]).optional(),
+  TestID: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  CreatedAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
 }).strict();
 
 export const CharacterCreateInputSchema: z.ZodType<Prisma.CharacterCreateInput> = z.object({
@@ -254,81 +184,39 @@ export const CharacterUncheckedUpdateManyInputSchema: z.ZodType<Prisma.Character
   CharacterName: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
-export const PlayerCharactersCreateInputSchema: z.ZodType<Prisma.PlayerCharactersCreateInput> = z.object({
-  PlayerID: z.string(),
-  CharacterID: z.string()
+export const TransactionTestCreateInputSchema: z.ZodType<Prisma.TransactionTestCreateInput> = z.object({
+  TestID: z.string(),
+  CreatedAt: z.coerce.date()
 }).strict();
 
-export const PlayerCharactersUncheckedCreateInputSchema: z.ZodType<Prisma.PlayerCharactersUncheckedCreateInput> = z.object({
-  PlayerID: z.string(),
-  CharacterID: z.string()
+export const TransactionTestUncheckedCreateInputSchema: z.ZodType<Prisma.TransactionTestUncheckedCreateInput> = z.object({
+  TestID: z.string(),
+  CreatedAt: z.coerce.date()
 }).strict();
 
-export const PlayerCharactersUpdateInputSchema: z.ZodType<Prisma.PlayerCharactersUpdateInput> = z.object({
-  PlayerID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  CharacterID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+export const TransactionTestUpdateInputSchema: z.ZodType<Prisma.TransactionTestUpdateInput> = z.object({
+  TestID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  CreatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
-export const PlayerCharactersUncheckedUpdateInputSchema: z.ZodType<Prisma.PlayerCharactersUncheckedUpdateInput> = z.object({
-  PlayerID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  CharacterID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+export const TransactionTestUncheckedUpdateInputSchema: z.ZodType<Prisma.TransactionTestUncheckedUpdateInput> = z.object({
+  TestID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  CreatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
-export const PlayerCharactersCreateManyInputSchema: z.ZodType<Prisma.PlayerCharactersCreateManyInput> = z.object({
-  PlayerID: z.string(),
-  CharacterID: z.string()
+export const TransactionTestCreateManyInputSchema: z.ZodType<Prisma.TransactionTestCreateManyInput> = z.object({
+  TestID: z.string(),
+  CreatedAt: z.coerce.date()
 }).strict();
 
-export const PlayerCharactersUpdateManyMutationInputSchema: z.ZodType<Prisma.PlayerCharactersUpdateManyMutationInput> = z.object({
-  PlayerID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  CharacterID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+export const TransactionTestUpdateManyMutationInputSchema: z.ZodType<Prisma.TransactionTestUpdateManyMutationInput> = z.object({
+  TestID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  CreatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
-export const PlayerCharactersUncheckedUpdateManyInputSchema: z.ZodType<Prisma.PlayerCharactersUncheckedUpdateManyInput> = z.object({
-  PlayerID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  CharacterID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-}).strict();
-
-export const PlayersCreateInputSchema: z.ZodType<Prisma.PlayersCreateInput> = z.object({
-  PlayerID: z.string(),
-  PlayerName: z.string(),
-  CharacterMaxCount: z.number().int()
-}).strict();
-
-export const PlayersUncheckedCreateInputSchema: z.ZodType<Prisma.PlayersUncheckedCreateInput> = z.object({
-  PlayerID: z.string(),
-  PlayerName: z.string(),
-  CharacterMaxCount: z.number().int()
-}).strict();
-
-export const PlayersUpdateInputSchema: z.ZodType<Prisma.PlayersUpdateInput> = z.object({
-  PlayerID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  PlayerName: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  CharacterMaxCount: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
-}).strict();
-
-export const PlayersUncheckedUpdateInputSchema: z.ZodType<Prisma.PlayersUncheckedUpdateInput> = z.object({
-  PlayerID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  PlayerName: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  CharacterMaxCount: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
-}).strict();
-
-export const PlayersCreateManyInputSchema: z.ZodType<Prisma.PlayersCreateManyInput> = z.object({
-  PlayerID: z.string(),
-  PlayerName: z.string(),
-  CharacterMaxCount: z.number().int()
-}).strict();
-
-export const PlayersUpdateManyMutationInputSchema: z.ZodType<Prisma.PlayersUpdateManyMutationInput> = z.object({
-  PlayerID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  PlayerName: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  CharacterMaxCount: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
-}).strict();
-
-export const PlayersUncheckedUpdateManyInputSchema: z.ZodType<Prisma.PlayersUncheckedUpdateManyInput> = z.object({
-  PlayerID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  PlayerName: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  CharacterMaxCount: z.union([ z.number().int(),z.lazy(() => IntFieldUpdateOperationsInputSchema) ]).optional(),
+export const TransactionTestUncheckedUpdateManyInputSchema: z.ZodType<Prisma.TransactionTestUncheckedUpdateManyInput> = z.object({
+  TestID: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  CreatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
 export const StringFilterSchema: z.ZodType<Prisma.StringFilter> = z.object({
@@ -377,89 +265,57 @@ export const StringWithAggregatesFilterSchema: z.ZodType<Prisma.StringWithAggreg
   _max: z.lazy(() => NestedStringFilterSchema).optional()
 }).strict();
 
-export const PlayerCharactersPlayerIDCharacterIDCompoundUniqueInputSchema: z.ZodType<Prisma.PlayerCharactersPlayerIDCharacterIDCompoundUniqueInput> = z.object({
-  PlayerID: z.string(),
-  CharacterID: z.string()
+export const DateTimeFilterSchema: z.ZodType<Prisma.DateTimeFilter> = z.object({
+  equals: z.coerce.date().optional(),
+  in: z.coerce.date().array().optional(),
+  notIn: z.coerce.date().array().optional(),
+  lt: z.coerce.date().optional(),
+  lte: z.coerce.date().optional(),
+  gt: z.coerce.date().optional(),
+  gte: z.coerce.date().optional(),
+  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeFilterSchema) ]).optional(),
 }).strict();
 
-export const PlayerCharactersCountOrderByAggregateInputSchema: z.ZodType<Prisma.PlayerCharactersCountOrderByAggregateInput> = z.object({
-  PlayerID: z.lazy(() => SortOrderSchema).optional(),
-  CharacterID: z.lazy(() => SortOrderSchema).optional()
+export const TransactionTestTestIDCreatedAtCompoundUniqueInputSchema: z.ZodType<Prisma.TransactionTestTestIDCreatedAtCompoundUniqueInput> = z.object({
+  TestID: z.string(),
+  CreatedAt: z.coerce.date()
 }).strict();
 
-export const PlayerCharactersMaxOrderByAggregateInputSchema: z.ZodType<Prisma.PlayerCharactersMaxOrderByAggregateInput> = z.object({
-  PlayerID: z.lazy(() => SortOrderSchema).optional(),
-  CharacterID: z.lazy(() => SortOrderSchema).optional()
+export const TransactionTestCountOrderByAggregateInputSchema: z.ZodType<Prisma.TransactionTestCountOrderByAggregateInput> = z.object({
+  TestID: z.lazy(() => SortOrderSchema).optional(),
+  CreatedAt: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
-export const PlayerCharactersMinOrderByAggregateInputSchema: z.ZodType<Prisma.PlayerCharactersMinOrderByAggregateInput> = z.object({
-  PlayerID: z.lazy(() => SortOrderSchema).optional(),
-  CharacterID: z.lazy(() => SortOrderSchema).optional()
+export const TransactionTestMaxOrderByAggregateInputSchema: z.ZodType<Prisma.TransactionTestMaxOrderByAggregateInput> = z.object({
+  TestID: z.lazy(() => SortOrderSchema).optional(),
+  CreatedAt: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
-export const IntFilterSchema: z.ZodType<Prisma.IntFilter> = z.object({
-  equals: z.number().optional(),
-  in: z.number().array().optional(),
-  notIn: z.number().array().optional(),
-  lt: z.number().optional(),
-  lte: z.number().optional(),
-  gt: z.number().optional(),
-  gte: z.number().optional(),
-  not: z.union([ z.number(),z.lazy(() => NestedIntFilterSchema) ]).optional(),
+export const TransactionTestMinOrderByAggregateInputSchema: z.ZodType<Prisma.TransactionTestMinOrderByAggregateInput> = z.object({
+  TestID: z.lazy(() => SortOrderSchema).optional(),
+  CreatedAt: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
-export const PlayersCountOrderByAggregateInputSchema: z.ZodType<Prisma.PlayersCountOrderByAggregateInput> = z.object({
-  PlayerID: z.lazy(() => SortOrderSchema).optional(),
-  PlayerName: z.lazy(() => SortOrderSchema).optional(),
-  CharacterMaxCount: z.lazy(() => SortOrderSchema).optional()
-}).strict();
-
-export const PlayersAvgOrderByAggregateInputSchema: z.ZodType<Prisma.PlayersAvgOrderByAggregateInput> = z.object({
-  CharacterMaxCount: z.lazy(() => SortOrderSchema).optional()
-}).strict();
-
-export const PlayersMaxOrderByAggregateInputSchema: z.ZodType<Prisma.PlayersMaxOrderByAggregateInput> = z.object({
-  PlayerID: z.lazy(() => SortOrderSchema).optional(),
-  PlayerName: z.lazy(() => SortOrderSchema).optional(),
-  CharacterMaxCount: z.lazy(() => SortOrderSchema).optional()
-}).strict();
-
-export const PlayersMinOrderByAggregateInputSchema: z.ZodType<Prisma.PlayersMinOrderByAggregateInput> = z.object({
-  PlayerID: z.lazy(() => SortOrderSchema).optional(),
-  PlayerName: z.lazy(() => SortOrderSchema).optional(),
-  CharacterMaxCount: z.lazy(() => SortOrderSchema).optional()
-}).strict();
-
-export const PlayersSumOrderByAggregateInputSchema: z.ZodType<Prisma.PlayersSumOrderByAggregateInput> = z.object({
-  CharacterMaxCount: z.lazy(() => SortOrderSchema).optional()
-}).strict();
-
-export const IntWithAggregatesFilterSchema: z.ZodType<Prisma.IntWithAggregatesFilter> = z.object({
-  equals: z.number().optional(),
-  in: z.number().array().optional(),
-  notIn: z.number().array().optional(),
-  lt: z.number().optional(),
-  lte: z.number().optional(),
-  gt: z.number().optional(),
-  gte: z.number().optional(),
-  not: z.union([ z.number(),z.lazy(() => NestedIntWithAggregatesFilterSchema) ]).optional(),
+export const DateTimeWithAggregatesFilterSchema: z.ZodType<Prisma.DateTimeWithAggregatesFilter> = z.object({
+  equals: z.coerce.date().optional(),
+  in: z.coerce.date().array().optional(),
+  notIn: z.coerce.date().array().optional(),
+  lt: z.coerce.date().optional(),
+  lte: z.coerce.date().optional(),
+  gt: z.coerce.date().optional(),
+  gte: z.coerce.date().optional(),
+  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeWithAggregatesFilterSchema) ]).optional(),
   _count: z.lazy(() => NestedIntFilterSchema).optional(),
-  _avg: z.lazy(() => NestedFloatFilterSchema).optional(),
-  _sum: z.lazy(() => NestedIntFilterSchema).optional(),
-  _min: z.lazy(() => NestedIntFilterSchema).optional(),
-  _max: z.lazy(() => NestedIntFilterSchema).optional()
+  _min: z.lazy(() => NestedDateTimeFilterSchema).optional(),
+  _max: z.lazy(() => NestedDateTimeFilterSchema).optional()
 }).strict();
 
 export const StringFieldUpdateOperationsInputSchema: z.ZodType<Prisma.StringFieldUpdateOperationsInput> = z.object({
   set: z.string().optional()
 }).strict();
 
-export const IntFieldUpdateOperationsInputSchema: z.ZodType<Prisma.IntFieldUpdateOperationsInput> = z.object({
-  set: z.number().optional(),
-  increment: z.number().optional(),
-  decrement: z.number().optional(),
-  multiply: z.number().optional(),
-  divide: z.number().optional()
+export const DateTimeFieldUpdateOperationsInputSchema: z.ZodType<Prisma.DateTimeFieldUpdateOperationsInput> = z.object({
+  set: z.coerce.date().optional()
 }).strict();
 
 export const NestedStringFilterSchema: z.ZodType<Prisma.NestedStringFilter> = z.object({
@@ -504,31 +360,29 @@ export const NestedIntFilterSchema: z.ZodType<Prisma.NestedIntFilter> = z.object
   not: z.union([ z.number(),z.lazy(() => NestedIntFilterSchema) ]).optional(),
 }).strict();
 
-export const NestedIntWithAggregatesFilterSchema: z.ZodType<Prisma.NestedIntWithAggregatesFilter> = z.object({
-  equals: z.number().optional(),
-  in: z.number().array().optional(),
-  notIn: z.number().array().optional(),
-  lt: z.number().optional(),
-  lte: z.number().optional(),
-  gt: z.number().optional(),
-  gte: z.number().optional(),
-  not: z.union([ z.number(),z.lazy(() => NestedIntWithAggregatesFilterSchema) ]).optional(),
-  _count: z.lazy(() => NestedIntFilterSchema).optional(),
-  _avg: z.lazy(() => NestedFloatFilterSchema).optional(),
-  _sum: z.lazy(() => NestedIntFilterSchema).optional(),
-  _min: z.lazy(() => NestedIntFilterSchema).optional(),
-  _max: z.lazy(() => NestedIntFilterSchema).optional()
+export const NestedDateTimeFilterSchema: z.ZodType<Prisma.NestedDateTimeFilter> = z.object({
+  equals: z.coerce.date().optional(),
+  in: z.coerce.date().array().optional(),
+  notIn: z.coerce.date().array().optional(),
+  lt: z.coerce.date().optional(),
+  lte: z.coerce.date().optional(),
+  gt: z.coerce.date().optional(),
+  gte: z.coerce.date().optional(),
+  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeFilterSchema) ]).optional(),
 }).strict();
 
-export const NestedFloatFilterSchema: z.ZodType<Prisma.NestedFloatFilter> = z.object({
-  equals: z.number().optional(),
-  in: z.number().array().optional(),
-  notIn: z.number().array().optional(),
-  lt: z.number().optional(),
-  lte: z.number().optional(),
-  gt: z.number().optional(),
-  gte: z.number().optional(),
-  not: z.union([ z.number(),z.lazy(() => NestedFloatFilterSchema) ]).optional(),
+export const NestedDateTimeWithAggregatesFilterSchema: z.ZodType<Prisma.NestedDateTimeWithAggregatesFilter> = z.object({
+  equals: z.coerce.date().optional(),
+  in: z.coerce.date().array().optional(),
+  notIn: z.coerce.date().array().optional(),
+  lt: z.coerce.date().optional(),
+  lte: z.coerce.date().optional(),
+  gt: z.coerce.date().optional(),
+  gte: z.coerce.date().optional(),
+  not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeWithAggregatesFilterSchema) ]).optional(),
+  _count: z.lazy(() => NestedIntFilterSchema).optional(),
+  _min: z.lazy(() => NestedDateTimeFilterSchema).optional(),
+  _max: z.lazy(() => NestedDateTimeFilterSchema).optional()
 }).strict();
 
 /////////////////////////////////////////
@@ -592,118 +446,61 @@ export const CharacterFindUniqueOrThrowArgsSchema: z.ZodType<Prisma.CharacterFin
   where: CharacterWhereUniqueInputSchema,
 }).strict() ;
 
-export const PlayerCharactersFindFirstArgsSchema: z.ZodType<Prisma.PlayerCharactersFindFirstArgs> = z.object({
-  select: PlayerCharactersSelectSchema.optional(),
-  where: PlayerCharactersWhereInputSchema.optional(),
-  orderBy: z.union([ PlayerCharactersOrderByWithRelationInputSchema.array(),PlayerCharactersOrderByWithRelationInputSchema ]).optional(),
-  cursor: PlayerCharactersWhereUniqueInputSchema.optional(),
+export const TransactionTestFindFirstArgsSchema: z.ZodType<Prisma.TransactionTestFindFirstArgs> = z.object({
+  select: TransactionTestSelectSchema.optional(),
+  where: TransactionTestWhereInputSchema.optional(),
+  orderBy: z.union([ TransactionTestOrderByWithRelationInputSchema.array(),TransactionTestOrderByWithRelationInputSchema ]).optional(),
+  cursor: TransactionTestWhereUniqueInputSchema.optional(),
   take: z.number().optional(),
   skip: z.number().optional(),
-  distinct: z.union([ PlayerCharactersScalarFieldEnumSchema,PlayerCharactersScalarFieldEnumSchema.array() ]).optional(),
+  distinct: z.union([ TransactionTestScalarFieldEnumSchema,TransactionTestScalarFieldEnumSchema.array() ]).optional(),
 }).strict() ;
 
-export const PlayerCharactersFindFirstOrThrowArgsSchema: z.ZodType<Prisma.PlayerCharactersFindFirstOrThrowArgs> = z.object({
-  select: PlayerCharactersSelectSchema.optional(),
-  where: PlayerCharactersWhereInputSchema.optional(),
-  orderBy: z.union([ PlayerCharactersOrderByWithRelationInputSchema.array(),PlayerCharactersOrderByWithRelationInputSchema ]).optional(),
-  cursor: PlayerCharactersWhereUniqueInputSchema.optional(),
+export const TransactionTestFindFirstOrThrowArgsSchema: z.ZodType<Prisma.TransactionTestFindFirstOrThrowArgs> = z.object({
+  select: TransactionTestSelectSchema.optional(),
+  where: TransactionTestWhereInputSchema.optional(),
+  orderBy: z.union([ TransactionTestOrderByWithRelationInputSchema.array(),TransactionTestOrderByWithRelationInputSchema ]).optional(),
+  cursor: TransactionTestWhereUniqueInputSchema.optional(),
   take: z.number().optional(),
   skip: z.number().optional(),
-  distinct: z.union([ PlayerCharactersScalarFieldEnumSchema,PlayerCharactersScalarFieldEnumSchema.array() ]).optional(),
+  distinct: z.union([ TransactionTestScalarFieldEnumSchema,TransactionTestScalarFieldEnumSchema.array() ]).optional(),
 }).strict() ;
 
-export const PlayerCharactersFindManyArgsSchema: z.ZodType<Prisma.PlayerCharactersFindManyArgs> = z.object({
-  select: PlayerCharactersSelectSchema.optional(),
-  where: PlayerCharactersWhereInputSchema.optional(),
-  orderBy: z.union([ PlayerCharactersOrderByWithRelationInputSchema.array(),PlayerCharactersOrderByWithRelationInputSchema ]).optional(),
-  cursor: PlayerCharactersWhereUniqueInputSchema.optional(),
+export const TransactionTestFindManyArgsSchema: z.ZodType<Prisma.TransactionTestFindManyArgs> = z.object({
+  select: TransactionTestSelectSchema.optional(),
+  where: TransactionTestWhereInputSchema.optional(),
+  orderBy: z.union([ TransactionTestOrderByWithRelationInputSchema.array(),TransactionTestOrderByWithRelationInputSchema ]).optional(),
+  cursor: TransactionTestWhereUniqueInputSchema.optional(),
   take: z.number().optional(),
   skip: z.number().optional(),
-  distinct: z.union([ PlayerCharactersScalarFieldEnumSchema,PlayerCharactersScalarFieldEnumSchema.array() ]).optional(),
+  distinct: z.union([ TransactionTestScalarFieldEnumSchema,TransactionTestScalarFieldEnumSchema.array() ]).optional(),
 }).strict() ;
 
-export const PlayerCharactersAggregateArgsSchema: z.ZodType<Prisma.PlayerCharactersAggregateArgs> = z.object({
-  where: PlayerCharactersWhereInputSchema.optional(),
-  orderBy: z.union([ PlayerCharactersOrderByWithRelationInputSchema.array(),PlayerCharactersOrderByWithRelationInputSchema ]).optional(),
-  cursor: PlayerCharactersWhereUniqueInputSchema.optional(),
-  take: z.number().optional(),
-  skip: z.number().optional(),
-}).strict() ;
-
-export const PlayerCharactersGroupByArgsSchema: z.ZodType<Prisma.PlayerCharactersGroupByArgs> = z.object({
-  where: PlayerCharactersWhereInputSchema.optional(),
-  orderBy: z.union([ PlayerCharactersOrderByWithAggregationInputSchema.array(),PlayerCharactersOrderByWithAggregationInputSchema ]).optional(),
-  by: PlayerCharactersScalarFieldEnumSchema.array(),
-  having: PlayerCharactersScalarWhereWithAggregatesInputSchema.optional(),
+export const TransactionTestAggregateArgsSchema: z.ZodType<Prisma.TransactionTestAggregateArgs> = z.object({
+  where: TransactionTestWhereInputSchema.optional(),
+  orderBy: z.union([ TransactionTestOrderByWithRelationInputSchema.array(),TransactionTestOrderByWithRelationInputSchema ]).optional(),
+  cursor: TransactionTestWhereUniqueInputSchema.optional(),
   take: z.number().optional(),
   skip: z.number().optional(),
 }).strict() ;
 
-export const PlayerCharactersFindUniqueArgsSchema: z.ZodType<Prisma.PlayerCharactersFindUniqueArgs> = z.object({
-  select: PlayerCharactersSelectSchema.optional(),
-  where: PlayerCharactersWhereUniqueInputSchema,
-}).strict() ;
-
-export const PlayerCharactersFindUniqueOrThrowArgsSchema: z.ZodType<Prisma.PlayerCharactersFindUniqueOrThrowArgs> = z.object({
-  select: PlayerCharactersSelectSchema.optional(),
-  where: PlayerCharactersWhereUniqueInputSchema,
-}).strict() ;
-
-export const PlayersFindFirstArgsSchema: z.ZodType<Prisma.PlayersFindFirstArgs> = z.object({
-  select: PlayersSelectSchema.optional(),
-  where: PlayersWhereInputSchema.optional(),
-  orderBy: z.union([ PlayersOrderByWithRelationInputSchema.array(),PlayersOrderByWithRelationInputSchema ]).optional(),
-  cursor: PlayersWhereUniqueInputSchema.optional(),
-  take: z.number().optional(),
-  skip: z.number().optional(),
-  distinct: z.union([ PlayersScalarFieldEnumSchema,PlayersScalarFieldEnumSchema.array() ]).optional(),
-}).strict() ;
-
-export const PlayersFindFirstOrThrowArgsSchema: z.ZodType<Prisma.PlayersFindFirstOrThrowArgs> = z.object({
-  select: PlayersSelectSchema.optional(),
-  where: PlayersWhereInputSchema.optional(),
-  orderBy: z.union([ PlayersOrderByWithRelationInputSchema.array(),PlayersOrderByWithRelationInputSchema ]).optional(),
-  cursor: PlayersWhereUniqueInputSchema.optional(),
-  take: z.number().optional(),
-  skip: z.number().optional(),
-  distinct: z.union([ PlayersScalarFieldEnumSchema,PlayersScalarFieldEnumSchema.array() ]).optional(),
-}).strict() ;
-
-export const PlayersFindManyArgsSchema: z.ZodType<Prisma.PlayersFindManyArgs> = z.object({
-  select: PlayersSelectSchema.optional(),
-  where: PlayersWhereInputSchema.optional(),
-  orderBy: z.union([ PlayersOrderByWithRelationInputSchema.array(),PlayersOrderByWithRelationInputSchema ]).optional(),
-  cursor: PlayersWhereUniqueInputSchema.optional(),
-  take: z.number().optional(),
-  skip: z.number().optional(),
-  distinct: z.union([ PlayersScalarFieldEnumSchema,PlayersScalarFieldEnumSchema.array() ]).optional(),
-}).strict() ;
-
-export const PlayersAggregateArgsSchema: z.ZodType<Prisma.PlayersAggregateArgs> = z.object({
-  where: PlayersWhereInputSchema.optional(),
-  orderBy: z.union([ PlayersOrderByWithRelationInputSchema.array(),PlayersOrderByWithRelationInputSchema ]).optional(),
-  cursor: PlayersWhereUniqueInputSchema.optional(),
+export const TransactionTestGroupByArgsSchema: z.ZodType<Prisma.TransactionTestGroupByArgs> = z.object({
+  where: TransactionTestWhereInputSchema.optional(),
+  orderBy: z.union([ TransactionTestOrderByWithAggregationInputSchema.array(),TransactionTestOrderByWithAggregationInputSchema ]).optional(),
+  by: TransactionTestScalarFieldEnumSchema.array(),
+  having: TransactionTestScalarWhereWithAggregatesInputSchema.optional(),
   take: z.number().optional(),
   skip: z.number().optional(),
 }).strict() ;
 
-export const PlayersGroupByArgsSchema: z.ZodType<Prisma.PlayersGroupByArgs> = z.object({
-  where: PlayersWhereInputSchema.optional(),
-  orderBy: z.union([ PlayersOrderByWithAggregationInputSchema.array(),PlayersOrderByWithAggregationInputSchema ]).optional(),
-  by: PlayersScalarFieldEnumSchema.array(),
-  having: PlayersScalarWhereWithAggregatesInputSchema.optional(),
-  take: z.number().optional(),
-  skip: z.number().optional(),
+export const TransactionTestFindUniqueArgsSchema: z.ZodType<Prisma.TransactionTestFindUniqueArgs> = z.object({
+  select: TransactionTestSelectSchema.optional(),
+  where: TransactionTestWhereUniqueInputSchema,
 }).strict() ;
 
-export const PlayersFindUniqueArgsSchema: z.ZodType<Prisma.PlayersFindUniqueArgs> = z.object({
-  select: PlayersSelectSchema.optional(),
-  where: PlayersWhereUniqueInputSchema,
-}).strict() ;
-
-export const PlayersFindUniqueOrThrowArgsSchema: z.ZodType<Prisma.PlayersFindUniqueOrThrowArgs> = z.object({
-  select: PlayersSelectSchema.optional(),
-  where: PlayersWhereUniqueInputSchema,
+export const TransactionTestFindUniqueOrThrowArgsSchema: z.ZodType<Prisma.TransactionTestFindUniqueOrThrowArgs> = z.object({
+  select: TransactionTestSelectSchema.optional(),
+  where: TransactionTestWhereUniqueInputSchema,
 }).strict() ;
 
 export const CharacterCreateArgsSchema: z.ZodType<Prisma.CharacterCreateArgs> = z.object({
@@ -742,74 +539,38 @@ export const CharacterDeleteManyArgsSchema: z.ZodType<Prisma.CharacterDeleteMany
   where: CharacterWhereInputSchema.optional(),
 }).strict() ;
 
-export const PlayerCharactersCreateArgsSchema: z.ZodType<Prisma.PlayerCharactersCreateArgs> = z.object({
-  select: PlayerCharactersSelectSchema.optional(),
-  data: z.union([ PlayerCharactersCreateInputSchema,PlayerCharactersUncheckedCreateInputSchema ]),
+export const TransactionTestCreateArgsSchema: z.ZodType<Prisma.TransactionTestCreateArgs> = z.object({
+  select: TransactionTestSelectSchema.optional(),
+  data: z.union([ TransactionTestCreateInputSchema,TransactionTestUncheckedCreateInputSchema ]),
 }).strict() ;
 
-export const PlayerCharactersUpsertArgsSchema: z.ZodType<Prisma.PlayerCharactersUpsertArgs> = z.object({
-  select: PlayerCharactersSelectSchema.optional(),
-  where: PlayerCharactersWhereUniqueInputSchema,
-  create: z.union([ PlayerCharactersCreateInputSchema,PlayerCharactersUncheckedCreateInputSchema ]),
-  update: z.union([ PlayerCharactersUpdateInputSchema,PlayerCharactersUncheckedUpdateInputSchema ]),
+export const TransactionTestUpsertArgsSchema: z.ZodType<Prisma.TransactionTestUpsertArgs> = z.object({
+  select: TransactionTestSelectSchema.optional(),
+  where: TransactionTestWhereUniqueInputSchema,
+  create: z.union([ TransactionTestCreateInputSchema,TransactionTestUncheckedCreateInputSchema ]),
+  update: z.union([ TransactionTestUpdateInputSchema,TransactionTestUncheckedUpdateInputSchema ]),
 }).strict() ;
 
-export const PlayerCharactersCreateManyArgsSchema: z.ZodType<Prisma.PlayerCharactersCreateManyArgs> = z.object({
-  data: z.union([ PlayerCharactersCreateManyInputSchema,PlayerCharactersCreateManyInputSchema.array() ]),
+export const TransactionTestCreateManyArgsSchema: z.ZodType<Prisma.TransactionTestCreateManyArgs> = z.object({
+  data: z.union([ TransactionTestCreateManyInputSchema,TransactionTestCreateManyInputSchema.array() ]),
 }).strict() ;
 
-export const PlayerCharactersDeleteArgsSchema: z.ZodType<Prisma.PlayerCharactersDeleteArgs> = z.object({
-  select: PlayerCharactersSelectSchema.optional(),
-  where: PlayerCharactersWhereUniqueInputSchema,
+export const TransactionTestDeleteArgsSchema: z.ZodType<Prisma.TransactionTestDeleteArgs> = z.object({
+  select: TransactionTestSelectSchema.optional(),
+  where: TransactionTestWhereUniqueInputSchema,
 }).strict() ;
 
-export const PlayerCharactersUpdateArgsSchema: z.ZodType<Prisma.PlayerCharactersUpdateArgs> = z.object({
-  select: PlayerCharactersSelectSchema.optional(),
-  data: z.union([ PlayerCharactersUpdateInputSchema,PlayerCharactersUncheckedUpdateInputSchema ]),
-  where: PlayerCharactersWhereUniqueInputSchema,
+export const TransactionTestUpdateArgsSchema: z.ZodType<Prisma.TransactionTestUpdateArgs> = z.object({
+  select: TransactionTestSelectSchema.optional(),
+  data: z.union([ TransactionTestUpdateInputSchema,TransactionTestUncheckedUpdateInputSchema ]),
+  where: TransactionTestWhereUniqueInputSchema,
 }).strict() ;
 
-export const PlayerCharactersUpdateManyArgsSchema: z.ZodType<Prisma.PlayerCharactersUpdateManyArgs> = z.object({
-  data: z.union([ PlayerCharactersUpdateManyMutationInputSchema,PlayerCharactersUncheckedUpdateManyInputSchema ]),
-  where: PlayerCharactersWhereInputSchema.optional(),
+export const TransactionTestUpdateManyArgsSchema: z.ZodType<Prisma.TransactionTestUpdateManyArgs> = z.object({
+  data: z.union([ TransactionTestUpdateManyMutationInputSchema,TransactionTestUncheckedUpdateManyInputSchema ]),
+  where: TransactionTestWhereInputSchema.optional(),
 }).strict() ;
 
-export const PlayerCharactersDeleteManyArgsSchema: z.ZodType<Prisma.PlayerCharactersDeleteManyArgs> = z.object({
-  where: PlayerCharactersWhereInputSchema.optional(),
-}).strict() ;
-
-export const PlayersCreateArgsSchema: z.ZodType<Prisma.PlayersCreateArgs> = z.object({
-  select: PlayersSelectSchema.optional(),
-  data: z.union([ PlayersCreateInputSchema,PlayersUncheckedCreateInputSchema ]),
-}).strict() ;
-
-export const PlayersUpsertArgsSchema: z.ZodType<Prisma.PlayersUpsertArgs> = z.object({
-  select: PlayersSelectSchema.optional(),
-  where: PlayersWhereUniqueInputSchema,
-  create: z.union([ PlayersCreateInputSchema,PlayersUncheckedCreateInputSchema ]),
-  update: z.union([ PlayersUpdateInputSchema,PlayersUncheckedUpdateInputSchema ]),
-}).strict() ;
-
-export const PlayersCreateManyArgsSchema: z.ZodType<Prisma.PlayersCreateManyArgs> = z.object({
-  data: z.union([ PlayersCreateManyInputSchema,PlayersCreateManyInputSchema.array() ]),
-}).strict() ;
-
-export const PlayersDeleteArgsSchema: z.ZodType<Prisma.PlayersDeleteArgs> = z.object({
-  select: PlayersSelectSchema.optional(),
-  where: PlayersWhereUniqueInputSchema,
-}).strict() ;
-
-export const PlayersUpdateArgsSchema: z.ZodType<Prisma.PlayersUpdateArgs> = z.object({
-  select: PlayersSelectSchema.optional(),
-  data: z.union([ PlayersUpdateInputSchema,PlayersUncheckedUpdateInputSchema ]),
-  where: PlayersWhereUniqueInputSchema,
-}).strict() ;
-
-export const PlayersUpdateManyArgsSchema: z.ZodType<Prisma.PlayersUpdateManyArgs> = z.object({
-  data: z.union([ PlayersUpdateManyMutationInputSchema,PlayersUncheckedUpdateManyInputSchema ]),
-  where: PlayersWhereInputSchema.optional(),
-}).strict() ;
-
-export const PlayersDeleteManyArgsSchema: z.ZodType<Prisma.PlayersDeleteManyArgs> = z.object({
-  where: PlayersWhereInputSchema.optional(),
+export const TransactionTestDeleteManyArgsSchema: z.ZodType<Prisma.TransactionTestDeleteManyArgs> = z.object({
+  where: TransactionTestWhereInputSchema.optional(),
 }).strict() ;
