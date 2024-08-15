@@ -136,13 +136,26 @@ export default class Database {
     const result = await request.bulk(args.table);
     return result;
   }
-  async beginTransaction() {
+  private async createTransaction() {
     await this.connect();
     if (this.poolconnection == null) {
       throw new Error('Database connection failed');
     }
     const transaction = new sql.Transaction(this.poolconnection);
-    await transaction.begin();
     return transaction;
+  }
+
+  async useTransaction(
+    callback: (transaction: sql.Transaction) => Promise<void>,
+  ) {
+    const transaction = await this.createTransaction();
+    try {
+      await transaction.begin();
+      await callback(transaction);
+      await transaction.commit();
+    } catch (e) {
+      await transaction.rollback();
+      throw e;
+    }
   }
 }

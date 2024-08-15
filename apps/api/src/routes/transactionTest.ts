@@ -14,8 +14,7 @@ const app = new Hono()
     zValidator('json', TransactionTestSchema.array().min(1)),
     async (c) => {
       const data = await c.req.valid('json');
-      const transaction = await db.beginTransaction();
-      try {
+      await db.useTransaction(async (transaction) => {
         const [{ TestID }] = data;
         const deleteArgs = {
           logger: console.log,
@@ -34,12 +33,8 @@ const app = new Hono()
 
         await db.executePreparedStatement(deleteArgs, transaction);
         await db.bulk({ table, logger: console.log }, transaction);
-        await transaction.commit();
-        return c.json({});
-      } catch (e) {
-        await transaction.rollback();
-        throw e;
-      }
+      });
+      return c.json({});
     },
   )
   .post(
@@ -47,8 +42,8 @@ const app = new Hono()
     zValidator('json', TransactionTestSchema.array().min(1)),
     async (c) => {
       const data = await c.req.valid('json');
-      const transaction = await db.beginTransaction();
-      try {
+
+      await db.useTransaction(async (transaction) => {
         const [{ TestID }] = data;
         const deleteArgs = {
           logger: console.log,
@@ -68,12 +63,9 @@ const app = new Hono()
         await db.executePreparedStatement(deleteArgs, transaction);
         await new Promise((resolve) => setTimeout(resolve, 1000 * 5));
         await db.bulk({ table, logger: console.log }, transaction);
-        await transaction.commit();
-        return c.json({});
-      } catch (e) {
-        await transaction.rollback();
-        throw e;
-      }
+      });
+
+      return c.json({});
     },
   );
 
