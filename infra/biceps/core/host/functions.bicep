@@ -4,6 +4,7 @@ param allowedOrigin string
 param kind string
 param linuxFxVersion string
 param extensionVersion string
+param applicationInsightsInstrumentationKey string
 @secure()
 param databaseUrl string
 @secure()
@@ -46,6 +47,10 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
         {
           name: 'FUNCTIONS_WORKER_RUNTIME'
           value: 'node'
+        }
+        {
+          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          value: applicationInsightsInstrumentationKey
         }
         {
           name: 'DATABASE_URL'
