@@ -11,8 +11,8 @@
   "author": "hibohiboo",
   "license": "MIT",
   "devDependencies": {
-    "husky": "^9.1.4",
-    "npm-check-updates": "^17.0.6",
+    "husky": "^9.1.5",
+    "npm-check-updates": "^17.1.0",
     "prettier": "^3.3.3",
     "turbo": "^2.0.14"
   },
