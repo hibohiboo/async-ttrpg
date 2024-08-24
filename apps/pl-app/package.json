@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "rm -rf ./node_modules/.tmp",
+    "prebuild": "rimraf  ./node_modules/.tmp",
     "build": "tsc -b && vite build --mode staging",
     "lint": "eslint",
     "preview": "vite preview",
-    "predeploy": "rm -rf ./node_modules/.tmp && tsc -b && vite build --mode staging",
+    "predeploy": "rimraf  ./node_modules/.tmp && tsc -b && vite build --mode staging",
     "deploy": "dotenv -e .env.deploy -- bash -c 'swa deploy ./dist --env production --subscription-id $AZURE_SUBSCRIPTION_ID'",
     "ncu": "ncu -u"
   },
