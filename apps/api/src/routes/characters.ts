@@ -3,9 +3,12 @@ import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import { CharacterSchema } from '@db/zod';
 import { z } from 'zod';
+import { Bindings } from '@api/types';
 
-const app = new Hono()
+const app = new Hono<{ Bindings: Bindings }>()
   .get('/', async (c) => {
+    c.env.AZURE_FUNCTIONS_CONTEXT.log('Hello from the characters route');
+    console.log('Hello from the characters route');
     const characters = await prisma.character.findMany();
     return c.json(characters);
   })

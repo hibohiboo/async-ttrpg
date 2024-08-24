@@ -1,13 +1,77 @@
-import { app } from '@azure/functions';
+import { app, HttpResponseInit } from '@azure/functions';
 import honoApp from '@api/app';
-import { azureHonoHandler } from '@marplex/hono-azurefunc-adapter';
+import { HttpRequest, InvocationContext } from '@azure/functions';
+import type { ReadableStream } from 'node:stream/web';
+import { ExecutionContext } from 'hono';
+
+const newAzureFunctionsResponse = (response: Response): HttpResponseInit => {
+  const returnBase = {
+    status: response.status,
+    headers: headersToObject(response.headers),
+  };
+  if (!response.body) return returnBase;
+  return { ...returnBase, body: streamToAsyncIterator(response.body) };
+};
+const streamToAsyncIterator = (readable: ReadableStream<Uint8Array>) => {
+  const reader = readable.getReader();
+  return {
+    next() {
+      return reader.read();
+    },
+    return() {
+      return reader.releaseLock();
+    },
+    [Symbol.asyncIterator]() {
+      return this;
+    },
+  } as AsyncIterableIterator<Uint8Array>;
+};
+
+type LoopableHeader = {
+  forEach: (callbackfn: (value: string, key: string) => void) => void;
+};
+
+function headersToObject(input: LoopableHeader): Record<string, string> {
+  const headers: Record<string, string> = {};
+  input.forEach((v, k) => (headers[k] = v));
+  return headers;
+}
+
+const newRequestFromAzureFunctions = (request: HttpRequest): Request => {
+  const hasBody = !['GET', 'HEAD'].includes(request.method);
+
+  return new Request(request.url, {
+    method: request.method,
+    headers: headersToObject(request.headers),
+    ...(hasBody ? { body: request.body, duplex: 'half' } : {}),
+  });
+};
+
+type FetchCallback = (
+  request: Request,
+  env: Record<string, unknown>,
+  executionCtx?: ExecutionContext,
+) => Promise<Response> | Response;
+
+function azureHonoHandler(fetch: FetchCallback) {
+  return async (request: HttpRequest, _context: InvocationContext) => {
+    return newAzureFunctionsResponse(
+      await fetch(newRequestFromAzureFunctions(request), {
+        ...process.env,
+        AZURE_FUNCTIONS_CONTEXT: _context,
+      }),
+    );
+  };
+}
+
 app.setup({
   enableHttpStream: true,
 });
+
 app.http('httpTrigger', {
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   authLevel: 'anonymous',
   route: 'api/{*proxy}',
-  // fetchの引数にはcontextを渡すことができないので第２引数のcontextは失われる。context.logによるログ出力はできないが、関数が１つだけのため関数とログの紐づけができなくなっても影響はない。
+  // 第２引数のcontextはenv.AZURE_FUNCTIONS_CONTEXTに格納する
   handler: azureHonoHandler(honoApp.fetch),
 });
