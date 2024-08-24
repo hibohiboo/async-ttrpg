@@ -1,17 +1,14 @@
-param storageAccountType string = 'Standard_LRS'
-param location string = resourceGroup().location
+param storageAccountName string
+param location string
 param allowedOrigin string
 param databaseUrl string
-var storageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
-
-resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
-  name: storageAccountName
-  location: location
-  kind: 'StorageV2'
-  sku: { name: storageAccountType }
-}
 
 var functionAppName = '${uniqueString(resourceGroup().id)}azfunctionsapp'
+
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
+  name: storageAccountName
+}
+
 resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
   name: functionAppName
   location: location
@@ -53,3 +50,5 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
     }
   }
 }
+
+output appServiceAppHostName string = functionApp.properties.defaultHostName
