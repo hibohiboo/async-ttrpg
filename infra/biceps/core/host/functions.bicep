@@ -2,6 +2,9 @@ param storageAccountName string
 param location string
 param allowedOrigin string
 param databaseUrl string
+param kind string
+param linuxFxVersion string
+param extensionVersion string
 
 var functionAppName = '${uniqueString(resourceGroup().id)}azfunctionsapp'
 
@@ -12,14 +15,14 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing 
 resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
   name: functionAppName
   location: location
-  kind: 'functionapp,linux'
+  kind: kind
   properties: {
     reserved: true
     siteConfig: {
       cors: {
         allowedOrigins: [allowedOrigin]
       }
-      linuxFxVersion: 'Node|20'
+      linuxFxVersion: linuxFxVersion
       appSettings: [
         {
           name: 'AzureWebJobsStorage'
@@ -35,7 +38,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
         }
         {
           name: 'FUNCTIONS_EXTENSION_VERSION'
-          value: '~4'
+          value: extensionVersion
         }
         {
           name: 'FUNCTIONS_WORKER_RUNTIME'
@@ -45,7 +48,6 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
           name: 'DATABASE_URL'
           value: databaseUrl
         }
-        
       ]
     }
   }

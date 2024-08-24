@@ -6,6 +6,7 @@ source $BIN_DIR/common.bash
 cd $BICEP_DIR && az deployment group create \
   --name functionsDeployment \
   --template-file main.bicep \
+  --parameters main.parameters.json \
   --parameters \
     allowedOrigin=$WSA_ORIGIN \
     databaseUrl=$DATABASE_URL \

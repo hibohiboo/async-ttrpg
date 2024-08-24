@@ -2,6 +2,9 @@ param location string = resourceGroup().location
 param allowedOrigin string
 param databaseUrl string
 
+@description('The runtime version of the Azure Functions app.')
+param functionsRuntime object
+
 var storageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
 
 module myFunctionsStorage 'core/storage/storage-account.bicep' = {
@@ -20,6 +23,9 @@ module myFunctions 'core/host/functions.bicep' = {
     allowedOrigin: allowedOrigin
     databaseUrl: databaseUrl
     storageAccountName: storageAccountName
+    kind: functionsRuntime.kind
+    linuxFxVersion: functionsRuntime.linuxFxVersion
+    extensionVersion: functionsRuntime.extensionVersion
   }
 }
 
