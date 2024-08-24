@@ -6,6 +6,7 @@ param functionsRuntime object
 
 var storageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
 var applicationInsightsName = '${uniqueString(resourceGroup().id)}applicationinsights'
+var logAnalyticsName = '${uniqueString(resourceGroup().id)}logAnalytics'
 
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
@@ -17,6 +18,7 @@ module myFunctionsApplicationInsights 'core/host/applications.bicep' = {
   params: {
     location: location
     applicationInsightsName: applicationInsightsName
+    logAnalyticsName: logAnalyticsName
   }
 }
 
