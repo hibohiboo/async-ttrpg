@@ -1,10 +1,13 @@
 param storageAccountName string
 param location string
 param allowedOrigin string
-param databaseUrl string
 param kind string
 param linuxFxVersion string
 param extensionVersion string
+@secure()
+param databaseUrl string
+@secure()
+param connectionString string
 
 var functionAppName = '${uniqueString(resourceGroup().id)}azfunctionsapp'
 
@@ -47,6 +50,10 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
         {
           name: 'DATABASE_URL'
           value: databaseUrl
+        }
+        {
+          name:'CONNECTION_STRING'
+          value: connectionString
         }
       ]
     }

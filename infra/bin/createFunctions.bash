@@ -9,7 +9,7 @@ cd $BICEP_DIR && az deployment group create \
   --parameters main.parameters.json \
   --parameters \
     allowedOrigin=$WSA_ORIGIN \
-    databaseUrl=$DATABASE_URL \
+    keyVaultName=$KEY_VAULT_NAME \
   -g $RESOURCE_GROUP_NAME
 
 

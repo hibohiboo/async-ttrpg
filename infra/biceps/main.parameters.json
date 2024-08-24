@@ -9,6 +9,14 @@
         "kind": "functionapp,linux",
         "extensionVersion": "~4"
       }
+    },
+    "sqlServerConnectionString": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/async-ttrpg/providers/Microsoft.KeyVault/vaults/AsyncTrpgKeyVault"
+        },
+        "secretName": "AsyncTrpgConnectionString"
+      }
     }
   }
 }
