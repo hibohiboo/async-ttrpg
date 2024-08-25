@@ -1,5 +1,6 @@
 import { InvocationContext } from '@azure/functions';
 
-export type Bindings = {
+type Bindings = {
   AZURE_FUNCTIONS_CONTEXT: InvocationContext;
 };
+export type AppContext = { Bindings: Bindings };
