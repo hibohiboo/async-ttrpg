@@ -7,9 +7,6 @@ import { AppContext } from '@api/types';
 
 const app = new Hono<AppContext>()
   .get('/', async (c) => {
-    c.env.AZURE_FUNCTIONS_CONTEXT.log('Hello from context');
-    console.log('Hello from console');
-    c.env.AZURE_FUNCTIONS_CONTEXT.log('Context', c.env.AZURE_FUNCTIONS_CONTEXT);
     const characters = await prisma.character.findMany();
     return c.json(characters);
   })
