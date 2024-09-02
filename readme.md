@@ -95,3 +95,15 @@ createFunctions.bash|Azure Functionsの作成
 createWebApps.bash|Azure Static Web Apps
 
 の作成
+
+## GitHub
+### クレデンシャルの混入抑制
+#### Secret Scanning を有効化
+Settings > Code security and analysis
+Secret sanning: Enable
+
+#### Push protection を有効化
+Settings > Code security and analysis
+Push protection: Enable
+
+※Secret sanningが前提
