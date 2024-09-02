@@ -10,7 +10,14 @@ const newAzureFunctionsResponse = (response: Response): HttpResponseInit => {
     headers: headersToObject(response.headers),
   };
   if (!response.body) return returnBase;
-  return { ...returnBase, body: streamToAsyncIterator(response.body) };
+
+  return {
+    ...returnBase,
+    body: streamToAsyncIterator(
+      // https://github.com/DefinitelyTyped/DefinitelyTyped/discussions/65542
+      response.body as unknown as ReadableStream<Uint8Array>,
+    ),
+  };
 };
 const streamToAsyncIterator = (readable: ReadableStream<Uint8Array>) => {
   const reader = readable.getReader();
@@ -39,12 +46,20 @@ function headersToObject(input: LoopableHeader): Record<string, string> {
 
 const newRequestFromAzureFunctions = (request: HttpRequest): Request => {
   const hasBody = !['GET', 'HEAD'].includes(request.method);
-
-  return new Request(request.url, {
+  const requestInit = {
     method: request.method,
     headers: headersToObject(request.headers),
-    ...(hasBody ? { body: request.body, duplex: 'half' } : {}),
-  });
+  };
+  if (!hasBody) {
+    return new Request(request.url, requestInit);
+  }
+
+  return new Request(request.url, {
+    ...requestInit,
+    body: request.body,
+    duplex: 'half',
+    // フロントエンドのトランスパイルで型エラーがでるのでasで回避
+  } as RequestInit);
 };
 
 type FetchCallback = (
