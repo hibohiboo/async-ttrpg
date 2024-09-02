@@ -11,4 +11,6 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - run: gh pr merge "${GITHUB_HEAD_REF}" --merge 
+      # --merge ... マージコミットを作成してからマージ
+      # --auto ... ステータスチェックがすべて成功状態に変わったタイミングで自動的にマージ ※要リポジトリ設定変更。 Setting > Allow auto-merge にチェック
+      - run: gh pr merge "${GITHUB_HEAD_REF}" --merge --auto
