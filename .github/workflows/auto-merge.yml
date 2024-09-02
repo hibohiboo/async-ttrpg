@@ -11,6 +11,10 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      # --merge ... マージコミットを作成してからマージ
-      # --auto ... ステータスチェックがすべて成功状態に変わったタイミングで自動的にマージ ※要リポジトリ設定変更。 Setting > Allow auto-merge にチェック
-      - run: gh pr merge "${GITHUB_HEAD_REF}" --merge --auto
+      - run: |
+              # 承認 ※要リポジトリ設定変更。 Setting > Actions > General の GithuActions設定の Allow GitHub Actions create and approve pull にチェック
+              gh pr review "${GITHUB_HEAD_REF}" --approve
+              # ステータスチェックと自動マージ
+              # --merge ... マージコミットを作成してからマージ
+              # --auto ... ステータスチェックがすべて成功状態に変わったタイミングで自動的にマージ ※要リポジトリ設定変更。 Setting > Allow auto-merge にチェック
+              gh pr merge "${GITHUB_HEAD_REF}" --merge --auto
