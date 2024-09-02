@@ -11,7 +11,10 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - run: |
+      - id: meta
+        uses: dependabot/fetch-metadata-action@v2 # 条件分岐でバッチバージョンかチェック
+      - if: ${{ steps.meta.outputs.update-type == 'version-update:semver-patch' }}
+        run: |
               # 承認 ※要リポジトリ設定変更。 Setting > Actions > General の GithuActions設定の Allow GitHub Actions create and approve pull にチェック
               gh pr review "${GITHUB_HEAD_REF}" --approve
               # ステータスチェックと自動マージ
