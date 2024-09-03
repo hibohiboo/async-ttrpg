@@ -1,13 +1,13 @@
 {
   "name": "async-ttrpg",
-  "version": "0.0.0",
+  "version": "0.1.2",
   "description": "sakutto trpg",
   "scripts": {
     "prepare": "node .husky/install.mjs",
     "ncu": "turbo ncu",
     "build": "turbo build",
     "dev": "turbo dev",
-    "add-github-releases": "gh release create v0.0.0 --title \"v0.0.0\" --notes \"Wonderful Text\""
+    "add-github-releases":  "jq -r .version package.json| xargs -I {} echo \"v{}\"  | xargs -I {} gh release create \"{}\" --title {} --notes-file './release-note-latest.md'"
   },
   "author": "hibohiboo",
   "license": "MIT",
