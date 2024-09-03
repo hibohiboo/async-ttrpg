@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: meta
-        uses: dependabot/fetch-metadata-action@v2 # 条件分岐でバッチバージョンかチェック
+        uses: dependabot/fetch-metadata@v2 # 条件分岐でバッチバージョンかチェック
       - if: ${{ steps.meta.outputs.update-type == 'version-update:semver-patch' }}
         run: |
               # 承認 ※要リポジトリ設定変更。 Setting > Actions > General の GithuActions設定の Allow GitHub Actions create and approve pull にチェック
