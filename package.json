@@ -6,7 +6,8 @@
     "prepare": "node .husky/install.mjs",
     "ncu": "turbo ncu",
     "build": "turbo build",
-    "dev": "turbo dev"
+    "dev": "turbo dev",
+    "add-github-releases": "gh release create v0.0.0 --title \"v0.0.0\" --notes \"Wonderful Text\""
   },
   "author": "hibohiboo",
   "license": "MIT",

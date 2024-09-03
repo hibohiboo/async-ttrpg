@@ -97,6 +97,19 @@ createWebApps.bash|Azure Static Web Apps
 の作成
 
 ## GitHub
+### ローカル開発用のcliの準備
+
+```
+winget install --id GitHub.cli
+```
+
+Windowsの再起動をする。
+パスが通ったことを確認
+
+```
+gh --version
+```
+
 ### クレデンシャルの混入抑制
 #### Secret Scanning を有効化
 Settings > Code security and analysis
@@ -107,3 +120,11 @@ Settings > Code security and analysis
 Push protection: Enable
 
 ※Secret sanningが前提
+
+### Github Relasesの作成
+
+```
+gh auth login
+npm run add-github-releases
+```
+
