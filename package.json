@@ -7,7 +7,7 @@
     "ncu": "turbo ncu",
     "build": "turbo build",
     "dev": "turbo dev",
-    "add-github-releases":  "jq -r .version package.json| xargs -I {} echo \"v{}\"  | xargs -I {} gh release create \"{}\" --title {} --notes-file './release-note-latest.md'"
+    "add-github-releases":  "jq -r .version package.json  | tr -d '\\r\\n' |  xargs -i gh release create \"v{}\" --title \"v{}\" --notes-file './release-note-latest.md'"
   },
   "author": "hibohiboo",
   "license": "MIT",
