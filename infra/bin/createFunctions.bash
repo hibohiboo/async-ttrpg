@@ -8,8 +8,8 @@ cd $BICEP_DIR && az deployment group create \
   --template-file main.bicep \
   --parameters main.bicepparam \
   --parameters \
-    allowedOrigin=$WSA_ORIGIN \
     keyVaultName=$KEY_VAULT_NAME \
+    staticSites_pl_static_web_app_name=$PL_STATIC_WEB_APP_NAME \
   -g $RESOURCE_GROUP_NAME
 
 

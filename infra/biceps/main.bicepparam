@@ -6,7 +6,7 @@ param functionsRuntime = {
   kind: 'functionapp,linux'
   extensionVersion: '~4'
 }
-param allowedOrigin = readEnvironmentVariable('WSA_ORIGIN','')
+param staticSites_pl_static_web_app_name = readEnvironmentVariable('PL_STATIC_WEB_APP_NAME','')
 param keyVaultName = readEnvironmentVariable('KEY_VAULT_NAME','')
 param functionEnvironments = [
   {

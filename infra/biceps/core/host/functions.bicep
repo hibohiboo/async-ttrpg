@@ -1,6 +1,5 @@
 param storageAccountName string
 param location string
-param allowedOrigin string
 param runtime string
 param kind string
 param linuxFxVersion string
@@ -11,11 +10,15 @@ param databaseUrl string
 @secure()
 param connectionString string
 param functionEnvironments array 
+param staticSites_pl_static_web_app_name string
 
 var functionAppName = '${uniqueString(resourceGroup().id)}azfunctionsapp'
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
   name: storageAccountName
+}
+resource staticSites_my_first_static_web_app_name_resource 'Microsoft.Web/staticSites@2023-01-01' existing = {
+  name: staticSites_pl_static_web_app_name
 }
 
 resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
@@ -26,7 +29,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
     reserved: true
     siteConfig: {
       cors: {
-        allowedOrigins: [allowedOrigin]
+        allowedOrigins: [staticSites_my_first_static_web_app_name_resource.properties.defaultHostname]
       }
       linuxFxVersion: linuxFxVersion
       appSettings: [

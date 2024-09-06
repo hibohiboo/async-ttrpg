@@ -1,9 +1,9 @@
 param location string = resourceGroup().location
-param allowedOrigin string
 param keyVaultName string
 @description('The runtime version of the Azure Functions app.')
 param functionsRuntime object
 param functionEnvironments array 
+param staticSites_pl_static_web_app_name string
 
 var storageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
 var applicationInsightsName = '${uniqueString(resourceGroup().id)}applicationinsights'
@@ -36,7 +36,7 @@ module myFunctions 'core/host/functions.bicep' = {
   name: 'myFunctions'
   params: {
     location: location
-    allowedOrigin: allowedOrigin
+    staticSites_pl_static_web_app_name: staticSites_pl_static_web_app_name
     databaseUrl: keyVault.getSecret('AsyncTrpgDatabaseURL')
     storageAccountName: storageAccountName
     kind: functionsRuntime.kind
