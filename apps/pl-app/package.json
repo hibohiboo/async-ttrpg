@@ -8,6 +8,7 @@
     "prebuild": "rimraf  ./node_modules/.tmp",
     "build": "tsc -b && vite build --mode staging",
     "lint": "eslint",
+    "fsd-lint": "steiger ./src --watch",
     "preview": "vite preview",
     "predeploy": "rimraf  ./node_modules/.tmp && tsc -b && vite build --mode staging",
     "deploy": "dotenv -e .env.deploy -- bash -c 'swa deploy ./dist --env production --subscription-id $AZURE_SUBSCRIPTION_ID'",
@@ -33,6 +34,7 @@
     "@types/uuid": "^10.0.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "dotenv-cli": "^7.4.2",
+    "steiger": "^0.4.0",
     "typescript": "^5.5.4",
     "vite": "^5.4.3"
   }
