@@ -7,7 +7,12 @@ import { AppContext } from './types';
 
 const route = new Hono<AppContext>()
   .route('/characters', characters)
-  .route('/test', transactionTest);
+  .route('/test', transactionTest)
+  .get('/echo', async (c) => {
+    // eslint-disable-next-line turbo/no-undeclared-env-vars
+    const test = process.env.HOGE;
+    return c.json({ echo: test });
+  });
 const startEndLogMiddleWare: MiddlewareHandler<AppContext> = async (
   c,
   next,

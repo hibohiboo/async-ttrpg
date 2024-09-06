@@ -1,6 +1,7 @@
 param storageAccountName string
 param location string
 param allowedOrigin string
+param runtime string
 param kind string
 param linuxFxVersion string
 param extensionVersion string
@@ -9,6 +10,7 @@ param applicationInsightsInstrumentationKey string
 param databaseUrl string
 @secure()
 param connectionString string
+param functionEnvironments array 
 
 var functionAppName = '${uniqueString(resourceGroup().id)}azfunctionsapp'
 
@@ -46,7 +48,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
         }
         {
           name: 'FUNCTIONS_WORKER_RUNTIME'
-          value: 'node'
+          value: runtime
         }
         {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
@@ -60,6 +62,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
           name:'CONNECTION_STRING'
           value: connectionString
         }
+        ...functionEnvironments
       ]
     }
   }

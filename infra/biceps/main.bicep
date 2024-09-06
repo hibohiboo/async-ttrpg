@@ -3,6 +3,7 @@ param allowedOrigin string
 param keyVaultName string
 @description('The runtime version of the Azure Functions app.')
 param functionsRuntime object
+param functionEnvironments array 
 
 var storageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
 var applicationInsightsName = '${uniqueString(resourceGroup().id)}applicationinsights'
@@ -39,10 +40,12 @@ module myFunctions 'core/host/functions.bicep' = {
     databaseUrl: keyVault.getSecret('AsyncTrpgDatabaseURL')
     storageAccountName: storageAccountName
     kind: functionsRuntime.kind
+    runtime: functionsRuntime.runtime
     linuxFxVersion: functionsRuntime.linuxFxVersion
     applicationInsightsInstrumentationKey: myFunctionsApplicationInsights.outputs.applicationInsightsInstrumentationKey
     extensionVersion: functionsRuntime.extensionVersion
     connectionString: keyVault.getSecret('AsyncTrpgConnectionString')
+    functionEnvironments: functionEnvironments
   }
 }
 
