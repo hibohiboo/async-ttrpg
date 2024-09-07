@@ -9,7 +9,7 @@
     "clean": "rimraf dist",
     "predev": "npm run build",
     "dev": "func start --port 7071",
-    "lint": "eslint",
+    "lint": "eslint src/*",
     "prisma-pull-local": "dotenv -e .env.local -- bash -c 'npx prisma db pull'",
     "prisma-pull": "prisma db pull",
     "prisma-generate": "prisma generate",
