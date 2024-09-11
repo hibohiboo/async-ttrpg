@@ -128,3 +128,7 @@ gh auth login
 npm run add-github-releases
 ```
 
+## sonarlint
+
+いったんあきらめ。
+https://unpkg.com/browse/eslint-plugin-sonarjs@2.0.2/
