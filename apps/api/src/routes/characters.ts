@@ -6,7 +6,8 @@ import { z } from 'zod';
 import { AppContext } from '@api/types';
 import { BlobServiceClient } from '@azure/storage-blob';
 import { sendQueueAndBlobContainer } from '@api/lib/sendQueueAndBlobContainer';
-import { QueueClient } from '@azure/storage-queue';
+import { QueueServiceClient } from '@azure/storage-queue';
+import { DefaultAzureCredential } from '@azure/identity';
 
 const app = new Hono<AppContext>()
   .get('/', async (c) => {
@@ -56,11 +57,21 @@ const app = new Hono<AppContext>()
   .post('/async', zValidator('json', CharacterSchema), async (c) => {
     const logger = c.env.AZURE_FUNCTIONS_CONTEXT;
     const data = await c.req.valid('json');
-    const blobServiceLient = new BlobServiceClient('');
-    const containerClient = blobServiceLient.getContainerClient(
+    const accountName = '';
+    const blobServiceClient = new BlobServiceClient(
+      `https://${accountName}.blob.core.windows.net`,
+      new DefaultAzureCredential(),
+    );
+    const containerClient = blobServiceClient.getContainerClient(
       'character-container',
     );
-    const queueClient = new QueueClient('', 'character-queue');
+    const credential = new DefaultAzureCredential();
+    const queueServiceClient = new QueueServiceClient(
+      `https://${accountName}.queue.core.windows.net`,
+      credential,
+    );
+    const queueClient = queueServiceClient.getQueueClient('character-queue');
+
     await sendQueueAndBlobContainer({
       containerClient,
       queueClient,
