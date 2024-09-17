@@ -58,14 +58,15 @@ const app = new Hono<AppContext>()
     const logger = c.env.AZURE_FUNCTIONS_CONTEXT;
     const data = await c.req.valid('json');
     const accountName = '';
+    const credential = new DefaultAzureCredential();
     const blobServiceClient = new BlobServiceClient(
       `https://${accountName}.blob.core.windows.net`,
-      new DefaultAzureCredential(),
+      credential,
     );
     const containerClient = blobServiceClient.getContainerClient(
       'character-container',
     );
-    const credential = new DefaultAzureCredential();
+
     const queueServiceClient = new QueueServiceClient(
       `https://${accountName}.queue.core.windows.net`,
       credential,
