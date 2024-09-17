@@ -22,7 +22,7 @@ resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2023-01-01'
 }
 resource blobContainerForQueue 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-01-01' = {
   parent: blobService
-  name: 'storage-container-with-queue'
+  name: 'character-container'
   properties: {
     publicAccess: 'None'
   }
@@ -33,5 +33,5 @@ resource queueServices 'Microsoft.Storage/storageAccounts/queueServices@2023-01-
 }
 resource storageQueueMain 'Microsoft.Storage/storageAccounts/queueServices/queues@2023-01-01' = {
   parent: queueServices
-  name: 'storage-queue-main'
+  name: 'character-queue'
 }

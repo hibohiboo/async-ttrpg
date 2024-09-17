@@ -4,6 +4,9 @@ import { zValidator } from '@hono/zod-validator';
 import { CharacterSchema } from '@db/zod';
 import { z } from 'zod';
 import { AppContext } from '@api/types';
+import { BlobServiceClient } from '@azure/storage-blob';
+import { sendQueueAndBlobContainer } from '@api/lib/sendQueueAndBlobContainer';
+import { QueueClient } from '@azure/storage-queue';
 
 const app = new Hono<AppContext>()
   .get('/', async (c) => {
@@ -49,6 +52,23 @@ const app = new Hono<AppContext>()
       });
       return c.json(character);
     },
-  );
+  )
+  .post('/async', zValidator('json', CharacterSchema), async (c) => {
+    const logger = c.env.AZURE_FUNCTIONS_CONTEXT;
+    const data = await c.req.valid('json');
+    const blobServiceLient = new BlobServiceClient('');
+    const containerClient = blobServiceLient.getContainerClient(
+      'character-container',
+    );
+    const queueClient = new QueueClient('', 'character-queue');
+    await sendQueueAndBlobContainer({
+      containerClient,
+      queueClient,
+      blobPath: `${data.CharacterID}.json`,
+      blobData: JSON.stringify(data),
+      messageTimeToLive: 60 * 60 * 0.5, // 30 minutes
+      logger,
+    });
+  });
 
 export default app;
