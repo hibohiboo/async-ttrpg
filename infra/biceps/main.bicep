@@ -23,7 +23,6 @@ module myFunctionsApplicationInsights 'core/host/applications.bicep' = {
   }
 }
 
-
 module myFunctionsStorage 'core/storage/storage-account.bicep' = {
   name: 'myFunctionsStorage'
   params: {
@@ -57,6 +56,25 @@ module myStorageBlobContainerAndQueue 'core/storage/blobContainerAndQueue.bicep'
   params: {
     location: location
     storageAccountName: queueAndContainerStorageAccountName
-    principalId: myFunctions.outputs.principalId
+  }
+}
+// 組み込みロール: https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles
+var storageRoleDefinitionId= 'ba92f5b4-2d11-453d-a403-e96b0029c9fe' // ストレージ BLOB データ共同作成者
+var queueRoleDefinitionId= '974c5e8b-45b9-4653-ba55-5f855dd0fb88' // ストレージ キュー データ共同作成者
+var principalId = myFunctions.outputs.principalId
+module myStorageRole 'core/rbac/role.bicep' = {
+  name: 'myStorageRole'
+  params: {
+    queueAndContainerStorageAccountName: queueAndContainerStorageAccountName
+    principalId: principalId
+    roleDefinitionId: storageRoleDefinitionId
+  }
+}
+module myQueueRole 'core/rbac/role.bicep' = {
+  name: 'myQueueRole'
+  params: {
+    queueAndContainerStorageAccountName: queueAndContainerStorageAccountName
+    principalId: principalId
+    roleDefinitionId: queueRoleDefinitionId
   }
 }
