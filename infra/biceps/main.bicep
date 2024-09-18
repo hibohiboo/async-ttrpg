@@ -8,7 +8,7 @@ param staticSites_pl_static_web_app_name string
 var storageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
 var applicationInsightsName = '${uniqueString(resourceGroup().id)}applicationinsights'
 var logAnalyticsName = '${uniqueString(resourceGroup().id)}logAnalytics'
-
+var queueAndContainerStorageAccountName = '${uniqueString(resourceGroup().id)}az'
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
   name: keyVaultName
@@ -50,3 +50,12 @@ module myFunctions 'core/host/functions.bicep' = {
 }
 
 output appServiceAppHostName string = myFunctions.outputs.appServiceAppHostName
+
+module myStorageBlobContainerAndQueue 'core/storage/blobContainerAndQueue.bicep' = {
+  name: 'myStorageBlobContainerAndQueue'
+  params: {
+    location: location
+    storageAccountName: queueAndContainerStorageAccountName
+    principalId: myFunctions.outputs.principalId
+  }
+}

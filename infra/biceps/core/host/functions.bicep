@@ -25,6 +25,9 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
   name: functionAppName
   location: location
   kind: kind
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     reserved: true
     siteConfig: {
@@ -72,3 +75,4 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
 }
 
 output appServiceAppHostName string = functionApp.properties.defaultHostName
+output principalId string = functionApp.identity.principalId
