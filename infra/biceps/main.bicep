@@ -8,7 +8,7 @@ param staticSites_pl_static_web_app_name string
 var storageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
 var applicationInsightsName = '${uniqueString(resourceGroup().id)}applicationinsights'
 var logAnalyticsName = '${uniqueString(resourceGroup().id)}logAnalytics'
-var queueAndContainerStorageAccountName = '${uniqueString(resourceGroup().id)}az'
+var queueAndContainerStorageAccountName = '${uniqueString(resourceGroup().id)}azstorage'
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
   name: keyVaultName
@@ -46,6 +46,7 @@ module myFunctions 'core/host/functions.bicep' = {
     extensionVersion: functionsRuntime.extensionVersion
     connectionString: keyVault.getSecret('AsyncTrpgConnectionString')
     functionEnvironments: functionEnvironments
+    queueAndContainerStorageAccountName:queueAndContainerStorageAccountName
   }
 }
 

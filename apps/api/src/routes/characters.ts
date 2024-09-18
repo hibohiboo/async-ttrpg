@@ -5,9 +5,9 @@ import { CharacterSchema } from '@db/zod';
 import { z } from 'zod';
 import { AppContext } from '@api/types';
 import { BlobServiceClient } from '@azure/storage-blob';
-import { sendQueueAndBlobContainer } from '@api/lib/sendQueueAndBlobContainer';
-import { QueueServiceClient } from '@azure/storage-queue';
 import { DefaultAzureCredential } from '@azure/identity';
+import { QueueServiceClient } from '@azure/storage-queue';
+import { sendQueueAndBlobContainer } from '@api/lib/sendQueueAndBlobContainer';
 
 const app = new Hono<AppContext>()
   .get('/', async (c) => {
@@ -57,7 +57,11 @@ const app = new Hono<AppContext>()
   .post('/async', zValidator('json', CharacterSchema), async (c) => {
     const logger = c.env.AZURE_FUNCTIONS_CONTEXT;
     const data = await c.req.valid('json');
-    const accountName = '';
+    // eslint-disable-next-line turbo/no-undeclared-env-vars
+    const accountName = process.env.BLOB_QUEUE_STORAGE_ACCOUNT_NAME;
+    if (!accountName) {
+      throw new Error('Missing BLOB_QUEUE_STORAGE_ACCOUNT_NAME env var');
+    }
     const credential = new DefaultAzureCredential();
     const blobServiceClient = new BlobServiceClient(
       `https://${accountName}.blob.core.windows.net`,
@@ -81,6 +85,7 @@ const app = new Hono<AppContext>()
       messageTimeToLive: 60 * 60 * 0.5, // 30 minutes
       logger,
     });
+    return c.json({});
   });
 
 export default app;

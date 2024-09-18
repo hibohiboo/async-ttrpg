@@ -4,7 +4,7 @@ param principalId string
 var storageAccountSku = 'Standard_LRS'
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
-  name: '${storageAccountName}storage'
+  name: storageAccountName
   location: location
   sku: { name: storageAccountSku }
   kind: 'StorageV2'

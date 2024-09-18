@@ -11,9 +11,24 @@ param databaseUrl string
 param connectionString string
 param functionEnvironments array 
 param staticSites_pl_static_web_app_name string
+param queueAndContainerStorageAccountName string
 
 var functionAppName = '${uniqueString(resourceGroup().id)}azfunctionsapp'
-
+var environments = [
+  {
+    name: 'DATABASE_URL'
+    value: databaseUrl
+  }
+  {
+    name:'CONNECTION_STRING'
+    value: connectionString
+  }
+  {
+    name: 'BLOB_QUEUE_STORAGE_ACCOUNT_NAME'
+    value: queueAndContainerStorageAccountName
+  }
+  ...functionEnvironments
+]
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
   name: storageAccountName
 }
@@ -60,15 +75,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
           value: applicationInsightsInstrumentationKey
         }
-        {
-          name: 'DATABASE_URL'
-          value: databaseUrl
-        }
-        {
-          name:'CONNECTION_STRING'
-          value: connectionString
-        }
-        ...functionEnvironments
+        ...environments
       ]
     }
   }
