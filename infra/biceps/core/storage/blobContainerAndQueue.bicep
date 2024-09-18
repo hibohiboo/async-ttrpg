@@ -9,8 +9,6 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   kind: 'StorageV2'
   properties: {
     minimumTlsVersion: 'TLS1_2'
-    allowBlobPublicAccess: true
-    publicNetworkAccess: 'Enabled'
   }
 }
 resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2023-01-01' = {
@@ -20,9 +18,6 @@ resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2023-01-01'
 resource blobContainerForQueue 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-01-01' = {
   parent: blobService
   name: 'character-container'
-  properties: {
-    publicAccess: 'None'
-  }
 }
 resource queueServices 'Microsoft.Storage/storageAccounts/queueServices@2023-01-01' = {
   parent: storageAccount
