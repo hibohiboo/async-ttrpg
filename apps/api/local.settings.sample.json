@@ -9,7 +9,8 @@
     "DATABASE_URL_SERVER":"sqlserver://hoge.database.windows.net:1433;database=hogehoge;user=piyo;password=piyopiyo;encrypt=true;schema=pdo",
     "DATABASE_URL":"sqlserver://localhost:1433;database=test;user=sa;password=MyPassword@123;trustServerCertificate=true;encrypt=true;schema=atrpg",
     "HOGE": "hoge",
-    "BLOB_QUEUE_STORAGE_ACCOUNT_NAME": "hoge"
+    "BLOB_QUEUE_STORAGE_ACCOUNT_NAME": "hogepiyo",
+    "BLOB_QUEUE_STORAGE_ACCOUNT_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=youraccountname;AccountKey=youraccountkey;EndpointSuffix=core.windows.net"
   },
   "Host": {
     "CORS": "*"
