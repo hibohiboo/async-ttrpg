@@ -1,3 +1,4 @@
+/* eslint-disable turbo/no-undeclared-env-vars */
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import { TransactionTestSchema } from '@db/zod';
@@ -5,10 +6,28 @@ import Database from '@api/lib/database';
 import * as sql from 'mssql';
 import TestDatabase from '@api/lib/testdb';
 
-// eslint-disable-next-line turbo/no-undeclared-env-vars
-const connectionString = process.env.CONNECTION_STRING!;
-const db = new Database(connectionString); // 接続を使いまわすため、関数の外で定義
-const testdb = new TestDatabase(connectionString);
+const envList = ['SQLSERVER_NAME', 'SQLSERVER_DB_NAME'] as const;
+envList.forEach((k) => {
+  if (!process.env[k]) throw new Error(`Missing ${k} environments`);
+});
+const processEnv = process.env as Record<(typeof envList)[number], string>;
+
+const config = {
+  server: processEnv.SQLSERVER_NAME,
+  port: 1433,
+  database: processEnv.SQLSERVER_DB_NAME,
+  authentication: {
+    type: 'azure-active-directory-default',
+    options: {},
+  },
+  options: {
+    encrypt: true,
+  },
+} as const;
+
+const connectionString = process.env.MANAGED_ID_CONNECTION_STRING!;
+const db = new Database(config); // 接続を使いまわすため、関数の外で定義
+const testdb = new TestDatabase(config);
 console.log('connection', connectionString);
 const app = new Hono()
   .post(

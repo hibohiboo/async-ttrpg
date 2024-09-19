@@ -13,12 +13,12 @@ interface ExecuteQueryArgs {
 }
 
 export default class TestDatabase {
-  private config: string;
+  private config: sql.config | string;
   private poolconnection: ConnectionPool | null = null;
   private connected = false;
   private transaction: sql.Transaction | null = null;
 
-  constructor(connectionsString: string) {
+  constructor(connectionsString: sql.config | string) {
     if (connectionsString === '') {
       throw new Error('Database connection string is empty');
     }
