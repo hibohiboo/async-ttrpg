@@ -14,6 +14,7 @@ param staticSites_pl_static_web_app_name string
 param queueAndContainerStorageAccountName string
 
 var functionAppName = '${uniqueString(resourceGroup().id)}azfunctionsapp'
+
 var environments = [
   {
     name: 'DATABASE_URL'
@@ -24,8 +25,12 @@ var environments = [
     value: connectionString
   }
   {
-    name: 'BLOB_QUEUE_STORAGE_ACCOUNT_NAME'
+    name: 'BLOB_QUEUE_STORAGE_ACCOUNT__accountName'
     value: queueAndContainerStorageAccountName
+  }
+  {
+    name: 'BLOB_QUEUE_STORAGE_ACCOUNT__queueServiceUri'
+    value: 'https://${queueAndContainerStorageAccountName}.queue.core.windows.net'
   }
   ...functionEnvironments
 ]

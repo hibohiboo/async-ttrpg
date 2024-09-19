@@ -15,6 +15,6 @@ export async function storageQueueTrigger1(
 
 app.storageQueue('storageQueueTrigger1', {
   queueName: 'character-queue',
-  connection: 'BLOB_QUEUE_STORAGE_ACCOUNT_CONNECTION_STRING',
+  connection: 'BLOB_QUEUE_STORAGE_ACCOUNT',
   handler: storageQueueTrigger1,
 });

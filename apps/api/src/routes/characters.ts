@@ -57,8 +57,12 @@ const app = new Hono<AppContext>()
   .post('/async', zValidator('json', CharacterSchema), async (c) => {
     const logger = c.env.AZURE_FUNCTIONS_CONTEXT;
     const data = await c.req.valid('json');
-    // eslint-disable-next-line turbo/no-undeclared-env-vars
-    const accountName = process.env.BLOB_QUEUE_STORAGE_ACCOUNT_NAME;
+    const envList = ['BLOB_QUEUE_STORAGE_ACCOUNT__accountName'] as const;
+    envList.forEach((k) => {
+      if (!process.env[k]) throw new Error(`Missing ${k} environments`);
+    });
+    const processEnv = process.env as Record<(typeof envList)[number], string>;
+    const accountName = processEnv.BLOB_QUEUE_STORAGE_ACCOUNT__accountName;
     if (!accountName) {
       throw new Error('Missing BLOB_QUEUE_STORAGE_ACCOUNT_NAME env var');
     }
