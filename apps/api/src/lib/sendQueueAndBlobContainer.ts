@@ -40,7 +40,7 @@ export const sendQueueAndBlobContainer = async (
   };
 
   const queueResponse = await queueClient.sendMessage(
-    jsonToBase64(queueMessage),
+    JSON.stringify(queueMessage),
     {
       messageTimeToLive,
     },
@@ -50,7 +50,3 @@ export const sendQueueAndBlobContainer = async (
     `Sent message to queue "${queueClient.name}". Message Id: ${queueResponse.messageId}. Request Id: ${queueResponse.requestId}. Client Request Id: ${queueResponse.clientRequestId}`,
   );
 };
-function jsonToBase64(jsonObj: unknown): string {
-  const jsonString = JSON.stringify(jsonObj);
-  return Buffer.from(jsonString).toString('base64');
-}
