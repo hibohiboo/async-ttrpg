@@ -7,8 +7,6 @@ param extensionVersion string
 param applicationInsightsInstrumentationKey string
 @secure()
 param databaseUrl string
-@secure()
-param connectionString string
 param functionEnvironments array 
 param staticSites_pl_static_web_app_name string
 param queueAndContainerStorageAccountName string
@@ -19,10 +17,6 @@ var environments = [
   {
     name: 'DATABASE_URL'
     value: databaseUrl
-  }
-  {
-    name:'CONNECTION_STRING'
-    value: connectionString
   }
   {
     name: 'BLOB_QUEUE_STORAGE_ACCOUNT__accountName'

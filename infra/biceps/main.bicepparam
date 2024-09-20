@@ -6,11 +6,17 @@ param functionsRuntime = {
   kind: 'functionapp,linux'
   extensionVersion: '~4'
 }
-param staticSites_pl_static_web_app_name = readEnvironmentVariable('PL_STATIC_WEB_APP_NAME','')
-param keyVaultName = readEnvironmentVariable('KEY_VAULT_NAME','')
+
+// staticSites_pl_static_web_app_nameとkeyVaultNameは実行時のパラメータ指定で上書きされる実験
+param staticSites_pl_static_web_app_name = ''
+param keyVaultName = ''
 param functionEnvironments = [
   {
-    name: 'HOGE'
-    value: 'hoge'
+    name: 'SQLSERVER_NAME'
+    value: '${readEnvironmentVariable('DB_SERVER_NAME','')}.database.windows.net'
+  }
+  {
+    name: 'SQLSERVER_DB_NAME'
+    value: readEnvironmentVariable('SQLSERVER_DB_NAME','')
   }
 ]

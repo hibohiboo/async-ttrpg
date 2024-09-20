@@ -5,10 +5,10 @@
     "AzureWebJobsStorage":"",
     "FUNCTIONS_WORKER_RUNTIME": "node",
     "AzureWebJobsFeatureFlags": "EnableWorkerIndexing",
-    "CONNECTION_STRING": "Server=127.0.0.1,1433;Database=quickstart;User Id=SA;Password=MyPassword@123;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;",
     "DATABASE_URL_SERVER":"sqlserver://hoge.database.windows.net:1433;database=hogehoge;user=piyo;password=piyopiyo;encrypt=true;schema=pdo",
     "DATABASE_URL":"sqlserver://localhost:1433;database=test;user=sa;password=MyPassword@123;trustServerCertificate=true;encrypt=true;schema=atrpg",
-    "HOGE": "hoge",
+    "SQLSERVER_NAME": "hoge.database.windows.net",
+    "SQLSERVER_DB_NAME": "hogehoge",
     "BLOB_QUEUE_STORAGE_ACCOUNT__accountName": "hogepiyo",
     "BLOB_QUEUE_STORAGE_ACCOUNT__queueServiceUri": "https://hogepiyo.queue.core.windows.net"
   },
