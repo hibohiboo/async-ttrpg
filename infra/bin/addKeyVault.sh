@@ -30,5 +30,3 @@ done
 
 az role assignment create --role "Key Vault Secrets Officer" --assignee $userObjectId --scope /subscriptions/$subscriptions/resourceGroups/$RESOURCE_GROUP_NAME/providers/Microsoft.KeyVault/vaults/$keyVaultName
 az keyvault secret set --vault-name $keyVaultName --name $keyVaultSecretName --value $DATABASE_URL --output none
-az keyvault secret set --vault-name $keyVaultName --name $KEY_VAULT_SECRET_NAME_CONNECTION_STRING --value "$CONNECTION_STRING" --output none
-

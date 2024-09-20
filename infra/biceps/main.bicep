@@ -43,7 +43,6 @@ module myFunctions 'core/host/functions.bicep' = {
     linuxFxVersion: functionsRuntime.linuxFxVersion
     applicationInsightsInstrumentationKey: myFunctionsApplicationInsights.outputs.applicationInsightsInstrumentationKey
     extensionVersion: functionsRuntime.extensionVersion
-    connectionString: keyVault.getSecret('AsyncTrpgConnectionString')
     functionEnvironments: functionEnvironments
     queueAndContainerStorageAccountName:queueAndContainerStorageAccountName
   }

@@ -1,4 +1,3 @@
-/* eslint-disable turbo/no-undeclared-env-vars */
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import { TransactionTestSchema } from '@db/zod';
@@ -25,10 +24,9 @@ const config = {
   },
 } as const;
 
-const connectionString = process.env.MANAGED_ID_CONNECTION_STRING!;
 const db = new Database(config); // 接続を使いまわすため、関数の外で定義
 const testdb = new TestDatabase(config);
-console.log('connection', connectionString);
+
 const app = new Hono()
   .post(
     '/',
