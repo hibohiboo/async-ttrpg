@@ -20,7 +20,7 @@
     "@azure/functions": "^4.5.1",
     "@azure/identity": "^4.4.1",
     "@azure/storage-blob": "^12.25.0",
-    "@azure/storage-queue": "^12.23.0",
+    "@azure/storage-queue": "^12.24.0",
     "@hono/swagger-ui": "^0.4.1",
     "@hono/zod-openapi": "^0.16.0",
     "@marplex/hono-azurefunc-adapter": "^1.0.0",
