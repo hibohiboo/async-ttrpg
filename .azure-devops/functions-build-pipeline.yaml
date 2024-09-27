@@ -25,7 +25,7 @@ steps:
         dotnet build extensions.csproj --output ./bin
     fi
     npm install --ignore-scripts
-    bash build.sh
+    npm run build
   workingDirectory: $(System.DefaultWorkingDirectory)/apps/api
 - task: ArchiveFiles@2
   displayName: "Archive files"
