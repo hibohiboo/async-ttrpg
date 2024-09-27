@@ -26,7 +26,6 @@ const startEndLogMiddleWare: MiddlewareHandler<AppContext> = async (
 const app = new Hono<AppContext>()
   .use(startEndLogMiddleWare)
   .use(
-    '/api',
     cors({
       origin: '*',
       allowHeaders: ['Content-Type'],
