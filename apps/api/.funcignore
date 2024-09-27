@@ -12,4 +12,3 @@ tsconfig.json
 .env
 .env.sample
 node_modules
-generated
