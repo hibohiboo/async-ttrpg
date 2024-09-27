@@ -38,3 +38,11 @@ steps:
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/build$(Build.BuildId).zip'
     artifactName: 'drop'
+- task: AzureFunctionApp@2
+  inputs:
+    azureSubscription: 'azure-dev-hobby'
+    appType: functionAppLinux
+    appName: $(appName)
+    package: $(Build.ArtifactStagingDirectory)/**/*.zip
+    deploymentMethod: 'auto'
+  
