@@ -11,3 +11,5 @@ tsconfig.json
 .turbo
 .env
 .env.sample
+node_modules
+generated
