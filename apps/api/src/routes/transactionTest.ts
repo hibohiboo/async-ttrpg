@@ -37,7 +37,11 @@ const app = new Hono()
         const [{ TestID }] = data;
         const deleteArgs = {
           logger: console.log,
-          query: 'DELETE from atrpg.TransactionTest where TestID = @TestID',
+          query: /* sql */ `
+            DELETE FROM atrpg.TransactionTest
+            WHERE
+              TestID = @TestID
+          `,
           params: [{ name: 'TestID', data: TestID, type: sql.NVarChar }],
         };
 
@@ -66,7 +70,11 @@ const app = new Hono()
         const [{ TestID }] = data;
         const deleteArgs = {
           logger: console.log,
-          query: 'DELETE from atrpg.TransactionTest where TestID = @TestID',
+          query: /* sql */ `
+            DELETE FROM atrpg.TransactionTest
+            WHERE
+              TestID = @TestID
+          `,
           params: [{ name: 'TestID', data: TestID, type: sql.NVarChar }],
         };
 
@@ -80,7 +88,9 @@ const app = new Hono()
         });
 
         await db.executePreparedStatement(deleteArgs, transaction);
-        await new Promise((resolve) => setTimeout(resolve, 1000 * 5));
+        await new Promise((resolve) => {
+          setTimeout(resolve, 1000 * 5);
+        });
         await db.bulk({ table, logger: console.log }, transaction);
       });
 
@@ -97,7 +107,11 @@ const app = new Hono()
         const [{ TestID }] = data;
         const deleteArgs = {
           logger: console.log,
-          query: 'DELETE from atrpg.TransactionTest where TestID = @TestID',
+          query: /* sql */ `
+            DELETE FROM atrpg.TransactionTest
+            WHERE
+              TestID = @TestID
+          `,
           params: [{ name: 'TestID', data: TestID, type: sql.NVarChar }],
         };
 
@@ -130,7 +144,11 @@ const app = new Hono()
         const [{ TestID }] = data;
         const deleteArgs = {
           logger: console.log,
-          query: 'DELETE from atrpg.TransactionTest where TestID = @TestID',
+          query: /* sql */ `
+            DELETE FROM atrpg.TransactionTest
+            WHERE
+              TestID = @TestID
+          `,
           params: [{ name: 'TestID', data: TestID, type: sql.NVarChar }],
         };
 
@@ -144,7 +162,9 @@ const app = new Hono()
         });
 
         await testdb.executePreparedStatement(deleteArgs);
-        await new Promise((resolve) => setTimeout(resolve, 1000 * 10));
+        await new Promise((resolve) => {
+          setTimeout(resolve, 1000 * 10);
+        });
         await testdb.bulk({ table, logger: console.log });
         await testdb.commitTransaction();
         return c.json({});
