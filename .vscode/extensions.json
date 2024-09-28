@@ -3,7 +3,8 @@
     "ms-azuretools.vscode-bicep",
     "ms-azuretools.vscode-azurefunctions",
     "ms-vscode.vscode-typescript-next",
-    "EditorConfig.EditorConfig"
+    "EditorConfig.EditorConfig",
+    "bradlc.vscode-tailwindcss"
   ],
   "unwantedRecommendations": []
 }

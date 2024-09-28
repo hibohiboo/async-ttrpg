@@ -12,4 +12,17 @@ export default defineConfig({
       '@api': path.join(__dirname, '../api/src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+          'react-family': ['react-hook-form', 'react-router-dom'],
+          api: ['hono', 'swr'],
+          ui: ['antd'],
+          state: ['zustand'],
+        },
+      },
+    },
+  },
 });
