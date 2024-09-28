@@ -1,7 +1,7 @@
-import { InferRequestType } from 'hono/client';
 import { client } from '@pl-app/shared/client';
+import { InferRequestType } from 'hono/client';
 
-const { characters } = client.api;
+const characters = client.api.characters;
 export type Character = InferRequestType<typeof characters.$post>['json'];
 const getAll = async function getAll() {
   const res = await characters.$get();
@@ -24,7 +24,7 @@ const update = async function update(id: string, params: Character) {
 };
 
 // prefixed with underscored because delete is a reserved word in javascript
-const deleteHandler = async function _delete(id: string) {
+const _delete = async function _delete(id: string) {
   return characters[':id'].$delete({ param: { id } });
 };
 export const characterService = {
@@ -32,5 +32,5 @@ export const characterService = {
   getById,
   create,
   update,
-  delete: deleteHandler,
+  delete: _delete,
 };

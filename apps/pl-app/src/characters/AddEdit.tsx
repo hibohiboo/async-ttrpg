@@ -1,13 +1,13 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { v4 } from 'uuid';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import {
   Character,
   characterService,
 } from '@pl-app/_services/character.service';
+import { v4 } from 'uuid';
 
 function AddEdit() {
   const navigate = useNavigate();
@@ -31,19 +31,21 @@ function AddEdit() {
     resolver: yupResolver(validationSchema),
   });
 
+  async function onSubmit(data: Character) {
+    await (isAddMode ? createUser(data) : updateUser(id, data));
+    navigate('/');
+  }
+
   async function createUser(data: Character) {
     await characterService.create(data);
     alert('Character added');
   }
 
-  async function updateUser(userId: string, data: Character) {
-    await characterService.update(userId, data);
+  async function updateUser(id: string, data: Character) {
+    await characterService.update(id, data);
     alert('Character updated');
   }
-  async function onSubmit(data: Character) {
-    await (isAddMode ? createUser(data) : updateUser(id, data));
-    navigate('/');
-  }
+
   useEffect(() => {
     if (isAddMode) {
       setValue('CharacterID', v4());
@@ -60,7 +62,7 @@ function AddEdit() {
       <h1>{isAddMode ? 'Add User' : 'Edit User'}</h1>
       <div className="form-row">
         <div className="form-group col-5">
-          <label htmlFor="CharacterName">Character Name</label>
+          <label>Character Name</label>
           <input
             type="text"
             {...register('CharacterName')}

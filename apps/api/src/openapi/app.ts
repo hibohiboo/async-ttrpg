@@ -1,7 +1,7 @@
-import { swaggerUI } from '@hono/swagger-ui';
 import { OpenAPIHono } from '@hono/zod-openapi';
-import characters from './apps/characters';
+import { swaggerUI } from '@hono/swagger-ui';
 import sample from './apps/samples';
+import characters from './apps/characters';
 
 const route = new OpenAPIHono()
   .route('/', sample)

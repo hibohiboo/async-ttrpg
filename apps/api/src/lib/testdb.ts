@@ -14,11 +14,8 @@ interface ExecuteQueryArgs {
 
 export default class TestDatabase {
   private config: sql.config | string;
-
   private poolconnection: ConnectionPool | null = null;
-
   private connected = false;
-
   private transaction: sql.Transaction | null = null;
 
   constructor(connectionsString: sql.config | string) {
@@ -58,9 +55,9 @@ export default class TestDatabase {
       return null;
     }
     const request = this.poolconnection.request();
-    args.params.forEach(({ name, data, type }) => {
+    for (const { name, data, type } of args.params) {
       request.input(name, type, data);
-    });
+    }
     args.logger(`Database query start`);
     const result = await request.query<T>(args.query);
     args.logger(
@@ -92,7 +89,6 @@ export default class TestDatabase {
     const result = await this.executeQuery(args);
     return result?.rowsAffected[0];
   }
-
   private getPreparedStatement() {
     if (this.transaction) {
       console.log('ps transaction');
@@ -123,7 +119,6 @@ export default class TestDatabase {
       await ps.unprepare();
     }
   }
-
   private getRequest() {
     if (this.transaction) {
       return new sql.Request(this.transaction);
@@ -133,18 +128,16 @@ export default class TestDatabase {
     }
     return new sql.Request(this.poolconnection);
   }
-
   async bulk(args: {
     table: sql.Table;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    logger: (...argumets: any[]) => void;
+    logger: (...args: any[]) => void;
   }) {
     await this.connect();
     const request = this.getRequest();
     const result = await request.bulk(args.table);
     return result;
   }
-
   async beginTransaction() {
     await this.connect();
     if (this.poolconnection == null) {
@@ -153,7 +146,6 @@ export default class TestDatabase {
     this.transaction = new sql.Transaction(this.poolconnection);
     await this.transaction.begin();
   }
-
   async commitTransaction() {
     if (this.transaction == null) {
       throw new Error('Transaction not started');
@@ -161,7 +153,6 @@ export default class TestDatabase {
     await this.transaction.commit();
     this.transaction = null;
   }
-
   async rollbackTransaction() {
     if (this.transaction == null) {
       console.warn('Transaction not started');

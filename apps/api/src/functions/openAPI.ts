@@ -1,6 +1,6 @@
 import { app } from '@azure/functions';
-import { azureHonoHandler } from '@marplex/hono-azurefunc-adapter';
 import honoApp from '@api/openapi/app';
+import { azureHonoHandler } from '@marplex/hono-azurefunc-adapter';
 
 app.http('openAPI', {
   methods: ['GET'],

@@ -1,13 +1,13 @@
-import { DefaultAzureCredential } from '@azure/identity';
-import { BlobServiceClient } from '@azure/storage-blob';
-import { QueueServiceClient } from '@azure/storage-queue';
-import { zValidator } from '@hono/zod-validator';
-import { Hono } from 'hono';
-import { z } from 'zod';
-import { sendQueueAndBlobContainer } from '@api/lib/sendQueueAndBlobContainer';
-import { AppContext } from '@api/types';
-import { CharacterSchema } from '@db/zod';
 import { prisma } from '../shared/prisma';
+import { Hono } from 'hono';
+import { zValidator } from '@hono/zod-validator';
+import { CharacterSchema } from '@db/zod';
+import { z } from 'zod';
+import { AppContext } from '@api/types';
+import { BlobServiceClient } from '@azure/storage-blob';
+import { DefaultAzureCredential } from '@azure/identity';
+import { QueueServiceClient } from '@azure/storage-queue';
+import { sendQueueAndBlobContainer } from '@api/lib/sendQueueAndBlobContainer';
 
 const app = new Hono<AppContext>()
   .get('/', async (c) => {
@@ -37,7 +37,7 @@ const app = new Hono<AppContext>()
       const data = await c.req.valid('json');
       const { CharacterID, ...rest } = data;
       const character = await prisma.character.upsert({
-        where: { CharacterID },
+        where: { CharacterID: CharacterID },
         create: data,
         update: rest,
       });

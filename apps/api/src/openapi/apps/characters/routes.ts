@@ -1,6 +1,7 @@
-import { createRoute, z } from '@hono/zod-openapi';
-import { zValidator } from '@hono/zod-validator';
 import { CharacterSchema } from '@db/zod';
+import { createRoute } from '@hono/zod-openapi';
+import { z } from '@hono/zod-openapi';
+import { zValidator } from '@hono/zod-validator';
 
 export const getListRoute = createRoute({
   path: '/',
@@ -77,7 +78,7 @@ export const deleteRoute = createRoute({
     params: z.object({
       id:
         // どちらの書き方でもOK
-        // z.string().openapi({ description: 'キャラクターID', example: 'aaa' }),
+        //z.string().openapi({ description: 'キャラクターID', example: 'aaa' }),
         CharacterSchema.shape.CharacterID.openapi({
           description: 'キャラクターID',
           example: 'bbb',
