@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
 import { Character, characterService } from '../_services/character.service';
 
 function List() {

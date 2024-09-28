@@ -7,7 +7,7 @@
     "dev": "vite",
     "prebuild": "rimraf  ./node_modules/.tmp",
     "build": "tsc -b && vite build --mode staging",
-    "lint": "eslint src/*",
+    "lint": "eslint ./src",
     "fsd-lint": "steiger ./src --watch",
     "preview": "vite preview",
     "predeploy": "rimraf  ./node_modules/.tmp && tsc -b && vite build --mode staging",
