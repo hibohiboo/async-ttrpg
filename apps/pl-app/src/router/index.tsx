@@ -1,8 +1,6 @@
-// import { getCharacter } from '@yakumi-app/domain/api/crud';
-
+import { createBrowserRouter } from 'react-router-dom';
 import { AddEdit } from '@pl-app/characters/AddEdit';
 import { List } from '@pl-app/characters/List';
-import { createBrowserRouter } from 'react-router-dom';
 
 export const createRouter = () =>
   createBrowserRouter([

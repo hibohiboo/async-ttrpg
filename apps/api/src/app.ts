@@ -1,9 +1,9 @@
-import characters from './routes/characters';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-import transactionTest from './routes/transactionTest';
 import { MiddlewareHandler } from 'hono/types';
-import { AppContext } from './types';
+import characters from '@api/routes/characters';
+import transactionTest from '@api/routes/transactionTest';
+import { AppContext } from '@api/types';
 
 const route = new Hono<AppContext>()
   .route('/characters', characters)
