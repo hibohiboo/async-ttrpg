@@ -6,8 +6,9 @@
       "@api/*": ["../api/src/*"],
       "@db/*": ["../api/generated/*"],
      },
-     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo"
+     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+     "allowSyntheticDefaultImports": true
   },
-  "include": ["src", "../api/src", "../api/generated"],
+  "include": ["src", "../api/src", "../api/generated","tests"],
   "exclude": ["node_modules", "dist"]
 }

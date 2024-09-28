@@ -66,5 +66,9 @@ src
 +-- utils             # shared utility functions
 ```
 
+msw 初回コマンド
 
+```
+ npx msw init public --save
+```
 
