@@ -1,7 +1,7 @@
 import { InferRequestType } from 'hono/client';
-import { client } from '@pl-app/shared/client';
+import { apiClient } from '../shared/api/client';
 
-const { characters } = client.api;
+const { characters } = apiClient.api;
 export type Character = InferRequestType<typeof characters.$post>['json'];
 const getAll = async function getAll() {
   const res = await characters.$get();
