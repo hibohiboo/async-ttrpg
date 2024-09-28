@@ -7,13 +7,27 @@ param extensionVersion string
 param applicationInsightsInstrumentationKey string
 @secure()
 param databaseUrl string
-@secure()
-param connectionString string
 param functionEnvironments array 
 param staticSites_pl_static_web_app_name string
+param queueAndContainerStorageAccountName string
 
 var functionAppName = '${uniqueString(resourceGroup().id)}azfunctionsapp'
 
+var environments = [
+  {
+    name: 'DATABASE_URL'
+    value: databaseUrl
+  }
+  {
+    name: 'BLOB_QUEUE_STORAGE_ACCOUNT__accountName'
+    value: queueAndContainerStorageAccountName
+  }
+  {
+    name: 'BLOB_QUEUE_STORAGE_ACCOUNT__queueServiceUri'
+    value: 'https://${queueAndContainerStorageAccountName}.queue.core.windows.net'
+  }
+  ...functionEnvironments
+]
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
   name: storageAccountName
 }
@@ -25,6 +39,9 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
   name: functionAppName
   location: location
   kind: kind
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     reserved: true
     siteConfig: {
@@ -57,18 +74,11 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
           value: applicationInsightsInstrumentationKey
         }
-        {
-          name: 'DATABASE_URL'
-          value: databaseUrl
-        }
-        {
-          name:'CONNECTION_STRING'
-          value: connectionString
-        }
-        ...functionEnvironments
+        ...environments
       ]
     }
   }
 }
 
 output appServiceAppHostName string = functionApp.properties.defaultHostName
+output principalId string = functionApp.identity.principalId

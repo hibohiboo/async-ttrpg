@@ -11,6 +11,10 @@
   "extensions": {
     "http": {
       "routePrefix": ""
+    },
+    "queues": {
+      "maxDequeueCount": 3,
+      "messageEncoding": "none"
     }
   },
   "extensionBundle": {

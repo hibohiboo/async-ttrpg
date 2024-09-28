@@ -13,16 +13,18 @@ interface ExecuteQueryArgs {
 }
 
 export default class Database {
-  private config: string;
+  private config: sql.config | string;
   private poolconnection: ConnectionPool | null = null;
   private connected = false;
 
-  constructor(connectionsString: string) {
-    if (connectionsString === '') {
+  constructor(connectionsStringOrConfig: sql.config | string) {
+    if (connectionsStringOrConfig === '') {
       throw new Error('Database connection string is empty');
     }
-    console.log(`Database: config: ${JSON.stringify(connectionsString)}`);
-    this.config = connectionsString;
+    console.log(
+      `Database: config: ${JSON.stringify(connectionsStringOrConfig)}`,
+    );
+    this.config = connectionsStringOrConfig;
   }
 
   private async connect() {
