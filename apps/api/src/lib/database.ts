@@ -14,7 +14,9 @@ interface ExecuteQueryArgs {
 
 export default class Database {
   private config: sql.config | string;
+
   private poolconnection: ConnectionPool | null = null;
+
   private connected = false;
 
   constructor(connectionsStringOrConfig: sql.config | string) {
@@ -50,9 +52,9 @@ export default class Database {
       return null;
     }
     const request = this.poolconnection.request();
-    for (const { name, data, type } of args.params) {
+    args.params.forEach(({ name, data, type }) => {
       request.input(name, type, data);
-    }
+    });
     args.logger(`Database query start`);
     const result = await request.query<T>(args.query);
     args.logger(
@@ -84,6 +86,7 @@ export default class Database {
     const result = await this.executeQuery(args);
     return result?.rowsAffected[0];
   }
+
   private getPreparedStatement(transaction?: sql.Transaction) {
     if (transaction) {
       return new sql.PreparedStatement(transaction);
@@ -116,6 +119,7 @@ export default class Database {
       await ps.unprepare();
     }
   }
+
   private getRequest(transaction?: sql.Transaction) {
     if (transaction) {
       return new sql.Request(transaction);
@@ -125,11 +129,12 @@ export default class Database {
     }
     return new sql.Request(this.poolconnection);
   }
+
   async bulk(
     args: {
       table: sql.Table;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      logger: (...args: any[]) => void;
+      logger: (...argumens: any[]) => void;
     },
     transaction?: sql.Transaction,
   ) {
@@ -138,6 +143,7 @@ export default class Database {
     const result = await request.bulk(args.table);
     return result;
   }
+
   private async createTransaction() {
     await this.connect();
     if (this.poolconnection == null) {

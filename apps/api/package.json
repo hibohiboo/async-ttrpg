@@ -24,6 +24,7 @@
     "@azure/storage-queue": "^12.24.0",
     "@hono/swagger-ui": "^0.4.1",
     "@hono/zod-openapi": "^0.16.2",
+    "@hono/zod-validator": "^0.3.0",
     "@marplex/hono-azurefunc-adapter": "^1.0.0",
     "@prisma/client": "^5.20.0",
     "date-fns": "^4.1.0",
