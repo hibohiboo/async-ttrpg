@@ -1,12 +1,25 @@
+import path from "path";
+import { fileURLToPath } from "url";
+import customConfig from '@async-ttrpg/eslint-config-custom/defaults.js';
+import { FlatCompat } from "@eslint/eslintrc";
+import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import customConfig from '@async-ttrpg/eslint-config-custom/defaults.js';
-import reactRefreshPlugin from 'eslint-plugin-react-refresh';
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+
+const compat = new FlatCompat({
+    baseDirectory: dirname
+});
 
 export default tseslint.config({
   files: ['**/*.ts', '**/*.tsx'],
   ignores: ['dist', 'public'],
-  extends: [...customConfig],
+  extends: [...customConfig
+           , ...compat.extends('plugin:react-hooks/recommended')
+           , ...compat.extends('plugin:@conarti/eslint-plugin-feature-sliced/recommended')
+          ],
   plugins: {
     'react-refresh': reactRefreshPlugin,
   },
@@ -80,6 +93,7 @@ export default tseslint.config({
     sourceType: 'module',
     globals: {
       ...globals.node,
+      ...globals.browser,
       myCustomGlobal: 'readonly',
     },
   },
