@@ -1,3 +1,5 @@
-export function Page() {
-  return <div className="min-h-screen">test</div>;
+import { ReactNode } from 'react';
+
+export function Page({ children }: { children: ReactNode }) {
+  return children;
 }

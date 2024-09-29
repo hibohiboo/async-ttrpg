@@ -4,6 +4,7 @@ import {
   Character,
   characterService,
 } from '@pl-app/features/characters/api/model';
+import { basePath } from '../config/basePath';
 
 function List() {
   const [characters, setCharacters] = useState<
@@ -30,7 +31,7 @@ function List() {
   return (
     <div>
       <h1>キャラクター一覧</h1>
-      <Link to={`/add`} className="btn btn-sm btn-success mb-2">
+      <Link to={`${basePath}/add`} className="btn btn-sm btn-success mb-2">
         キャラクターを追加
       </Link>
       <table className="table table-striped">
@@ -49,7 +50,7 @@ function List() {
                 <td>{character.CharacterName}</td>
                 <td style={{ whiteSpace: 'nowrap' }}>
                   <Link
-                    to={`/edit/${character.CharacterID}`}
+                    to={`${basePath}/edit/${character.CharacterID}`}
                     className="btn btn-sm btn-primary mr-1"
                   >
                     Edit

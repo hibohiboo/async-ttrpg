@@ -8,6 +8,7 @@ import {
   Character,
   characterService,
 } from '@pl-app/features/characters/api/model';
+import { basePath } from '../config/basePath';
 
 function AddEdit() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ function AddEdit() {
   }
   async function onSubmit(data: Character) {
     await (isAddMode ? createUser(data) : updateUser(id, data));
-    navigate('/');
+    navigate(`${basePath}`);
   }
   useEffect(() => {
     if (isAddMode) {
@@ -83,7 +84,7 @@ function AddEdit() {
           )}
           Save
         </button>
-        <Link to={isAddMode ? '.' : '..'} className="btn btn-link">
+        <Link to={basePath} className="btn btn-link">
           Cancel
         </Link>
       </div>

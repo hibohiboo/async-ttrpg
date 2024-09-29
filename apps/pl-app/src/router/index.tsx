@@ -14,19 +14,25 @@ export const createRouter = () =>
       children: [
         {
           path: '/characters',
-          element: <CharacterPage />,
-        },
-        {
-          path: '/',
-          element: <CharacterList />,
-        },
-        {
-          path: '/add',
-          element: <CharacterEdit />,
-        },
-        {
-          path: '/edit/:id',
-          element: <CharacterEdit />,
+          element: (
+            <CharacterPage>
+              <Outlet />
+            </CharacterPage>
+          ),
+          children: [
+            {
+              index: true,
+              element: <CharacterList />,
+            },
+            {
+              path: 'add',
+              element: <CharacterEdit />,
+            },
+            {
+              path: 'edit/:id',
+              element: <CharacterEdit />,
+            },
+          ],
         },
       ],
     },

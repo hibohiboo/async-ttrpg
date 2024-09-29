@@ -36,7 +36,25 @@ export const handlers = [
         },
       ),
   ),
+  http.post(
+    'http://localhost:7071/api/characters',
+    () =>
+      new HttpResponse(
+        JSON.stringify({
+          CharacterID: 'test-aaaa-bbbb-cccc-29ddfc9efee1',
+          CharacterName: 'モックキャラクター',
+        }),
+        {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        },
+      ),
+  ),
   http.delete(
+    'http://localhost:7071/api/characters/:id',
+    () => new HttpResponse('', { status: 200 }),
+  ),
+  http.put(
     'http://localhost:7071/api/characters/:id',
     () => new HttpResponse('', { status: 200 }),
   ),
