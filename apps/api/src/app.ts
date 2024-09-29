@@ -34,3 +34,4 @@ const app = new Hono<AppContext>()
   )
   .route('/api', route);
 export default app;
+export type AppType = typeof app;
