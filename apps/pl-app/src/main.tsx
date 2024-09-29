@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RoutesApp } from './router/RoutesApp.tsx';
-import { APIClientProvider } from './shared/api/APIClinetContext.tsx';
+import { APIClientProvider } from './shared/api/APIClientContext.tsx';
 import './index.css';
 // eslint-disable-next-line import/order
 import { initMSW } from '../tests/msw/browser.ts';

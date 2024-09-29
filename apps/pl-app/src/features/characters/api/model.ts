@@ -1,5 +1,5 @@
 import { InferRequestType } from 'hono/client';
-import { apiClient } from '../shared/api/client';
+import { apiClient } from '@pl-app/shared/api';
 
 const { characters } = apiClient.api;
 export type Character = InferRequestType<typeof characters.$post>['json'];

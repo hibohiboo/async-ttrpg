@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import {
   Character,
   characterService,
-} from '@pl-app/_services/character.service';
+} from '@pl-app/features/characters/api/model';
 
 function AddEdit() {
   const navigate = useNavigate();

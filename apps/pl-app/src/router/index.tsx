@@ -1,8 +1,7 @@
 import { createBrowserRouter, Outlet } from 'react-router-dom';
-import { AddEdit } from '@pl-app/characters/AddEdit';
-import { List } from '@pl-app/characters/List';
+import { CharacterEdit, CharacterList } from '@pl-app/features/characters';
 import { CharacterPage } from '@pl-app/pages/character-page';
-import { AsyncTrpgLayout } from '@pl-app/widgets/layout/AsyncTrpgLayout';
+import { AsyncTrpgLayout } from '@pl-app/widgets/layout';
 
 export const createRouter = () =>
   createBrowserRouter([
@@ -19,15 +18,15 @@ export const createRouter = () =>
         },
         {
           path: '/',
-          element: <List />,
+          element: <CharacterList />,
         },
         {
           path: '/add',
-          element: <AddEdit />,
+          element: <CharacterEdit />,
         },
         {
           path: '/edit/:id',
-          element: <AddEdit />,
+          element: <CharacterEdit />,
         },
       ],
     },

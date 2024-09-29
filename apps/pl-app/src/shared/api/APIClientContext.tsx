@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useMemo } from 'react';
 import { ApiClient, apiClient } from './client';
 
-const APIClientContext = createContext<{ client: ApiClient }>({
+export const APIClientContext = createContext<{ client: ApiClient }>({
   client: apiClient,
 });
 

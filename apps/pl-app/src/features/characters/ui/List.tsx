@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Character, characterService } from '../_services/character.service';
+import {
+  Character,
+  characterService,
+} from '@pl-app/features/characters/api/model';
 
 function List() {
   const [characters, setCharacters] = useState<
