@@ -34,7 +34,6 @@ const startEndLogMiddleWare: MiddlewareHandler<AppContext> = async (
 };
 
 const app = new Hono<AppContext>()
-
   .use(
     cors({
       origin: '*',
