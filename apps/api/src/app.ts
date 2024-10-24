@@ -5,6 +5,8 @@ import characters from '@api/routes/characters';
 import transactionTest from '@api/routes/transactionTest';
 import { AppContext } from '@api/types';
 import { Logger } from './shared/Logger';
+import { logger as honoLogger } from 'hono/logger';
+import { createMiddleware } from 'hono/factory';
 
 const route = new Hono<AppContext>()
   .route('/characters', characters)
@@ -22,12 +24,16 @@ const route = new Hono<AppContext>()
     logger.log(`echo: ${test}`);
     return c.json({ echo: test });
   });
+const honoLoggerMiddleware = createMiddleware<AppContext>(async (c, next) => {
+  const logger = new Logger(c.env.AZURE_FUNCTIONS_CONTEXT);
+  c.set('services', { logger });
+  return honoLogger(logger.info.bind(logger))(c, next);
+});
 const startEndLogMiddleWare: MiddlewareHandler<AppContext> = async (
   c,
   next,
 ) => {
-  const logger = new Logger(c.env.AZURE_FUNCTIONS_CONTEXT);
-  c.set('services', { logger });
+  const { logger } = c.get('services');
   logger.log(`func start: ${c.req.url}`);
   await next();
   logger.log(`func end: ${c.req.url}`);
@@ -41,6 +47,7 @@ const app = new Hono<AppContext>()
       allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     }),
   )
+  .use(honoLoggerMiddleware)
   .use(startEndLogMiddleWare)
   .route('/api', route);
 export default app;
