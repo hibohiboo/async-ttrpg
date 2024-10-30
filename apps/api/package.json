@@ -18,7 +18,7 @@
     "ncu": "ncu -u"
   },
   "dependencies": {
-    "@azure/functions": "^4.5.1",
+    "@azure/functions": "^4.6.0",
     "@azure/identity": "^4.5.0",
     "@azure/storage-blob": "^12.25.0",
     "@azure/storage-queue": "^12.24.0",
