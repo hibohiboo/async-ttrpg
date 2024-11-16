@@ -15,6 +15,11 @@
     "queues": {
       "maxDequeueCount": 3,
       "messageEncoding": "none"
+    },
+    "durableTask": {
+      "storageProvider": {
+        "type": "AzureStorage"
+      }
     }
   },
   "extensionBundle": {
