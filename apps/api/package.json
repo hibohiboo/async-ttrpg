@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "prebuild": "npm run clean && npm run prisma-generate",
-    "build": "esbuild src/functions/index.ts --bundle --platform=node --target=node20 --outdir=dist/src/functions --external:@azure/functions-core --minify",
+    "build": "esbuild src/functions/index.ts --bundle --platform=node --target=node22 --outdir=dist/src/functions --external:@azure/functions-core --minify",
     "watch": "tsc -w",
     "clean": "rimraf dist",
     "predev": "npm run build",
