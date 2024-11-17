@@ -1,16 +1,19 @@
 import { app } from '@azure/functions';
-import df from 'durable-functions';
+import * as df from 'durable-functions';
 
 const activityName = 'durableHello1';
 
-df.app.orchestration('durableHello1Orchestrator', function* (context) {
-  const outputs = [];
-  outputs.push(yield context.df.callActivity(activityName, 'Tokyo'));
-  outputs.push(yield context.df.callActivity(activityName, 'Seattle'));
-  outputs.push(yield context.df.callActivity(activityName, 'Cairo'));
+df.app.orchestration(
+  'durableHello1Orchestrator',
+  function* durableHello1Orchestrator(context) {
+    const outputs = [];
+    outputs.push(yield context.df.callActivity(activityName, 'Tokyo'));
+    outputs.push(yield context.df.callActivity(activityName, 'Seattle'));
+    outputs.push(yield context.df.callActivity(activityName, 'Cairo'));
 
-  return outputs;
-});
+    return outputs;
+  },
+);
 
 df.app.activity(activityName, {
   handler: (input) => `Hello, ${input}`,
