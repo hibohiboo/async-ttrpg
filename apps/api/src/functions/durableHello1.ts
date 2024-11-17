@@ -1,4 +1,4 @@
-import { app } from '@azure/functions';
+import { app, InvocationContext } from '@azure/functions';
 import * as df from 'durable-functions';
 
 const activityName = 'durableHello1';
@@ -14,12 +14,41 @@ df.app.orchestration(
     return outputs;
   },
 );
-
 df.app.activity(activityName, {
   handler: (input) => `Hello, ${input}`,
 });
 
-app.http('durableHello1HttpStart', {
+df.app.orchestration(
+  'durableOrchestrator',
+  function* orchestrator(context: df.OrchestrationContext) {
+    const outputs = [];
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < 5; i++) {
+      try {
+        const result = yield context.df.callActivity('WaitTest', i);
+        outputs.push(result);
+        // eslint-disable-next-line sonarjs/no-ignored-exceptions
+      } catch (e) {
+        // context.error(`Error in orchestration: ${i}`, e);
+        context.error(`Error in orchestration: ${i}`);
+      }
+    }
+    return outputs;
+  },
+);
+
+df.app.activity('WaitTest', {
+  handler: async (num: number, context: InvocationContext) => {
+    context.log(`Wait start ${num}.`);
+    if (num === 3) throw new Error(`wait test ${num}`);
+    await new Promise((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+    context.log(`Wait end ${num}.`);
+  },
+});
+
+app.http('durableHttpStart', {
   route: 'orchestrators/{orchestratorName}',
   extraInputs: [df.input.durableClient()],
   handler: async (request, context) => {
