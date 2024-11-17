@@ -1,4 +1,5 @@
 import { app, InvocationContext } from '@azure/functions';
+import { addSeconds } from 'date-fns';
 import * as df from 'durable-functions';
 
 const activityName = 'durableHello1';
@@ -18,6 +19,8 @@ df.app.activity(activityName, {
   handler: (input) => `Hello, ${input}`,
 });
 
+// --------------------------------
+
 df.app.orchestration(
   'durableOrchestrator',
   function* orchestrator(context: df.OrchestrationContext) {
@@ -33,6 +36,7 @@ df.app.orchestration(
         context.error(`Error in orchestration: ${i}`);
       }
     }
+    context.log('Orchestration end.', outputs);
     return outputs;
   },
 );
@@ -45,9 +49,37 @@ df.app.activity('WaitTest', {
       setTimeout(resolve, 1000);
     });
     context.log(`Wait end ${num}.`);
+    return `Wait ${num}`;
   },
 });
 
+// --------------------------------
+df.app.orchestration(
+  'durableOrchestratorOrchestratorFunctionCodeConstraints',
+  function* durableOrchestratorOrchestratorFunctionCodeConstraints(context) {
+    const outputs: string[] = [];
+
+    // GUID
+    outputs.push(context.df.newGuid('v5なので与えられた文字列に対して一定'));
+    context.log('uuid v5.', outputs);
+
+    // 日付と時刻
+    const expiration = addSeconds(context.df.currentUtcDateTime, 30);
+    const timeoutTask = context.df.createTimer(expiration);
+    const approved = context.df.waitForExternalEvent('Approval');
+    context.log('wait approve start');
+    // どちらかが終わるまで待つ = タイムアウトの動きとなる
+    const winner = yield context.df.Task.any([timeoutTask, approved]);
+    if (winner === timeoutTask) {
+      outputs.push('timeout');
+    } else {
+      outputs.push('not timeout');
+    }
+    context.log('Orchestrator end.', outputs);
+    return outputs;
+  },
+);
+// --------------------------------
 app.http('durableHttpStart', {
   route: 'orchestrators/{orchestratorName}',
   extraInputs: [df.input.durableClient()],
