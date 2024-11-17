@@ -79,6 +79,42 @@ df.app.orchestration(
     return outputs;
   },
 );
+
+// --------------------------------
+df.app.orchestration(
+  'durableOrchestratorActivityErrorHandling',
+  function* durableOrchestratorOrchestratorFunctionCodeConstraints(context) {
+    const firstRetryIntervalInMilliseconds = 2000;
+    const maxNumberOfAttempts = 3;
+
+    // 関数呼び出しを最大3回再試行する。次の再試行までに2秒間待機する。
+    const retryOptions = new df.RetryOptions(
+      firstRetryIntervalInMilliseconds, // 次の再試行までの待機時間
+      maxNumberOfAttempts, // 最大試行回数. 1を指定すると再試行なし。
+    );
+    // 1を超えた値を指定すると、次の再試行までの待機時間が指数関数的に増加する。
+    retryOptions.backoffCoefficient = 2; // 指数バックオフの係数.デフォルトは1.0.
+    retryOptions.retryTimeoutInMilliseconds = 30 * 1000; // 再試行のタイムアウト時間
+    const flaky = yield context.df.callActivityWithRetry(
+      'flakyFunction',
+      retryOptions,
+    );
+
+    const timeoutTask = context.df.createTimer(
+      addSeconds(context.df.currentUtcDateTime, 30),
+    );
+    context.log('handling test start');
+
+    yield context.df.Task.any([timeoutTask, flaky]);
+    context.log('handling test end');
+  },
+);
+df.app.activity('flakyFunction', {
+  handler: async (_, context: InvocationContext) => {
+    context.log('flakyFunction start', context);
+    throw new Error(`error test`);
+  },
+});
 // --------------------------------
 app.http('durableHttpStart', {
   route: 'orchestrators/{orchestratorName}',
