@@ -7,6 +7,7 @@
     "build": "esbuild src/functions/index.ts --bundle --platform=node --target=node22 --outdir=dist/src/functions --external:@azure/functions-core --minify",
     "watch": "tsc -w",
     "clean": "rimraf dist",
+    "azurite": "azurite --silent --location c:/azurite --debug c:/azurite/debug.log",
     "predev": "npm run build",
     "dev": "func start --port 7071",
     "lint": "eslint src/*",
