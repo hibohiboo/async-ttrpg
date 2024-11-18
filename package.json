@@ -12,10 +12,10 @@
   "author": "hibohiboo",
   "license": "MIT",
   "devDependencies": {
-    "husky": "^9.1.6",
-    "npm-check-updates": "^17.1.10",
+    "husky": "^9.1.7",
+    "npm-check-updates": "^17.1.11",
     "prettier": "^3.3.3",
-    "turbo": "^2.2.3"
+    "turbo": "^2.3.0"
   },
   "packageManager": "npm@10.9.0",
   "private": true,
