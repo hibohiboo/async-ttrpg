@@ -4,7 +4,7 @@ param runtime string
 param kind string
 param linuxFxVersion string
 param extensionVersion string
-param applicationInsightsInstrumentationKey string
+param applicationInsightsName string
 @secure()
 param databaseUrl string
 param functionEnvironments array 
@@ -12,7 +12,9 @@ param staticSites_pl_static_web_app_name string
 param queueAndContainerStorageAccountName string
 
 var functionAppName = '${uniqueString(resourceGroup().id)}azfunctionsapp'
-
+resource appInsights 'Microsoft.Insights/components@2020-02-02' existing = {
+  name: applicationInsightsName
+}
 var environments = [
   {
     name: 'DATABASE_URL'
@@ -71,8 +73,8 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
           value: runtime
         }
         {
-          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
-          value: applicationInsightsInstrumentationKey
+          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+          value: appInsights.properties.ConnectionString
         }
         ...environments
       ]

@@ -41,7 +41,7 @@ module myFunctions 'core/host/functions.bicep' = {
     kind: functionsRuntime.kind
     runtime: functionsRuntime.runtime
     linuxFxVersion: functionsRuntime.linuxFxVersion
-    applicationInsightsInstrumentationKey: myFunctionsApplicationInsights.outputs.applicationInsightsInstrumentationKey
+    applicationInsightsName: applicationInsightsName
     extensionVersion: functionsRuntime.extensionVersion
     functionEnvironments: functionEnvironments
     queueAndContainerStorageAccountName:queueAndContainerStorageAccountName
