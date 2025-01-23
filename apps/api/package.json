@@ -8,7 +8,7 @@
     "build": "esbuild src/functions/index.ts --bundle --platform=node --target=node22 --outdir=dist/src/functions --external:@azure/functions-core --minify --tsconfig=tsconfig.build.json",
     "watch": "tsc -w",
     "clean": "rimraf dist",
-    "azurite": "cross-env MSYS_NO_PATHCONV=1 azurite --silent --location c:/azurite --debug c:/azurite/debug.log",
+    "azurite": "azurite --silent --location c:/azurite --debug c:/azurite/debug.log",
     "azurite-https": "cross-env MSYS_NO_PATHCONV=1 azurite --silent --location c:/azurite --debug c:/azurite/debug.log --oauth basic --cert %USERPROFILE%/.ssh/mkcert/127.0.0.1.pem --key %USERPROFILE%/.ssh/mkcert/127.0.0.1-key.pem",
     "predev": "npm run build",
     "dev": "func start --port 7071",
