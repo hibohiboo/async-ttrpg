@@ -1,9 +1,7 @@
-import { DefaultAzureCredential } from '@azure/identity';
-import { BlobServiceClient } from '@azure/storage-blob';
-import { QueueServiceClient } from '@azure/storage-queue';
 import { zValidator } from '@hono/zod-validator';
 import { Hono } from 'hono';
 import { z } from 'zod';
+import { createQueueAndBlobClient } from '@api/lib/createQueueAndBlobServiceClient';
 import { sendQueueAndBlobContainer } from '@api/lib/sendQueueAndBlobContainer';
 import { AppContext } from '@api/types';
 import { CharacterSchema } from '@db/zod';
@@ -57,30 +55,13 @@ const app = new Hono<AppContext>()
   .post('/async', zValidator('json', CharacterSchema), async (c) => {
     const logger = c.env.AZURE_FUNCTIONS_CONTEXT;
     const data = await c.req.valid('json');
-    const envList = ['BLOB_QUEUE_STORAGE_ACCOUNT__accountName'] as const;
-    envList.forEach((k) => {
-      if (!process.env[k]) throw new Error(`Missing ${k} environments`);
-    });
-    const processEnv = process.env as Record<(typeof envList)[number], string>;
-    const accountName = processEnv.BLOB_QUEUE_STORAGE_ACCOUNT__accountName;
-    if (!accountName) {
-      throw new Error('Missing BLOB_QUEUE_STORAGE_ACCOUNT_NAME env var');
-    }
-    const credential = new DefaultAzureCredential();
-    const blobServiceClient = new BlobServiceClient(
-      `https://${accountName}.blob.core.windows.net`,
-      credential,
-    );
+    const { blobServiceClient, queueServiceClient } =
+      createQueueAndBlobClient();
     const containerClient = blobServiceClient.getContainerClient(
       'character-container',
     );
 
-    const queueServiceClient = new QueueServiceClient(
-      `https://${accountName}.queue.core.windows.net`,
-      credential,
-    );
     const queueClient = queueServiceClient.getQueueClient('character-queue');
-
     await sendQueueAndBlobContainer({
       containerClient,
       queueClient,

@@ -1,4 +1,4 @@
-import { client } from '../utils/client';
+import { client } from '@test/utils/client';
 
 describe('echo', () => {
   test('環境変数が取得できること', async () => {

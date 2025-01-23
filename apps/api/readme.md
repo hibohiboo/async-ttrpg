@@ -22,3 +22,20 @@ JsonPath|設定値|説明|参考
 --|--|--|--
 extension.http.routePrefix|空文字|関数ルートのapiを削除|[*](https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-bindings-http-webhook-trigger?tabs=python-v2%2Cisolated-process%2Cnodejs-v4%2Cfunctionsv2&pivots=programming-language-typescript#customize-the-http-endpoint)
 
+# テスト
+## 普通のテスト
+
+npm run db:up
+npm run test
+
+## BlobStorageのテスト
+
+npm run db:up
+npm run azurite
+npm run az-test
+
+## (お試しマネージドID)BlobStorageのテスト
+
+npm run db:up
+npm run azurite-https
+npm run az-test-https
