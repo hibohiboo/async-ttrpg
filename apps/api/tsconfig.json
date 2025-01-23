@@ -5,6 +5,7 @@
     "rootDir": ".",
     "paths": { 
       "@api/*": ["./src/*"],
+      "@test/*": ["./tests/*"],
       "@db/*": ["./generated/*"],
      },
      "types": ["vitest/globals"], // vitest の API をグローバルAPI として使用できるようにする
