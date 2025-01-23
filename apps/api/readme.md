@@ -25,17 +25,23 @@ extension.http.routePrefix|空文字|関数ルートのapiを削除|[*](https://
 # テスト
 ## 普通のテスト
 
+```
 npm run db:up
 npm run test
+```
 
 ## BlobStorageのテスト
 
+```
 npm run db:up
 npm run azurite
 npm run az-test
+```
 
 ## (お試しマネージドID)BlobStorageのテスト
 
+```
 npm run db:up
 npm run azurite-https
 npm run az-test-https
+```
