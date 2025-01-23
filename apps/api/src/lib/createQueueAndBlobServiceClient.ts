@@ -2,8 +2,27 @@ import { DefaultAzureCredential } from '@azure/identity';
 import { BlobServiceClient } from '@azure/storage-blob';
 import { QueueServiceClient } from '@azure/storage-queue';
 
-// 開発環境では環境変数から接続文字列を取得
 const createQueueAndBlobClientFromConnectionString = () => {
+  const isHttps = (['AZURE_STORAGE_MANAGED_ID_TEST'] as const).reduce(
+    (v, k) => v && !!process.env[k],
+    true,
+  );
+  // テスト用に https でマネージドID接続
+  if (isHttps) {
+    const credential = new DefaultAzureCredential();
+    const blobServiceClient = new BlobServiceClient(
+      'https://127.0.0.1:10000/devstoreaccount1',
+      credential,
+    );
+
+    const queueServiceClient = new QueueServiceClient(
+      'https://127.0.0.1:10001/devstoreaccount1',
+      credential,
+    );
+
+    return { blobServiceClient, queueServiceClient };
+  }
+  // 開発環境では環境変数から接続文字列を取得
   const envList = ['AZURE_STORAGE_CONNECTION_STRING'] as const;
   envList.forEach((k) => {
     if (!process.env[k]) throw new Error(`Missing ${k} environments`);
