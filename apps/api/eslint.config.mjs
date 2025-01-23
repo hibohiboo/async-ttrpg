@@ -3,5 +3,5 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config({
   extends: customConfig,
-  ignores: ['vitest.workspace.ts']
+  ignores: ['vitest.workspace.ts','tests']
 });
