@@ -1,6 +1,6 @@
 {
   "name": "@async-ttrpg/api",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "scripts": {
     "prebuild": "npm run clean && npm run prisma-generate",
