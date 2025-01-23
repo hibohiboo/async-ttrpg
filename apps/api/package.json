@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
+    "tsc": "tsc -p tsconfig.build.json",
     "prebuild": "npm run clean && npm run prisma-generate",
-    "build": "esbuild src/functions/index.ts --bundle --platform=node --target=node22 --outdir=dist/src/functions --external:@azure/functions-core --minify",
+    "build": "esbuild src/functions/index.ts --bundle --platform=node --target=node22 --outdir=dist/src/functions --external:@azure/functions-core --minify --tsconfig=tsconfig.build.json",
     "watch": "tsc -w",
     "clean": "rimraf dist",
     "azurite": "azurite --silent --location c:/azurite --debug c:/azurite/debug.log",
@@ -16,7 +17,10 @@
     "prisma-generate": "prisma generate",
     "predeploy": "npm run build",
     "deploy": "dotenv -e .env -- bash -c 'func azure functionapp publish $APP_NAME --subscription $AZURE_SUBSCRIPTION_ID'",
-    "ncu": "ncu -u"
+    "db:up": "cd ../../database && bash ./bin/up.sh",
+    "ncu": "ncu -u",
+    "test": "vitest",
+    "az-test": "vitest --project=azurite-test"
   },
   "dependencies": {
     "@azure/functions": "^4.6.0",
@@ -46,6 +50,8 @@
     "prisma": "^6.2.1",
     "rimraf": "^6.0.1",
     "typescript": "^5.7.3",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.3",
     "zod-prisma-types": "^3.2.1"
   },
   "optionalDependencies": {

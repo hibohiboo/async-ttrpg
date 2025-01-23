@@ -8,6 +8,6 @@
       "@db/*": ["./generated/*"],
      },
   },
-  "include": ["src","generated","tests"],
+  "include": ["src","generated"],
   "exclude": ["node_modules", "dist"]
 }
