@@ -6,9 +6,11 @@ describe('echo', () => {
   beforeAll(async () => {
     const { blobServiceClient, queueServiceClient } =
       createQueueAndBlobClient();
+
     for await (const container of blobServiceClient.listContainers()) {
       await blobServiceClient.deleteContainer(container.name);
     }
+
     await blobServiceClient.createContainer('character-container');
     await queueServiceClient.createQueue('character-queue');
   });
