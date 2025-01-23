@@ -1,12 +1,12 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
+import { createMiddleware } from 'hono/factory';
+import { logger as honoLogger } from 'hono/logger';
 import { MiddlewareHandler } from 'hono/types';
 import characters from '@api/routes/characters';
 import transactionTest from '@api/routes/transactionTest';
 import { AppContext } from '@api/types';
 import { Logger } from './shared/Logger';
-import { logger as honoLogger } from 'hono/logger';
-import { createMiddleware } from 'hono/factory';
 
 const route = new Hono<AppContext>()
   .route('/characters', characters)

@@ -13,7 +13,7 @@
   "license": "MIT",
   "devDependencies": {
     "husky": "^9.1.7",
-    "npm-check-updates": "^17.1.13",
+    "npm-check-updates": "^17.1.14",
     "prettier": "^3.4.2",
     "turbo": "^2.3.3"
   },
