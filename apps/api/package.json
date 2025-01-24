@@ -44,7 +44,7 @@
     "@async-ttrpg/eslint-config-custom": "*",
     "@async-ttrpg/tsconfig": "*",
     "@types/mssql": "^9.1.6",
-    "@types/node": "^22.10.9",
+    "@types/node": "^22.10.10",
     "cross-env": "^7.0.3",
     "dotenv-cli": "^8.0.0",
     "esbuild": "^0.24.2",
