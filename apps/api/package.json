@@ -33,7 +33,7 @@
     "@hono/zod-openapi": "^0.18.3",
     "@hono/zod-validator": "^0.4.2",
     "@marplex/hono-azurefunc-adapter": "^1.0.1",
-    "@prisma/client": "^6.2.1",
+    "@prisma/client": "^6.5.0",
     "date-fns": "^4.1.0",
     "durable-functions": "^3.1.0",
     "hono": "^4.6.19",
