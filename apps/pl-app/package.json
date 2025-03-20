@@ -38,7 +38,7 @@
     "@types/react-dom": "^19.0.3",
     "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.4.20",
-    "@vitejs/plugin-react-swc": "^3.7.2",
+    "@vitejs/plugin-react-swc": "^3.8.1",
     "dotenv-cli": "^8.0.0",
     "msw": "^2.7.0",
     "postcss": "^8.5.1",
