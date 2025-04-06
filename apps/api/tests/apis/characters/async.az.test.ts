@@ -1,6 +1,5 @@
 import { createQueueAndBlobClient } from '@api/lib/createQueueAndBlobServiceClient';
 import { client } from '@test/utils/client';
-import { a } from 'vitest/dist/chunks/suite.BJU7kdY9';
 
 describe('echo', () => {
   beforeAll(async () => {
