@@ -7,17 +7,17 @@
     "ncu": "turbo ncu",
     "build": "turbo build",
     "dev": "turbo dev",
-    "add-github-releases":  "jq -r .version package.json  | tr -d '\\r\\n' |  xargs -i gh release create \"v{}\" --title \"v{}\" --notes-file './release-note-latest.md'"
+    "add-github-releases": "jq -r .version package.json  | tr -d '\\r\\n' |  xargs -i gh release create \"v{}\" --title \"v{}\" --notes-file './release-note-latest.md'"
   },
   "author": "hibohiboo",
   "license": "MIT",
   "devDependencies": {
     "husky": "^9.1.7",
-    "npm-check-updates": "^17.1.14",
-    "prettier": "^3.4.2",
-    "turbo": "^2.3.3"
+    "npm-check-updates": "^18.0.1",
+    "prettier": "^3.5.3",
+    "turbo": "^2.5.2"
   },
-  "packageManager": "npm@11.0.0",
+  "packageManager": "npm@11.3.0",
   "private": true,
   "workspaces": [
     "packages/*",

@@ -533,10 +533,12 @@ export const CharacterUpdateArgsSchema: z.ZodType<Prisma.CharacterUpdateArgs> = 
 export const CharacterUpdateManyArgsSchema: z.ZodType<Prisma.CharacterUpdateManyArgs> = z.object({
   data: z.union([ CharacterUpdateManyMutationInputSchema,CharacterUncheckedUpdateManyInputSchema ]),
   where: CharacterWhereInputSchema.optional(),
+  limit: z.number().optional(),
 }).strict() ;
 
 export const CharacterDeleteManyArgsSchema: z.ZodType<Prisma.CharacterDeleteManyArgs> = z.object({
   where: CharacterWhereInputSchema.optional(),
+  limit: z.number().optional(),
 }).strict() ;
 
 export const TransactionTestCreateArgsSchema: z.ZodType<Prisma.TransactionTestCreateArgs> = z.object({
@@ -569,8 +571,10 @@ export const TransactionTestUpdateArgsSchema: z.ZodType<Prisma.TransactionTestUp
 export const TransactionTestUpdateManyArgsSchema: z.ZodType<Prisma.TransactionTestUpdateManyArgs> = z.object({
   data: z.union([ TransactionTestUpdateManyMutationInputSchema,TransactionTestUncheckedUpdateManyInputSchema ]),
   where: TransactionTestWhereInputSchema.optional(),
+  limit: z.number().optional(),
 }).strict() ;
 
 export const TransactionTestDeleteManyArgsSchema: z.ZodType<Prisma.TransactionTestDeleteManyArgs> = z.object({
   where: TransactionTestWhereInputSchema.optional(),
+  limit: z.number().optional(),
 }).strict() ;
