@@ -10,12 +10,15 @@ pool:
   vmImage: ubuntu-latest
 steps:
 - checkout: self
-- task: DockerCompose@2
+- script: |
+    chmod 777 database/initdb.d/entrypoint.sh
+  displayName: 'permissions for initdb.d'
+- task: DockerCompose@1
   displayName: 'Build and run SQL Server container'
   inputs:
     containerregistrytype: 'Azure Container Registry'
     dockerComposeFile: 'database/docker-compose.yml'
-    action: 'Run a Docker Compose command'
+    action: 'Run services'
     detached: true
 
 - script: |
@@ -25,7 +28,7 @@ steps:
   displayName: 'Download JDBC Driver'
 
 - script: |
-    mkdir -m 666 output
+    mkdir -m 777 output
     ls -R
   displayName: 'Create output directory'
 - script: |
