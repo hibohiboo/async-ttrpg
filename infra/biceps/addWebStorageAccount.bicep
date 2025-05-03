@@ -27,17 +27,6 @@ resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2024-01-01'
   name: 'default'
   properties: {
     deleteRetentionPolicy: { enabled: false }
-    cors: {
-      corsRules: [
-        {
-          allowedOrigins: ['*']
-          allowedMethods: ['GET', 'HEAD', 'OPTIONS']
-          allowedHeaders: ['*']
-          exposedHeaders: ['*']
-          maxAgeInSeconds: 3600
-        }
-      ]
-    }
   }
 }
 
