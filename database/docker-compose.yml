@@ -1,7 +1,7 @@
 services:
   mssql:
     # CU13以前とCU14以降で ODBC のパスが異なるので、server:2022-latest ではなく、明示的に指定しておく
-    image: mcr.microsoft.com/mssql/server:2022-CU14-ubuntu-22.04
+    image: mcr.microsoft.com/mssql/server:2022-CU18-ubuntu-22.04
     user: root
     container_name: mssql
     hostname: mssqlhost
