@@ -32,7 +32,7 @@ steps:
     docker pull schemaspy/schemaspy
     docker run \
     -v "$(Build.SourcesDirectory)/output:/output" \
-    -v "$(Agent.TempDirectory)/schemaspy.properties:/schemaspy.properties" \
+    -v "$(Build.SourcesDirectory)/schemaspy.properties:/schemaspy.properties" \
     -v "$(Build.SourcesDirectory)/sqljdbc_12.10/jpn/jars/:/drivers" \
     --add-host=host.docker.internal:host-gateway \
     schemaspy/schemaspy:latest -connprops encrypt\\=false
