@@ -31,6 +31,7 @@ steps:
     mkdir -m 777 output
     ls -R
   displayName: 'Create output directory'
+
 - script: |
     docker pull schemaspy/schemaspy
     docker run \
@@ -46,3 +47,22 @@ steps:
     targetPath: '$(Build.SourcesDirectory)/output'
     artifact: 'SchemaSpy'
     publishLocation: 'pipeline'
+
+- task: DownloadPipelineArtifact@2
+  displayName: 'Download SchemaSpy artifact'
+  inputs:
+    artifact: 'SchemaSpy'
+    path: '$(Pipeline.Workspace)/SchemaSpy'
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'azure-dev-hobby'
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      az storage blob upload-batch \
+        --account-name hibowebstorageaccount \
+        --destination '$web' \
+        --destination-path 'dbdocs' \
+        --source "$(Pipeline.Workspace)/SchemaSpy" \
+        --overwrite
