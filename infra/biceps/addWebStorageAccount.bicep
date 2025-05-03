@@ -30,8 +30,9 @@ resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2024-01-01'
   }
 }
 
+
 resource customScript 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
-  name: 'customScript'
+  name: 'enableStaticWebsiteScript'
   location: location
   kind: 'AzurePowerShell'
   properties: {
@@ -44,11 +45,16 @@ resource customScript 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
     ]
     arguments: '-storageAccountName ${storageAccount.name}'
     scriptContent: '''
-    param($storageAccountName)
-    $context = New-AzStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $ENV:storageAccountKey
-    Enable-AzStorageStaticWebsite -Context $context
+      param(
+        [string] $storageAccountName
+      )
+
+      $context = New-AzStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $env:storageAccountKey
+      Enable-AzStorageStaticWebsite -Context $context -IndexDocument "index.html" -ErrorDocument404Path "404.html"
     '''
+    cleanupPreference: 'OnSuccess'
     retentionInterval: 'PT1H'
   }
 }
+
 output staticWebsiteUrl string = 'https://${storageAccount.name}.z11.web.${environment().suffixes.storage}/'

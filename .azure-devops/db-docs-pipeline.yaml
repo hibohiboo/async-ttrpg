@@ -60,8 +60,18 @@ steps:
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
+      STORAGE_ACCOUNT_NAME=hibowebstorageaccount
+      IP_ADDRESS=$(curl -s https://ipinfo.io/json | jq -r '.ip')
+      echo "Your IP address is: $IP_ADDRESS"
+
+      az storage account network-rule add \
+        --account-name $STORAGE_ACCOUNT_NAME \
+        --ip-address $IP_ADDRESS
+      
+      sleep 10
+
       az storage blob upload-batch \
-        --account-name hibowebstorageaccount \
+        --account-name $STORAGE_ACCOUNT_NAME \
         --destination '$web' \
         --destination-path 'dbdocs' \
         --source "$(Pipeline.Workspace)/SchemaSpy" \
