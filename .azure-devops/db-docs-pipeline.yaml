@@ -1,0 +1,45 @@
+trigger:
+  branches:
+    include:
+      - develop
+  paths:
+    include:
+      - database/*
+      - .azure-devops/db-docs-pipeline.yaml
+pool:
+  vmImage: ubuntu-latest
+steps:
+- checkout: self
+- task: DockerCompose@2
+  displayName: 'Build and run SQL Server container'
+  inputs:
+    containerregistrytype: 'Azure Container Registry'
+    dockerComposeFile: 'database/docker-compose.yml'
+    action: 'Run a Docker Compose command'
+    detached: true
+
+- script: |
+    mkdir jdbc
+    wget -P jdbc/ https://download.microsoft.com/download/745da347-bd51-4bf0-a84e-3465608d8856/jpn/sqljdbc_12.10.0.0_jpn.tar.gz
+    tar -zxvf jdbc/sqljdbc_12.10.0.0_jpn.tar.gz
+  displayName: 'Download JDBC Driver'
+
+- script: |
+    mkdir -m 666 output
+    ls -R
+  displayName: 'Create output directory'
+- script: |
+    docker pull schemaspy/schemaspy
+    docker run \
+    -v "$(Build.SourcesDirectory)/output:/output" \
+    -v "$(Agent.TempDirectory)/schemaspy.properties:/schemaspy.properties" \
+    -v "$(Build.SourcesDirectory)/sqljdbc_12.10/jpn/jars/:/drivers" \
+    --add-host=host.docker.internal:host-gateway \
+    schemaspy/schemaspy:latest -connprops encrypt\\=false
+  displayName: 'Run SchemaSpy'
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish SchemaSpy output'
+  inputs:
+    targetPath: '$(Build.SourcesDirectory)/output'
+    artifact: 'SchemaSpy'
+    publishLocation: 'pipeline'
