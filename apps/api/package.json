@@ -25,6 +25,7 @@
     "az-test-https": "vitest --project=azurite-test-https"
   },
   "dependencies": {
+    "@azure/arm-resourcegraph": "^4.2.1",
     "@azure/functions": "^4.7.0",
     "@azure/identity": "^4.9.1",
     "@azure/storage-blob": "^12.27.0",

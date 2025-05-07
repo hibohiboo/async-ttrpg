@@ -6,11 +6,13 @@ import { MiddlewareHandler } from 'hono/types';
 import characters from '@api/routes/characters';
 import transactionTest from '@api/routes/transactionTest';
 import { AppContext } from '@api/types';
+import sdkTest from './routes/sdkTest';
 import { Logger } from './shared/Logger';
 
 const route = new Hono<AppContext>()
   .route('/characters', characters)
   .route('/test', transactionTest)
+  .route('/sdk-test', sdkTest)
   .get('/echo', async (c) => {
     const { logger } = c.get('services');
 
