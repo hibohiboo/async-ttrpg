@@ -18,7 +18,7 @@
     "@ant-design/icons": "^5.6.0",
     "@hono/swagger-ui": "^0.5.0",
     "@hookform/resolvers": "^3.10.0",
-    "antd": "^5.23.2",
+    "antd": "^5.25.3",
     "hono": "^4.7.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
