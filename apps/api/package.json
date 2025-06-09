@@ -58,7 +58,7 @@
     "zod-prisma-types": "^3.2.4"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.34.6"
+    "@rollup/rollup-linux-x64-gnu": "^4.42.0"
   },
   "main": "dist/src/{app.js,functions/*.js}"
 }
