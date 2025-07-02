@@ -7,35 +7,6 @@ param allowedSubnetIds array = []
 
 var storageAccountName = 'st${uniqueString(resourceGroup().id)}'
 
-// 現在のパブリックIPアドレスを取得する
-resource getCurrentIpScript 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
-  name: 'getCurrentIpScript'
-  location: location
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '13.0'
-    scriptContent: '''
-      $ip = Invoke-RestMethod -Uri 'https://api.ipify.org?format=json' | Select-Object -ExpandProperty ip
-      $DeploymentScriptOutputs = @{}
-      $DeploymentScriptOutputs['currentIp'] = $ip
-    '''
-    cleanupPreference: 'OnSuccess'
-    retentionInterval: 'PT1H'
-  }
-}
-
-// パラメータのIPアドレスをipRules形式に変換
-var parameterIpRules = [for ipAddress in allowedIpAddresses: {
-  value: ipAddress
-  action: 'Allow'
-}]
-
-// 現在のIPアドレスのルール
-var currentIpRule = {
-  value: getCurrentIpScript.properties.outputs.currentIp
-  action: 'Allow'
-}
-
 resource storageAccount 'Microsoft.Storage/storageAccounts@2024-01-01' = {
   name: storageAccountName
   location: location
@@ -52,8 +23,10 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2024-01-01' = {
         id: subnetId
         action: 'Allow'
       }]
-      // for式はデプロイ開始時に値が確定している必要があるので、動的に取得した値を使う場合はconcatで追加する
-      ipRules: concat(parameterIpRules, [currentIpRule])
+      ipRules: [for ipAddress in allowedIpAddresses: {
+        value: ipAddress
+        action: 'Allow'
+      }]
     }
   }
 }
